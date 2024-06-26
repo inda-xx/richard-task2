@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import subprocess
+from pytz import timezone
 from datetime import datetime
 from openai import OpenAI
 
@@ -58,7 +59,8 @@ def main(api_key):
     task, tests, solution = extract_task_tests_solution(response_content)
 
     # Create a new branch with a unique name
-    branch_name = f"task-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    stockholm_tz = timezone('Europe/Stockholm')
+    branch_name = f"task-{datetime.now(stockholm_tz).strftime('%Y%m%d%H%M%S')}"
     create_branch(branch_name)
     commit_and_push_changes(branch_name, task, tests, solution)
 
