@@ -1,0 +1,45 @@
+name: Generate Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      template:
+        description: 'Task template'
+        required: true
+        default: |
+          # Task Template
+          This is a short task template for testing.
+      requirements:
+        description: 'Requirements for the new task'
+        required: true
+        default: '{"difficulty": "medium", "language": "Java"}'
+
+permissions:
+  contents: write  # Grant write permission for the GITHUB_TOKEN
+
+jobs:
+  generate-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai
+
+      - name: Generate and push new task
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "${{ github.event.inputs.template }}" > template.txt
+          echo '${{ github.event.inputs.requirements }}' > requirements.json
+          python scripts/generate_task.py "${{ secrets.OPENAI_TOKEN }}" "$(cat template.txt)" "$(cat requirements.json)"
