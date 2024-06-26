@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import subprocess
-from pytz import timezone
+import pytz
 from datetime import datetime
 from openai import OpenAI
 
@@ -13,7 +13,7 @@ def main(api_key):
 
     client = OpenAI(api_key=api_key)
 
-    # Read the template file
+    # Read the template 
     try:
         with open("task_template.md", "r") as file:
             template = file.read()
@@ -59,6 +59,7 @@ def main(api_key):
     task, tests, solution = extract_task_tests_solution(response_content)
 
     # Create a new branch with a unique name
+    from pytz import timezone
     stockholm_tz = timezone('Europe/Stockholm')
     branch_name = f"task-{datetime.now(stockholm_tz).strftime('%Y%m%d%H%M%S')}"
     create_branch(branch_name)
