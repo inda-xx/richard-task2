@@ -5,16 +5,25 @@ import subprocess
 from datetime import datetime
 from openai import OpenAI
 
-def main(api_key, template, requirements):
+def main(api_key):
     if not api_key:
         print("Error: OpenAI API key is missing.")
         sys.exit(1)
 
     client = OpenAI(api_key=api_key)
-    
-    # Parse requirements JSON
+
+    # Read the template file
     try:
-        requirements_dict = json.loads(requirements)
+        with open("task_template.md", "r") as file:
+            template = file.read()
+    except FileNotFoundError:
+        print("Error: task_template.md file not found.")
+        sys.exit(1)
+
+    # Extract requirements JSON
+    requirements_str = os.getenv("REQUIREMENTS_JSON", '{"difficulty": "medium", "language": "Java"}')
+    try:
+        requirements_dict = json.loads(requirements_str)
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON: {e}")
         sys.exit(1)
@@ -116,12 +125,10 @@ def commit_and_push_changes(branch_name, task_content, tests_content, solution_c
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
-if len(sys.argv) != 4:
-    print("Error: Missing required command line arguments 'api_key', 'template', and 'requirements'")
+if len(sys.argv) != 2:
+    print("Error: Missing required command line argument 'api_key'")
     sys.exit(1)
 
 api_key = sys.argv[1]
-template = sys.argv[2]
-requirements = sys.argv[3]
 
-main(api_key, template, requirements)
+main(api_key)
