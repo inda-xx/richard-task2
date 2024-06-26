@@ -3,13 +3,17 @@ name: Generate Task
 on:
   workflow_dispatch:
     inputs:
+      theme:
+        description: 'Theme for the new task'
+        required: true
+        default: 'Create a basic Java application with the following requirements.'
       requirements:
         description: 'Requirements for the new task'
         required: true
         default: '{"difficulty": "medium", "language": "Java"}'
 
 permissions:
-  contents: write  # Grant write permission for the GITHUB_TOKEN
+  contents: write  
 
 jobs:
   generate-task:
@@ -34,5 +38,6 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUIREMENTS_JSON: ${{ github.event.inputs.requirements }}
+          TASK_THEME: ${{ github.event.inputs.theme }}
         run: |
           python scripts/generate_task.py "${{ secrets.OPENAI_TOKEN }}"

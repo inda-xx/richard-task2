@@ -20,16 +20,19 @@ def main(api_key):
         print("Error: task_template.md file not found.")
         sys.exit(1)
 
-    # Extract requirements JSON
+    # Extract requirements JSON and theme from environment variables
     requirements_str = os.getenv("REQUIREMENTS_JSON", '{"difficulty": "medium", "language": "Java"}')
+    theme = os.getenv("TASK_THEME", "Create a basic Java application with the following requirements.")
+
     try:
         requirements_dict = json.loads(requirements_str)
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON: {e}")
         sys.exit(1)
 
-    # Combine template and requirements into a single prompt
+    # Combine template, theme, and requirements 
     prompt = (f"Create a new programming task based on this template: {template}. "
+              f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
               "Also, provide a set of tests for the task and a suggested solution. "
               "Format the response as follows:\n\n"
@@ -37,7 +40,7 @@ def main(api_key):
               "### Tests\n<test_cases>\n\n"
               "### Solution\n<solution_code>")
 
-    # Call OpenAI API to generate task, tests, and solution
+    # Call OpenAI API
     try:
         response = client.chat.completions.create(
             model="gpt-4",
@@ -60,7 +63,7 @@ def main(api_key):
     commit_and_push_changes(branch_name, task, tests, solution)
 
 def extract_task_tests_solution(content):
-    # Split the content based on predefined markers
+    # Split content based on predefined markers
     task_marker = "### Task"
     tests_marker = "### Tests"
     solution_marker = "### Solution"
@@ -79,7 +82,6 @@ def create_branch(branch_name):
     try:
         # Create a new git branch
         subprocess.run(["git", "checkout", "-b", branch_name], check=True)
-        # Use the GITHUB_TOKEN for authentication
         subprocess.run(
             ["git", "push", "-u", "origin", branch_name],
             check=True,
@@ -95,7 +97,7 @@ def commit_and_push_changes(branch_name, task_content, tests_content, solution_c
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
         
-        # Save the generated task to a markdown file and commit the changes
+        # Save the generated task 
         os.makedirs("tasks", exist_ok=True)
         os.makedirs(".hidden_tasks", exist_ok=True)
 
@@ -112,7 +114,7 @@ def commit_and_push_changes(branch_name, task_content, tests_content, solution_c
 
         subprocess.run(["git", "add", task_file_path, tests_file_path, solution_file_path], check=True)
         subprocess.run(["git", "commit", "-m", f"Add new task and hidden files: {branch_name}"], check=True)
-        # Use the GITHUB_TOKEN for authentication
+        # GITHUB_TOKEN for authentication
         subprocess.run(
             ["git", "push", "origin", branch_name],
             check=True,
