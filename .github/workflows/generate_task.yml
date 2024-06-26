@@ -6,14 +6,14 @@ on:
       theme:
         description: 'Theme for the new task'
         required: true
-        default: 'Create a basic Java application with the following requirements.'
+        default: 'Create a simple game application that includes the following functionalities: player movement, scoring system, and enemy interactions.'
       requirements:
         description: 'Requirements for the new task'
         required: true
         default: '{"difficulty": "medium", "language": "Java"}'
 
 permissions:
-  contents: write  
+  contents: write  # Grant write permission for the GITHUB_TOKEN
 
 jobs:
   generate-task:
@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install openai
+          pip install openai pytz
 
       - name: Generate and push new task
         env:
