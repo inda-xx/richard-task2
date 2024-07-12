@@ -33,7 +33,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai pytz
 
-      - name: Generate and push new task
+      - name: Generate new task
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,3 +41,19 @@ jobs:
           TASK_THEME: ${{ github.event.inputs.theme }}
         run: |
           python scripts/generate_task.py "${{ secrets.OPENAI_TOKEN }}"
+
+      - name: Create branch with task content
+        run: |
+          branch_name="task-$(date +%Y%m%d%H%M%S)"
+          git checkout -b $branch_name
+          git add tasks/new_task.md src/template_code.java
+          git commit -m "Add new task"
+          git push origin $branch_name
+
+      - name: Create a pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: ${{ steps.create_branch.outputs.branch_name }}
+          title: 'Add new task'
+          body: 'This PR adds a new task based on the provided theme and requirements.'
+          draft: true

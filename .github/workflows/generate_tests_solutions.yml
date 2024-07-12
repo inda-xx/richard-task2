@@ -1,0 +1,40 @@
+name: Generate Tests and Solution
+
+on:
+  push:
+    branches:
+      - main  
+
+permissions:
+  contents: write  # Grant write permission for the GITHUB_TOKEN
+
+jobs:
+  generate-tests-solution:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pytz
+
+      - name: Generate tests and solution
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/generate_tests_solution.py "${{ secrets.OPENAI_TOKEN }}"
+
+      - name: Commit and push tests and solution
+        run: |
+          git add .hidden_tasks/new_task_tests.java .hidden_tasks/new_task_solution.java
+          git commit -m "Add tests and solution for new task"
+          git push origin main
