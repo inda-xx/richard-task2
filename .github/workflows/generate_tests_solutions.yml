@@ -3,7 +3,7 @@ name: Generate Tests and Solution
 on:
   push:
     branches:
-      - main  
+      - main  # or any other branch that you use for merging PRs
 
 permissions:
   contents: write  # Grant write permission for the GITHUB_TOKEN
