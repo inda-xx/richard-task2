@@ -43,8 +43,10 @@ jobs:
           python scripts/generate_task.py "${{ secrets.OPENAI_TOKEN }}"
 
       - name: Create branch with task content
+        id: create_branch
         run: |
           branch_name="task-$(date +%Y%m%d%H%M%S)"
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
           git checkout -b $branch_name
           git add tasks/new_task.md src/template_code.java
           git commit -m "Add new task"
@@ -53,7 +55,7 @@ jobs:
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: ${{ steps.create_branch.outputs.branch_name }}
+          branch: ${{ env.branch_name }}
           title: 'Add new task'
           body: 'This PR adds a new task based on the provided theme and requirements.'
           draft: true
