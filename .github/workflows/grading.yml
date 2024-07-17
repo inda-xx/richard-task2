@@ -1,38 +1,54 @@
-name: Grade Assignment
+name: Grade Task Submission
 
 on:
   pull_request:
-    paths:
-      - 'submissions/**'
+    branches:
+      - task-*
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  test:
+  grade-task:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout task branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.8'
+      - name: Checkout student's branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: student-code
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r .github/workflows/requirements.txt
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-    - name: Run tests
-      run: |
-        pytest tests/ --junitxml=results.xml
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai
 
-    - name: Grade assignment
-      run: |
-        python scripts/grade_assignment.py results.xml .github/assessment_sheet.yaml "${{ github.actor }}"
+      - name: Run tests
+        run: |
+          cd student-code/src
+          javac *.java
+          java org.junit.runner.JUnitCore IndamonTest
 
-    - name: Upload results
-      uses: actions/upload-artifact@v2
-      with:
-        name: grade_results
-        path: grading_results/
+      - name: Grade and provide feedback
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/grade_submission.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.event.pull_request.number }}"
+
+      - name: Merge pull request
+        if: success()
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --merge
