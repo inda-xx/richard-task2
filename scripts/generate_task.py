@@ -22,6 +22,16 @@ def main(api_key):
         print("Error: task_template.md file not found.")
         sys.exit(1)
 
+    # Read the existing code
+    try:
+        with open("src/Indamon.java", "r") as file:
+            existing_code = file.read()
+        with open("src/IndamonTest.java", "r") as file:
+            existing_tests = file.read()
+    except FileNotFoundError:
+        print("Error: Indamon.java or IndamonTest.java file not found.")
+        sys.exit(1)
+
     # Extract requirements JSON and theme from environment variables
     requirements_str = os.getenv("REQUIREMENTS_JSON", '{"difficulty": "medium", "language": "Java"}')
     theme = os.getenv("TASK_THEME", "Create a basic Java application with the following requirements.")
@@ -32,14 +42,25 @@ def main(api_key):
         print(f"Error decoding JSON: {e}")
         sys.exit(1)
 
-    # Combine template, theme, and requirements into a single prompt
+    # Combine template, theme, requirements, existing code, and existing tests into a single prompt
     prompt = (f"Create a new programming task based on this template: {template}. "
               f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
-              "Provide a detailed task description and a code template. "
+              "Use the following existing code and tests as inspiration. Ensure that the new generated task is detailed, aesthetically pleasing, and provides thorough instructions for the students. "
+              "The task must include specific function names where necessary and be compatible with the provided tests. "
+              "The task description must include the name of the test class and the test methods for the functions in the task. "
               "Format the response as follows:\n\n"
               "### Task\n<task_description>\n\n"
-              "### Template\n<template_code>\n\n")
+              "### Template\n<template_code>\n\n"
+              "### Existing Code\n\n"
+              "```java\n"
+              f"{existing_code}\n"
+              "```\n\n"
+              "### Existing Tests\n\n"
+              "```java\n"
+              f"{existing_tests}\n"
+              "```\n\n"
+              "The code template must be very detailed and coordinated with the task description and tests, ensuring the correct function names and return types are used so that the tests pass.")
 
     # Call OpenAI API to generate task and template
     response_content = generate_with_retries(client, prompt, max_retries=3)

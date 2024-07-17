@@ -1,6 +1,5 @@
 import os
 import sys
-import json
 import subprocess
 from openai import OpenAI
 
@@ -17,15 +16,20 @@ def main(api_key):
             task = file.read()
         with open("src/template_code.java", "r") as file:
             template = file.read()
+        with open("src/IndamonTest.java", "r") as file:
+            existing_tests = file.read()
     except FileNotFoundError:
         print("Error: new_task.md or template_code.java file not found.")
         sys.exit(1)
 
-    # Combine task and template into a single prompt for generating tests and solution
-    prompt = (f"Given the following task and code template, generate a set of tests and a suggested solution. "
-              f"Ensure the tests are thorough and cover all edge cases.\n\n"
+    # Combine task, template, and existing tests into a single prompt for generating tests and solution
+    prompt = (f"Given the following task, code template, and existing tests, generate a set of high-quality unit tests and a suggested solution. "
+              f"Ensure the tests are thorough, robust, and cover all edge cases, including invalid inputs, boundary conditions, and performance considerations. "
+              f"The solution should be complete and able to pass all the generated tests.\n\n"
               f"### Task\n{task}\n\n"
               f"### Template\n{template}\n\n"
+              f"### Existing Tests\n\n"
+              f"```java\n{existing_tests}\n```\n\n"
               "Format the response as follows:\n\n"
               "### Tests\n<test_cases>\n\n"
               "### Solution\n<solution_code>\n\n")
