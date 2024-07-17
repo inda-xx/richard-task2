@@ -25,6 +25,10 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           path: student-code
 
+      - name: Copy student's solution to task template location
+        run: |
+          cp student-code/src/template_code.java src/template_code.java
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -37,7 +41,7 @@ jobs:
 
       - name: Run tests
         run: |
-          cd student-code/src
+          cd src
           javac *.java
           java org.junit.runner.JUnitCore IndamonTest
 

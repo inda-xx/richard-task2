@@ -10,15 +10,15 @@ def main(api_key, pull_request_number):
 
     openai.api_key = api_key
 
-    # Read the student code
+    # Read the student's code from the task template location
     try:
-        with open("student-code/src/StudentTask.java", "r") as file:
+        with open("src/template_code.java", "r") as file:
             student_code = file.read()
     except FileNotFoundError:
-        print("Error: StudentTask.java file not found.")
+        print("Error: template_code.java file not found.")
         sys.exit(1)
 
-    # Read solution
+    # Read the solution code
     try:
         with open("src/.hidden_tasks/new_task_solution.java", "r") as file:
             solution_code = file.read()
@@ -26,14 +26,14 @@ def main(api_key, pull_request_number):
         print("Error: new_task_solution.java file not found.")
         sys.exit(1)
 
-    
+    # Create prompt for evaluating the code
     prompt = (f"Evaluate the following student's code based on the solution provided. "
               "Give feedback on the correctness, efficiency, and coding style. "
               "Point out any errors and suggest improvements.\n\n"
               f"### Student's Code\n```java\n{student_code}\n```\n\n"
               f"### Solution Code\n```java\n{solution_code}\n```\n")
 
-    # Call OpenAI
+    # Call OpenAI API to evaluate the student's code
     try:
         response = openai.Completion.create(
             model="gpt-4",
@@ -45,7 +45,7 @@ def main(api_key, pull_request_number):
         print(f"Error generating feedback: {e}")
         sys.exit(1)
 
-    # Post feedback as a comment on the pull request
+    # Post the feedback as a comment on the pull request
     repo_name = os.getenv('GITHUB_REPOSITORY')
     github_token = os.getenv('GITHUB_TOKEN')
     headers = {
