@@ -10,7 +10,11 @@ on:
       requirements:
         description: 'Requirements for the new task'
         required: true
-        default: '{"difficulty": "medium", "language": "Java"}'
+        default: '{"difficulty": "medium"}'
+      language:
+        description: 'Natural language for the task description'
+        required: true
+        default: 'English'
   push:
     branches:
       - task-*
@@ -46,6 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUIREMENTS_JSON: ${{ github.event.inputs.requirements }}
           TASK_THEME: ${{ github.event.inputs.theme }}
+          TASK_LANGUAGE: ${{ github.event.inputs.language }}
         run: |
           python scripts/generate_task.py "${{ secrets.OPENAI_TOKEN }}"
 
