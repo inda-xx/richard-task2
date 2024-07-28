@@ -33,8 +33,9 @@ def main(api_key):
         sys.exit(1)
 
     # Extract requirements JSON and theme from environment variables
-    requirements_str = os.getenv("REQUIREMENTS_JSON", '{"difficulty": "medium", "language": "Java"}')
+    requirements_str = os.getenv("REQUIREMENTS_JSON", '{"difficulty": "medium"}')
     theme = os.getenv("TASK_THEME", "Create a basic Java application with the following requirements.")
+    language = os.getenv("TASK_LANGUAGE", "English")
 
     try:
         requirements_dict = json.loads(requirements_str)
@@ -43,15 +44,16 @@ def main(api_key):
         sys.exit(1)
 
     # Combine template, theme, requirements, existing code, and existing tests into a single prompt
-    prompt = (f"Create a new programming task based on this template: {template}. "
+    prompt = (f"Create a new programming task in {language} based on this template: {template}. "
               f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
               "Use the following existing code and tests as inspiration. Ensure that the new generated task is detailed, aesthetically pleasing, and provides thorough instructions for the students. "
               "The task must include specific function names where necessary and be compatible with the provided tests. "
               "The task description must include the name of the test class and the test methods for the functions in the task. "
+              f"Create a slightly quirky task title based on the theme: {theme} "
               "Format the response as follows:\n\n"
-              "# <task_title>"
-              "## <task_subtitle>"
+              "# \n<task_title>"
+              "## \n <task_subtitle>"
               "### Task\n<task_description>\n\n"
               "### Template\n<template_code>\n\n"
               "### Existing Code\n\n"
