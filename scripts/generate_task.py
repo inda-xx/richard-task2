@@ -50,6 +50,8 @@ def main(api_key):
               "The task must include specific function names where necessary and be compatible with the provided tests. "
               "The task description must include the name of the test class and the test methods for the functions in the task. "
               "Format the response as follows:\n\n"
+              "# <task_title>"
+              "## <task_subtitle>"
               "### Task\n<task_description>\n\n"
               "### Template\n<template_code>\n\n"
               "### Existing Code\n\n"
