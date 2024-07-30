@@ -22,10 +22,11 @@ def main(api_key):
         print("Error: new_task.md or template_code.java file not found.")
         sys.exit(1)
 
-    # Combine task, template, and existing tests into a single prompt for generating tests and solution
+    # Combine task, template, and existing tests into a single prompt 
     prompt = (f"Given the following task, code template, and existing tests, generate a set of high-quality unit tests and a suggested solution. "
               f"Ensure the tests are thorough, robust, and cover all edge cases, including invalid inputs, boundary conditions, and performance considerations. "
-              f"The solution should be complete and able to pass all the generated tests.\n\n"
+              f"The tests should follow best practices, including descriptive naming conventions, setup and teardown methods if necessary, and detailed assertions to validate expected behavior. "
+              f"The solution should be complete and able to pass all the generated tests. Use meaningful variable names and comments to improve readability and maintainability.\n\n"
               f"### Task\n{task}\n\n"
               f"### Template\n{template}\n\n"
               f"### Existing Tests\n\n"
@@ -34,16 +35,14 @@ def main(api_key):
               "### Tests\n<test_cases>\n\n"
               "### Solution\n<solution_code>\n\n")
 
-    # Call OpenAI API to generate tests and solution
     response_content = generate_with_retries(client, prompt, max_retries=3)
     if response_content is None:
         print("Error: Failed to generate tests and solution after multiple retries.")
         sys.exit(1)
 
-    # Extract tests and solution from the response
     tests, solution = extract_tests_solution(response_content)
 
-    # Create a new commit with the tests and solution
+    
     commit_and_push_changes(tests, solution)
 
 def generate_with_retries(client, prompt, max_retries=3):
