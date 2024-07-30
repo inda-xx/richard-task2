@@ -44,13 +44,24 @@ def main(api_key):
         sys.exit(1)
 
     # Combine template, theme, requirements, existing code, and existing tests into a single prompt
+    task_goals = (
+        "Designing Java classes, "
+        "Adding instance fields, "
+        "Adding a constructor method, "
+        "Creating getters and setters, "
+        "Printing to the terminal, "
+        "Using the main method, "
+        "Scope (or variable shadowing)."
+    )
+
     prompt = (f"Create a new programming task in {language} based on this template: {template}. "
               f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
+              f"Ensure the following task goals are included: {task_goals} "
               "Use the following existing code and tests as inspiration. Ensure that the new generated task is detailed, aesthetically pleasing, and provides thorough instructions for the students. "
               "The task must include specific function names where necessary and be compatible with the provided tests. "
               "The task description must include the name of the test class and the test methods for the functions in the task. "
-              f"Create a slightly quirky task title based on the theme: {theme} "
+              "Create a slightly quirky task title based on the description and "
               "Format the response as follows:\n\n"
               "# \n<task_title>"
               "## \n <task_subtitle>"
