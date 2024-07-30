@@ -1,0 +1,3 @@
+Welcome dear coders! Here's where you get to put your Java skills to work. For this assignment, we will simulate a simple banking model. Your task is to define a class representing a bank account.
+
+The bank account should allow the user to deposit funds, withdraw funds, and inquire about the balance. For the sake of simplicity, let's disregard issues such as authentication and transactions between bank accounts.
