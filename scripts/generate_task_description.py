@@ -224,6 +224,9 @@ def main(api_key):
     # Commit and push changes
     commit_and_push_changes(branch_name, task_file_path)
 
+    # Output the branch name for the next job
+    print(f"::set-output name=branch_name::{branch_name}")
+
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
         try:
@@ -261,7 +264,7 @@ def commit_and_push_changes(branch_name, task_file_path):
         subprocess.run(["git", "add", task_file_path], check=True)
         subprocess.run(["git", "commit", "-m", f"Add new task description: {branch_name}"], check=True)
         subprocess.run(
-            ["git", "push", "origin", branch_name],
+            ["git", "push", "--set-upstream", "origin", branch_name],
             check=True,
             env=dict(os.environ, GIT_ASKPASS='echo', GIT_USERNAME='x-access-token', GIT_PASSWORD=os.getenv('GITHUB_TOKEN'))
         )

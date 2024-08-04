@@ -3,7 +3,7 @@ import sys
 import subprocess
 from openai import OpenAI
 
-def main(api_key):
+def main(api_key, branch_name):
     if not api_key:
         print("Error: OpenAI API key is missing.")
         sys.exit(1)
@@ -39,7 +39,7 @@ def main(api_key):
         file.write(response_content)
 
     # Commit and push changes
-    commit_and_push_changes(template_file_path)
+    commit_and_push_changes(branch_name, template_file_path)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
@@ -58,12 +58,8 @@ def generate_with_retries(client, prompt, max_retries=3):
                 print("Retrying...")
     return None
 
-def commit_and_push_changes(template_file_path):
+def commit_and_push_changes(branch_name, template_file_path):
     try:
-        branch_name = os.getenv('GITHUB_REF_NAME')
-        if not branch_name:
-            raise ValueError("GITHUB_REF_NAME environment variable not set")
-
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
 
@@ -77,14 +73,12 @@ def commit_and_push_changes(template_file_path):
     except subprocess.CalledProcessError as e:
         print(f"Error committing and pushing changes: {e}")
         sys.exit(1)
-    except ValueError as e:
-        print(f"Error: {e}")
-        sys.exit(1)
 
-if len(sys.argv) != 2:
-    print("Error: Missing required command line argument 'api_key'")
+if len(sys.argv) != 3:
+    print("Error: Missing required command line arguments 'api_key' and 'branch_name'")
     sys.exit(1)
 
 api_key = sys.argv[1]
+branch_name = sys.argv[2]
 
-main(api_key)
+main(api_key, branch_name)
