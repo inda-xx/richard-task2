@@ -7,10 +7,15 @@ on:
         description: 'Theme for the new task'
         required: true
         default: 'Create a simple game application that includes the following functionalities: player movement, scoring system, and enemy interactions.'
-      requirements:
-        description: 'Requirements for the new task'
+      difficulty:
+        description: 'Difficulty level for the new task'
         required: true
-        default: '{"difficulty": "medium"}'
+        type: choice
+        options:
+          - basic
+          - medium
+          - hard
+        default: medium
       language:
         description: 'Natural language for the task description'
         required: true
@@ -48,7 +53,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIREMENTS_JSON: ${{ github.event.inputs.requirements }}
+          TASK_DIFFICULTY: ${{ github.event.inputs.difficulty }}
           TASK_THEME: ${{ github.event.inputs.theme }}
           TASK_LANGUAGE: ${{ github.event.inputs.language }}
         run: |
