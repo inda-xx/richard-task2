@@ -1,6 +1,10 @@
 import os
 import sys
+import subprocess
+from datetime import datetime
 from openai import OpenAI
+import pytz
+from pytz import timezone
 
 def main(api_key):
     if not api_key:
@@ -207,10 +211,18 @@ def main(api_key):
         print("Error: Failed to generate task description after multiple retries.")
         sys.exit(1)
 
+    # Create a new branch with a unique name
+    stockholm_tz = timezone('Europe/Stockholm')
+    branch_name = f"task-{datetime.now(stockholm_tz).strftime('%Y%m%d%H%M%S')}"
+    create_branch(branch_name)
+
     # Write the response content to a markdown file
     task_file_path = os.path.join("tasks", "new_task.md")
     with open(task_file_path, "w") as file:
         file.write(response_content)
+
+    # Commit and push changes
+    commit_and_push_changes(branch_name, task_file_path)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
@@ -228,6 +240,34 @@ def generate_with_retries(client, prompt, max_retries=3):
             if attempt < max_retries - 1:
                 print("Retrying...")
     return None
+
+def create_branch(branch_name):
+    try:
+        subprocess.run(["git", "checkout", "-b", branch_name], check=True)
+        subprocess.run(
+            ["git", "push", "-u", "origin", branch_name],
+            check=True,
+            env=dict(os.environ, GIT_ASKPASS='echo', GIT_USERNAME='x-access-token', GIT_PASSWORD=os.getenv('GITHUB_TOKEN'))
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error creating branch: {e}")
+        sys.exit(1)
+
+def commit_and_push_changes(branch_name, task_file_path):
+    try:
+        subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
+        subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
+
+        subprocess.run(["git", "add", task_file_path], check=True)
+        subprocess.run(["git", "commit", "-m", f"Add new task description: {branch_name}"], check=True)
+        subprocess.run(
+            ["git", "push", "origin", branch_name],
+            check=True,
+            env=dict(os.environ, GIT_ASKPASS='echo', GIT_USERNAME='x-access-token', GIT_PASSWORD=os.getenv('GITHUB_TOKEN'))
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error committing and pushing changes: {e}")
+        sys.exit(1)
 
 if len(sys.argv) != 2:
     print("Error: Missing required command line argument 'api_key'")
