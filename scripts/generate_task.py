@@ -52,6 +52,68 @@ def main(api_key):
         "Scope (or variable shadowing)."
     )
 
+    indamon_code = """
+    class Indamon {
+        private String name;
+        private int hp;
+        private int attack;
+        private int defense;
+        private boolean fainted;
+
+        public Indamon(String name, int hp, int attack, int defense) {
+            this.name = name;
+            this.hp = hp;
+            this.attack = attack;
+            this.defense = defense;
+            fainted = false;
+        }
+
+        // getters
+        public String getName() { return name; }
+        public int getHp() { return hp; }
+        public int getAttack() { return attack; }
+        public int getDefense() { return defense; }
+        public boolean getFainted() { return fainted; }
+
+        // setters
+        public void setName(String name) { this.name = name; }
+        public void setHp(int hp) { this.hp = hp; }
+        public void setAttack(int attack) { this.attack = attack; }
+        public void setDefense(int defense) { this.defense = defense; }
+        public void setFainted(boolean fainted) { this.fainted = fainted; }
+
+        // attack method
+        public void attackOponnent(Indamon target) {
+            int damage = attack / target.getDefense();
+            target.setHp(target.getHp() - damage);
+            if (target.getHp() <= 0) {
+                target.setFainted(true);
+            }
+        }
+
+        // print info method
+        public void printInfo() {
+            System.out.println("Name: " + name);
+            System.out.println("HP: " + hp);
+            System.out.println("Attack: " + attack);
+            System.out.println("Defense: " + defense);
+            System.out.println("Fainted: " + fainted);
+        }   
+
+        public static void main(String[] args) {
+            // create a new "Indamon" object
+            Indamon glassey = new Indamon("Glassey", 10, 5, 5);
+            Indamon siberov = new Indamon("Siberov", 10, 5, 5);
+            // print out the object's info
+            glassey.printInfo();
+            siberov.printInfo();
+            // call the attack method
+            glassey.attack(siberov);
+            siberov.printInfo();
+        } // end main method
+    }
+    """
+
     prompt = (f"Create a new programming task in {language} based on this template: {template}. "
               f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
@@ -67,7 +129,7 @@ def main(api_key):
               "### Template\n<template_code>\n\n"
               "### Existing Code\n\n"
               "```java\n"
-              f"{existing_code}\n"
+              f"{indamon_code}\n"
               "```\n\n"
               "### Existing Tests\n\n"
               "```java\n"
@@ -87,13 +149,13 @@ def main(api_key):
         sys.exit(1)
 
     # Extract task and template from the response
-    task, template = extract_task_template(response_content)
+    task, template_code = extract_task_template(response_content)
 
     # Create a new branch with a unique name
     stockholm_tz = timezone('Europe/Stockholm')
     branch_name = f"task-{datetime.now(stockholm_tz).strftime('%Y%m%d%H%M%S')}"
     create_branch(branch_name)
-    commit_and_push_changes(branch_name, task, template)
+    commit_and_push_changes(branch_name, task, template_code)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
@@ -120,9 +182,9 @@ def extract_task_template(content):
     template_start = content.find(template_marker)
 
     task = content[task_start + len(task_marker):template_start].strip()
-    template = content[template_start + len(template_marker):].strip()
+    template_code = content[template_start + len(template_marker):].strip()
 
-    return task, template
+    return task, template_code
 
 def create_branch(branch_name):
     try:
