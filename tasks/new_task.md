@@ -1,0 +1,1 @@
+You will create a simple game application involving a Player, a Score, and Enemies. The Player needs to move around a hypothetical game board and avoid contact with Enemies to survive. Each time the Player successfully evades an Enemy, the player’s Score increases. This task will help you to understand and practice using Java classes, objects, instance fields, and methods.
