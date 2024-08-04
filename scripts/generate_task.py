@@ -56,10 +56,10 @@ def main(api_key):
               f"Theme: {theme}. "
               f"Requirements: {requirements_dict}. "
               f"Ensure the following task goals are included: {task_goals} "
-              "Use the following existing code and tests as inspiration. Ensure that the new generated task is detailed, well-structured, aesthetically pleasing, and provides thorough instructions for the students. "
+              "Use the following existing code and tests as inspiration. The new task must be detailed, well-structured, aesthetically pleasing, and provide thorough instructions for the students. "
               "The task must include specific function names where necessary and be compatible with the provided tests. "
               "The task description must include the name of the test class and the test methods for the functions in the task. "
-              "Create a slightly quirky task title based on the description and "
+              "Create a slightly quirky task title based on the description. "
               "Format the response as follows:\n\n"
               "# <task_title>\n\n"
               "## <task_subtitle>\n\n"
@@ -74,7 +74,11 @@ def main(api_key):
               f"{existing_tests}\n"
               "```\n\n"
               "The code template must be very detailed and coordinated with the task description and tests, ensuring the correct function names and return types are used so that the tests pass. "
-              "Pay special attention to clarity, coherence, and structure to ensure the task is easy to understand and follow.")
+              "Pay special attention to clarity, coherence, and structure to ensure the task is easy to understand and follow. "
+              "The quality of the template is paramount, and it should include all necessary details for function names to facilitate grading later on. "
+              "Maintain consistency with the structure of the original task, and highlight the importance of each section. "
+              "Ensure the instructions, examples, and notes are clear and helpful, matching the style and format of the original task provided below:\n\n"
+              f"{template}\n\n")
 
     # Call OpenAI API to generate task and template
     response_content = generate_with_retries(client, prompt, max_retries=3)
