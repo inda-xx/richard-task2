@@ -1,0 +1,3 @@
+Your task is to create a simple game application featuring dynamic player movement, an intriguing scoring system, and interactive enemy interactions. You will have to create a world filled with the mythical creatures called Indamons. Each player in the game controls an Indamon. The Indamons combating each other forms the cornerstone of the game. Make it modular and interactive for a fun learning experience. 
+
+Use Java as the programming language, focusing on the fundamentals of object-oriented programming. You will be practicing designing classes, adding instance fields, using constructors, creating getters and setters, printing to the terminal, using the main method, and understanding scope and variable shadowing.
