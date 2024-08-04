@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 from openai import OpenAI
 
 def main(api_key):
@@ -65,7 +66,7 @@ def commit_and_push_changes(template_file_path):
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
 
         subprocess.run(["git", "add", template_file_path], check=True)
-        subprocess.run(["git", "commit", "-m", f"Add new template code"], check=True)
+        subprocess.run(["git", "commit", "-m", "Add new template code"], check=True)
         subprocess.run(
             ["git", "push", "origin", branch_name],
             check=True,
