@@ -61,6 +61,8 @@ def generate_with_retries(client, prompt, max_retries=3):
 def commit_and_push_changes(template_file_path):
     try:
         branch_name = os.getenv('GITHUB_REF_NAME')
+        if not branch_name:
+            raise ValueError("GITHUB_REF_NAME environment variable not set")
 
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
@@ -74,6 +76,9 @@ def commit_and_push_changes(template_file_path):
         )
     except subprocess.CalledProcessError as e:
         print(f"Error committing and pushing changes: {e}")
+        sys.exit(1)
+    except ValueError as e:
+        print(f"Error: {e}")
         sys.exit(1)
 
 if len(sys.argv) != 2:
