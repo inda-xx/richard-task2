@@ -1,0 +1,1 @@
+For this exercise, you are going to be developing a simple, stone-age game inspired by the legendary Pokémon. Your task involves modeling different cave creatures, we'll call them *Cavemon*, in Java. You are to create the character movement, implement interactions between player's Cavemon and enemy Cavemon, and a scoring system based on those interactions.
