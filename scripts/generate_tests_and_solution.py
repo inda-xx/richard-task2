@@ -98,9 +98,6 @@ def commit_and_push_changes(branch_name, tests_content, solution_content):
     except subprocess.CalledProcessError as e:
         print(f"Error committing and pushing changes: {e}")
         sys.exit(1)
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        sys.exit(1)
 
 if len(sys.argv) != 3:
     print("Error: Missing required command line arguments 'api_key' and 'branch_name'")
