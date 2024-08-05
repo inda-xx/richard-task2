@@ -3,7 +3,7 @@ import sys
 import subprocess
 from openai import OpenAI
 
-def main(api_key):
+def main(api_key, branch_name):
     if not api_key:
         print("Error: OpenAI API key is missing.")
         sys.exit(1)
@@ -42,8 +42,7 @@ def main(api_key):
 
     tests, solution = extract_tests_solution(response_content)
 
-    
-    commit_and_push_changes(tests, solution)
+    commit_and_push_changes(branch_name, tests, solution)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
@@ -74,7 +73,7 @@ def extract_tests_solution(content):
 
     return tests, solution
 
-def commit_and_push_changes(tests_content, solution_content):
+def commit_and_push_changes(branch_name, tests_content, solution_content):
     try:
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
@@ -92,7 +91,7 @@ def commit_and_push_changes(tests_content, solution_content):
         subprocess.run(["git", "add", tests_file_path, solution_file_path], check=True)
         subprocess.run(["git", "commit", "-m", "Add generated tests and solution"], check=True)
         subprocess.run(
-            ["git", "push"],
+            ["git", "push", "--set-upstream", "origin", branch_name],
             check=True,
             env=dict(os.environ, GIT_ASKPASS='echo', GIT_USERNAME='x-access-token', GIT_PASSWORD=os.getenv('GITHUB_TOKEN'))
         )
@@ -103,10 +102,11 @@ def commit_and_push_changes(tests_content, solution_content):
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
-if len(sys.argv) != 2:
-    print("Error: Missing required command line argument 'api_key'")
+if len(sys.argv) != 3:
+    print("Error: Missing required command line arguments 'api_key' and 'branch_name'")
     sys.exit(1)
 
 api_key = sys.argv[1]
+branch_name = sys.argv[2]
 
-main(api_key)
+main(api_key, branch_name)
