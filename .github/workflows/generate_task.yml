@@ -68,7 +68,7 @@ jobs:
     needs: generate-task-description
 
     outputs:
-      branch_name: ${{ steps.checkout.outputs.branch_name }}
+      branch_name: ${{ steps.set-branch-name.outputs.branch_name }}
 
     steps:
       - name: Checkout repository
@@ -88,11 +88,16 @@ jobs:
           pip install openai
 
       - name: Generate template code
+        id: generate-template-code
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/generate_template_code.py "${{ secrets.OPENAI_TOKEN }}" "${{ needs.generate-task-description.outputs.branch_name }}"
+
+      - name: Set branch name
+        id: set-branch-name
+        run: echo "::set-output name=branch_name::$(git rev-parse --abbrev-ref HEAD)"
 
   generate-tests-and-solution:
     runs-on: ubuntu-latest

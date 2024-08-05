@@ -10,6 +10,13 @@ def main(api_key, branch_name):
 
     client = OpenAI(api_key=api_key)
 
+    # Ensure we are on the correct branch
+    try:
+        subprocess.run(["git", "checkout", branch_name], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error checking out branch {branch_name}: {e}")
+        sys.exit(1)
+
     # Read the generated task and template
     try:
         with open("tasks/new_task.md", "r") as file:
