@@ -1,137 +1,76 @@
-# Let's Play Java Game! 🕹️ 
+# 🏰 Adventure Quest 🕹️ 
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+Embark on a programming journey to create a simple game application. For this exercise, you are going to practice Java object-oriented programming and acquaint yourself with Java classes components.
 
-### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+### 💀 Deadline
+This exercise must be completed before **Friday 23rd September**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 👩‍🏫 Instructions
+Detailed instructions for completing and submitting the assignment can be found on the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### 📝 Preparation
+You must read and answer the questions in the OLI material for Module 3:
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f98f7979851fee529f9072a1321c6c43)
+- If necessary, register for the course key `dd1337-ht22`https://kth.oli.cmu.edu/, and sign up.
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
-* Designing Java classes
-* Adding instance fields
-* Adding a constructor method
-* Creating getters and setters
-* Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+> **Assistant's Note:** It's alright to read ahead if you did not find all the material, as the OLI material and tasks might slightly differ this year.
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+### ✅ Learning Goals
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+- Designing Java classes
+- Adding instance fields
+- Adding a constructor method
+- Creating getters and setters
+- Printing to the terminal
+- Using the `main` method
+- Understanding Scope (or variable shadowing)
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+### 🚨 Troubleshooting Guide
+If you encounter issues or have any questions, follow these steps:
 
-### 👾 Assignment
+1. Check this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students experiencing similar problems?
+2. If not, post your question by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). The title should be "Task *x*: *issue summary*".
+3. Consult a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the next lab session.
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+While discussing with classmates is beneficial,**never share your solutions**!
 
-#### Exercise 1.0 -- Character Class
+### 🏛 Assignment
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+You will build a simple adventure game with a hero, treasure chests, and monsters. The hero must open treasure chests while avoiding monsters. 
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+#### Exercise 3.1 -- Player, Chest, and Monster Classes
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+In the `src` folder, create `Player.java`, `Chest.java`, and `Monster.java` classes. These classes will have the following fields:
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
+- `Player` Class: `String` name, `int` score, `int` playerPosX, `int` playerPosY
+- `Chest` Class: `int` value, `boolean` isOpened, `int` chestPosX, `int` chestPosY
+- `Monster` Class: `int` damage, `boolean` isAlive, `int` monsterPosX, `int` monsterPosY
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+Implement the constructor, getters, and setters for each class. 
 
-#### Exercise 1.1 -- Getters and Setters 
+#### Exercise 3.2 -- Player's Movement
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
+Now, add the functionalities to control the player's movement. Implement a `move` method in the `Player` class that takes a string-direction argument ('up', 'down', 'left', 'right') and adjusts the player's position accordingly. 
 
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
+#### Exercise 3.3 -- Interactions
 
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
+Create methods in `Player.java` to interact with chests and monsters. 
 
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
+- Add a `openChest` method that increases the player's score if the chest is not yet opened and they're in the same position as the chest.
+- Add an `avoidMonster` method that decreases the player's score by Monster's damage if both are in the same position.
 
-#### Exercise 1.3 -- `printStatus()`
+#### Exercise 3.4 -- Score Display
 
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
+In `Player.java`, add a method `printScore` that prints the player's score to the terminal.
 
-#### Exercise 1.4 -- `move()`
+#### Exercise 3.5 -- Main Game Method
 
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
+In a new `Game.java` class, implement a `main` method that creates a new Player, Chests, and Monsters. Use a loop for continuous gameplay until the player walks into a Monster.
 
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
+#### Exercise 3.6 -- Scope (variable shadowing)
 
-#### Exercise 1.6 -- Instance variable shadowing
+To ensure you understand the concept of variable shadowing correctly, analyze the shadowing examples given in the OLI material. Note the difference between local and field (instance) variables.
 
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+### 🐞 Bugs and errors?
+If you find any errors or inconsistencies, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with "Task *x* Error: *summary of error here*" in the title. Bug reports will be rewarded with an acknowledgment mention.
