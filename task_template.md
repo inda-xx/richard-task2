@@ -19,6 +19,7 @@ You must read and answer the questions in the OLI material for Module 2.
 
 > **Assistant's Note:** The OLI material and tasks might be slightly out of line this year, so it is ok to read ahead if you did not find all the material.
 
+
 ### ✅ Learning Goals
 
 This week's learning goals include:
