@@ -17,8 +17,16 @@ jobs:
       tests_passed: ${{ steps.determine-result.outputs.tests_passed }}
 
     steps:
-      - name: Checkout the code
+      - name: Checkout the correct branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}  # Ensures the branch with the new task is checked out
+
+      - name: Verify Branch and Test Files
+        run: |
+          echo "Checking out branch: ${{ github.head_ref }}"
+          git branch
+          ls -R .hidden_tasks
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -33,7 +41,7 @@ jobs:
       - name: Run Tests
         id: run-tests
         run: |
-          python -m unittest discover .hidden_tasks
+          python -m unittest discover -s .hidden_tasks -p '*_test.py'
 
       - name: Determine Test Result
         id: determine-result
@@ -49,8 +57,10 @@ jobs:
     needs: run-tests
 
     steps:
-      - name: Checkout the code
+      - name: Checkout the correct branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}  # Ensure the same branch is checked out here
 
       - name: Set up Python
         uses: actions/setup-python@v4
