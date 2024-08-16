@@ -1,89 +1,75 @@
-# Let's Build A Game: Simple Shadows!
+# 🚀 Galactic Astrology: Constructing Constellation Classes! 🌌 
 
-Congratulations! You've been chosen to create a game for INDA! The game will involve a player, their score, and various enemies. More features can be added in future versions.
+For the second part of INDA, you'll be sharpening your skills in object modeling using Java. The focus here is to understand the constituents of a Java class.
 
-### ⏰ Deadline
-This task should be completed before the exercise on **Tuesday, 20th September**.
+### ☠️ Deadline
+
+This assignment should be completed before **Tuesday, September 20th**.
 
 ### 👩‍🏫 Instructions
-For instructions on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 📚 Preparation
-Before starting the task, ensure you've read and answered the questions on the OLI material for Module 3.
-- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
-- Sign up at https://kth.oli.cmu.edu/ if you haven't done so already, and register for the course key `dd1337-ht22`
+For step-by-step instructions and assignment submission, please visit the [course's assignment section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-> 📌 **Note:** The OLI material and tasks might be slightly different, so it is suggested to read ahead if you did not find all the information.
+### 📖 Preparation
 
-### 💡 Learning Goals
-The primary learning goals for this task are:
+Kindly go through and respond to the questions in Module 2's OLI material.
+
+- Go through [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- Go to https://kth.oli.cmu.edu/, sign up and register with the 'dd1337-ht22' course key, if you haven't done so already.
+
+> **Assistant's Note:** The OLI material may not always align with our tasks. If you cannot find all the needed material, do not hesitate to proceed further.
+
+### ✅ Learning Goals
+
+After this week, you'll understand:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
-* Implementing *getters* and *setters*
-* Printing information to the terminal
+* Creating getters and setters
+* Printing to the terminal
 * Using the `main` method
-* Understanding Scope (or *variable shadowing*)
+* Scope (or *variable shadowing*)
 
-###  🛠 If You Run Into Problems
-Refer to the following guide if you encounter issues:
-1. Check the [posted issues this week](https://gits-15.sys.kth.se/inda-22/help/issues). Maybe other students have faced your problem?
-2. If not, open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a descriptive title starting with "Task *x*: *summary of the problem*".
-3. Seek help from a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA) (see your schedule for the next lab timing).
+### 🚨 Troubleshooting
 
-While discussing with classmates is encouraged, **do not share answers**!
+If you have issues or questions, you should:
 
-### 🕹 Assignment
-The task at hand involves creating a simple game called "Simple Shadows" in Java. Your game should comprise the following components:
-1. A `Player` class.
-2. A `Score` class.
-3. An `Enemy` class.
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are others facing the same problem?
+2. If not, ask your question by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*".
+3. Consult with a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the next lab session.
 
-Make sure that each class has relevant fields, getters, setters, and a constructor method. You may add additional methods if required.
+You're encouraged to discuss with your coursemates, but remember, **do not share answers**!
 
-#### Exercise 3.1 -- The Player Class
+### 📚 Assignment
 
-The `Player` class should include the following fields:
+Several renowned astrologers are visiting the Royal Institute of Technology. Your task is to aid them by modeling *constellations* in Java! These constellations have unique attributes:
+
 - `String` name
-- `int` health
-- `int` positionX
-- `int` positionY
+- `int` stars (**count of stars**)
+- `boolean` visible
+- `String` seasonalViewing
 
-Construct relevant getters, setters, and a constructor for `Player` class. Make sure the health value of a player cannot be negative.
+The steps to complete your task are as follows:
 
-#### Exercise 3.2 -- The Enemy Class
+#### Step 2.0 -- Fields
+In the [`src`](src) folder, create a new class called `Constellation.java`. You're to use [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html) to represent the attributes of these constellations.
 
-The `Enemy` class should have these fields:
-- `String` type
-- `int` positionX
-- `int` positionY
-- `boolean` isAlive
+#### Step 2.1 -- Getters and Setters
+You'll need to restrict direct access to the Constellation class's state. This can be done by setting the fields' [access modifiers](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) to `private`. However, you still want to manipulate these fields. This can be done by adding **accessors** and **mutators** (or *getters* and *setters*). Include these for all fields—a total of eight methods. 
 
-Generate appropriate getters, setters, and a constructor method for the `Enemy` class. Make sure the enemy can only be positioned within the game boundaries.
+#### Step 2.2 -- Constructor
+Constructing objects as in Step 2.1 can be tedious. Instead, you should leverage a *constructor*. Implement a constructor as shown in the OLI material and repeat Step 2.1 with this implementation.
 
-#### Exercise 3.3 -- The Score Class
+#### Step 2.3 -- `printDetails()`
+To print every detail about the constellation to the terminal, you'll need to create a `printDetails()` method. The return type should be `void`.
 
-The `Score` class should comprise:
-- `int` points
-- `Player` player
+#### Step 2.4 -- `isVisible()`
+Astrologers are all about predictability. Add a method named `isVisible()` that leverages the `seasonalViewing` attribute to determine if a constellation can be viewed in the current season.
 
-Create setters, getters, and a constructor. Implement a method to increment the points when an enemy is defeated.
+#### Step 2.5 -- Variable Shadowing
+Finally, investigate a miscellaneous concept—*variable shadowing*. You might need to fix relevant examples in class.
 
-#### Exercise 3.4 -- Printing the Status
-Implement a `printStatus()` method in each class to print all field values to the console. 
+> **Assistant's Note:** Factor in *local scope*, *global variables*, and *instance fields* for your examples.
 
-#### Exercise 3.5 -- Variable Shadowing
-Take a few moments to answer the following questions:
-
-1. What is 'variable shadowing' in Java and how can it cause problems in your code?
-2. How can you avoid variable shadowing?
-
-> 📌 **Note:** You may find the term 'this' in Java.
-   
-#### Exercise 3.6 -- The Main Method
-Implement a `main()` method, where you create a `Player` object, multiple `Enemy` objects, and a `Score` object. Invoke the `printStatus()` method on each object.   
-
-Storyboard your entire game flow in comments in your `main()` function. This includes how the player moves, earns points, and interacts with enemies.
-
-### 🐛 Found Any Bugs?
-If you find any errors or have suggestions for this exercise, kindly open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of the bug here*". You will be acknowledged for your significant contributions!
+### 🐞 Bugs or errors?
+If you spot any inaccuracies or issues with this exercise, kindly raise a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error*". Your vigilance will be rewarded with mentions in the acknowledgment section.
