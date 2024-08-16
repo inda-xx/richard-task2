@@ -12,6 +12,9 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
 
+    outputs:
+      tests_passed: ${{ steps.determine-result.outputs.tests_passed }}
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -35,9 +38,9 @@ jobs:
         id: determine-result
         run: |
           if [ ${{ steps.run-tests.outcome }} == 'success' ]; then
-            echo "tests_passed=true" >> $GITHUB_ENV
+            echo "::set-output name=tests_passed::true"
           else
-            echo "tests_passed=false" >> $GITHUB_ENV
+            echo "::set-output name=tests_passed::false"
           fi
 
   analyze-and-respond:
@@ -62,11 +65,10 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TESTS_PASSED: ${{ env.tests_passed }}
+          TESTS_PASSED: ${{ needs.run-tests.outputs.tests_passed }}
         run: |
           if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
             python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           else
             python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           fi
-
