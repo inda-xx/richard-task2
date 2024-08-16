@@ -1,76 +1,227 @@
-# Code Quest: The Legend of JavaLandia! 🎮
-In the third exercise of INDA, you are delving into the world of Java game development! Let's build simple game fundamentals in Java.
+# The Chronicles of Cars 🚗 
 
-### 📅 Deadline
-This work should be completed before **Friday 23rd September**.
+Buckle up! In this programming task under the module of INDA, you will learn to enrich your Java programming skills by designing classes associated with the theme of cars.
 
-### 📚 Instructions
-For steps on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
+### 😱 Deadline
 
-### 📝 Preparation
-You should complete the following before starting the assignment:
+This task should be wrapped up by **Wednesday 9th November**.
 
-- Read [How to design classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f3e5a808ac1f088812f2a8ce315b8754)
-- If you have not done so, go to https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht22`
-- Familiarize yourself with Java game development basics.
+### 👨‍🏫 Instructions
 
-### ✅ Learning Goals
+To understand how to complete and submit this assignment, please visit the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-This week's learning goals include:
-* Designing Java classes 🏗️
-* Adding instance fields 📦
-* Adding a constructor method 🚧
-* Creating *getters* and *setters* 🔧🔩
-* Printing to the terminal 🖨️
-* Using the `main` method 🖥️
-* Scope (or *variable shadowing*) 🕵️‍♀️
+### 📚 Preparation
 
-### 🔨 Assignment
+For this assignment, you must thoroughly go through the Module 3 OLI materials.
 
-You're tasked with creating an adventure game set in JavaLandia. Hastily, three main components have been identified as necessary to start your quest: `Player.java`, `Enemy.java`, and `Score.java`. 
+- Dive into [Creating and Using Objects](https://kth.oli.cmu.edu/jcourse/webui/guest/module.do?context=dca4e88680020ca607fcf9f5c0a63d1c)
+- If you haven't yet, please sign up on https://kth.oli.cmu.edu/ and remember to register for the course key `dd1337-ht22`
 
-#### Exercise 3.1 -- The Adventurous Player
-In the `Player.java` class, create the player attributes using `private` instance fields:
+> **Assistant's Note:** Slight misalignment in OLI material and tasks might be possible this year, so if you don't find all the material, continue reading ahead.
 
-- `String` playerName
-- `int` playerHealth
-- `int` playerAttack
-- `int` playerDefense
-- `boolean` playerAlive
+### ✔️ Learning Goals
 
-All fields must have *getters* and *setters*. Create a constructor for `Player.java` class, and then instantiate `Player` in `main` method. Test the constructor and *getters* by printing field values to the terminal.
+This week's learning goals:
+- Designing Java classes
+- Adding instance fields
+- Adding a constructor method
+- Creating getters and setters
+- Printing to the terminal
+- Using the `main` method
+- Understanding of Scope (or variable shadowing)
 
-#### Exercise 3.2 -- The Ferocious Enemy
-In `Enemy.java` create enemy attributes similar to the player, but do not include `playerName`. Instead add `enemyId` as `int`. 
-Create a `main` method and follow Exercise 3.1 steps for instantiation and testing.
+### 🚧 Troubleshooting Guide
 
-#### Exercise 3.3 -- Scoring System
-In `Score.java` class, characterize the score using the following `private` instance fields:
+In case you encounter any issue or have any questions:
 
-- `int` playerId
-- `int` enemiesDefeated
-- `int` totalScore
+1. Visit week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues).
+2. If you can't find your issue, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Start the title with "Task 3: *summary of problem here*"
+3. During the [weekly lab](https://queue.csc.kth.se/Queue/INDA), don't hesitate to ask a TA. 
 
-Create *getters* and *setters*, a constructor, instantiate `Score` in `main` method, and test it out like before.
+Feel free to discuss with your course peers, but beware of not sharing answers!
 
-#### Exercise 3.4 -- Battle Royale: Player vs. Enemy
-Back in `Player.java`, create a `void` method called `battle` that receives an `Enemy` object. 
+### 🏰 Assignment
 
-This method should simulate a battle between the player and the enemy using a simple damage formula: `damage = playerAttack - enemyDefense` (if the result is less than 0, consider it as 0).
+In Stockholm, we're bringing the essence of automobile designing into programming. You will be creating Java classes for different parts of a car model. But remember, not to share any answers with your friends!
 
-Decrease the `Enemy` object's health by `damage`. If `enemyHealth` becomes 0 or less, set `enemyAlive` to `false`.
+#### Exercise 3.0 -- Fields
 
-Print the battle summary to the terminal, including enemy ID, damage dealt, remaining enemy health, and whether they're alive.
+In the folder tagged as [`src`](src), build a new class named `Car.java`. Your task is to assign the following attributes (fields):
 
-#### Exercise 3.5 -- High Scores
-In `Score.java`, create a `void` method called `updateScore` that takes a `Player` and `Enemy` objects as parameters.
+- `String` brand
+- `String` model
+- `int` year
+- `int` speed
+- `boolean` engineStatus
 
-If `enemyAlive` of `Enemy` is `false`, increase `enemiesDefeated` by 1, and `totalScore` by `enemyId * 10`.
+Try running the main method from Example 1 once you have added these fields to `Car.java`.
 
-In the `main` method, create a `Player` and multiple `Enemy` objects along with a `Score` object. Simulate battles and score updates. 
+<details>
+  <summary> 🧰 Example 1 </summary>
 
-#### Exercise 3.6 -- Shadows in JavaLandia
-Add a local variable in `updateScore` method with the same name as one of the instance variables, and try adding to that variable instead of the instance variable. Run the program. Analyze what happens, with focus on variable shadowing concepts.
+  ```java
+  class Car {
 
-### 🐜 Bugs and Errors?
-If you encounter any, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) titled "Task *x* Error: *summary of error here*". Your contribution will be appreciated!
+    // Insert the fields here
+
+    public static void main(String[] args) {
+      // establish a new "Car" item
+      Car mycar = new Car();
+
+      // assign the values
+      mycar.brand = "Tesla";
+      mycar.model = "Model S";
+      mycar.year = 2022;
+      mycar.speed = 0;
+
+      // retrieve the information of the assigned values
+      System.out.println("Brand: " + mycar.brand);
+      System.out.println("Model: " + mycar.model);
+      System.out.println("Year: " + mycar.year);
+      System.out.println("Speed: " + mycar.speed);
+    } // close the main method
+
+  } // close the class
+  ```
+</details>
+
+#### Exercise 3.1 -- Getters and Setters
+
+After encapsulating the state of your Car, include private access modifiers for the fields. Additionally, get on with creating *getters* and *setters* for all attributes, leading to ten methods in total. Upon completion, try running the main method in Example 2. 
+
+<details>
+  <summary> 🧰 Example 2 </summary>
+
+  ```java
+  class Car {
+
+    // Insert your fields here!
+
+    // Alongside the getters and setters!
+
+    public static void main(String[] args) {
+      // developing a new "Car" object
+      Car mycar = new Car();
+
+      // assigning new values to the object
+      mycar.setBrand("Tesla");
+      mycar.setModel("Model S");
+      mycar.setYear(2022);
+      mycar.setSpeed(0);
+
+      // print the details of the assigned attributes
+      System.out.println("Brand: " + mycar.getBrand());
+      System.out.println("Model: " + mycar.getModel());
+      System.out.println("Year: " + mycar.getYear());
+      System.out.println("Speed: " + mycar.getSpeed());
+      System.out.println("Engine Status: " + mycar.isEngineStatus());
+    } // close main method
+
+  } // terminate the class
+  ```
+</details>
+
+> **Assistant's Note:** The getters and setters for boolean type attribute has a different naming convention in comparison to others.
+
+#### Exercise 3.2 -- Constructor
+
+Bringing back a constructor from the OLI material will save you plenty of efforts. Once implemented, you can repeat Exercise 2 again.
+
+#### Exercise 3.3 -- `printDetails()`
+
+Create a method named `printDetails()`. The aim of this method is to print all the details about the car without any requirement of a return type. Look at Example 3 for a reference implementation. 
+
+<details>
+  <summary> 🧰 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args){
+    // develop a new "Car" object
+    Car mycar = new Car("Tesla", "Model S", 2022, 0);
+
+    // print the details of the car on the terminal
+    mycar.printDetails();
+  }
+  ```
+
+  This call must print the following details on the terminal:
+
+  ```
+  > DETAILS OF THE CAR:
+  > Brand: Tesla
+  > Model: Model S
+  > Year of manufacturing: 2022
+  > Speed: 0
+  > Engine Status: False
+  ```
+</details>
+
+#### Exercise 3.4 -- Speed up!
+
+For this exercise, create a method `speedUp` which receives an int arguement and increases speed. When this function is called, be sure to print the information on the terminal.
+
+<details>
+  <summary> 🧰 Example 4 </summary>
+
+  ```java
+  public static void main(String[] args){
+    // creating a new "Car" object
+    Car mycar = new Car("Tesla", "Model S", 2022, 0);
+
+    // call the "speedUp" method on mycar with increased speed
+    mycar.speedUp(60);
+  }
+  ```
+
+  The call should thus print:
+
+  ```
+  > The Tesla Model S is now running at 60 km/h speed!
+  ```
+</details>
+
+#### Exercise 3.5 -- Variable Shadowing
+
+Reflect on the given examples below about variable shadowing. Remember, you may have to articulate about these in class.
+
+```Java
+public class Shadow {
+    private int num = 0;
+
+    public void printNum() {
+        int num = 7;
+        System.out.println(num); 
+    }
+
+    public static void main(String[] args){
+        new Shadow().printNum();
+    }
+}
+```
+
+The second example can be found here:
+
+```Java
+import java.awt.Color;
+
+public class Car {
+  private String brand;
+  private Color color;
+
+  public Car(String brand, Color color) {
+    brand = brand;
+    color = color;
+  }
+
+  public driveFast(){
+    String brand = "Ferrari";
+    System.out.println("A " + brand + " drives very fast!"); 
+  }
+}
+```
+
+>**Assistant's Note:** Keep local scope, global variables, and instance fields in mind for these examples.
+
+### 🐜 Bugs And Errors?
+
+If you caught any inconsistency in this exercise, kindly, open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task 3 Error: *summary of error here*". Acknowledgments will be given to the person who spots the bug!
