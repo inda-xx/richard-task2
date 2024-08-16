@@ -55,11 +55,28 @@ def post_comment_on_pr(comment):
     pr_number = os.getenv('GITHUB_PR_NUMBER')
     repo = os.getenv('GITHUB_REPOSITORY')
 
+    # Debugging: Check environment variables
+    print(f"GITHUB_PR_NUMBER: {pr_number}")
+    print(f"GITHUB_REPOSITORY: {repo}")
+
+    if not pr_number or not repo:
+        print("Error: GITHUB_PR_NUMBER or GITHUB_REPOSITORY environment variables not set.")
+        sys.exit(1)
+
     command = [
         'gh', 'pr', 'comment', pr_number,
-        '--body', f'"{comment}"'
+        '--body', comment
     ]
-    subprocess.run(command, check=True)
+
+    # Debugging: Check command
+    print(f"Command: {command}")
+    
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to post comment: {e}")
+        sys.exit(1)
+
 
 if len(sys.argv) != 4:
     print("Error: Missing required command line arguments 'api_key', 'head_branch', and 'base_branch'")
