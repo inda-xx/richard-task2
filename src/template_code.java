@@ -1,68 +1,40 @@
 ```java
-
-    // Class for the "Hunter" entity
-    class Hunter {
-        // Fields
-        private String hunterName;
-        private int xLocation;
-        private int yLocation;
-        private int score;
-
-        // Constructor
-        // Initialize all the fields
-        public Hunter(String name, int x, int y) {
-            // your code here
-        }
-
-        // Getters
-        // Your getters here
-
-        // Setters
-        // Your setters here
-
-        // Method for scoring
-        // Your code here
-
-        // Method for moving the hunter
-        // Your code here
-
-        // Method to print info
-        // Your code here
+class Person {
+    // Fields
+    private String name;
+    private String role;
+    private int experience;
+    private boolean isBandLeader;
+    
+    // TODO: Add constructor
+    public Person(/*insert parameters here*/) {
+        //Set the instance variables using the parameters provided
+        /*TODO*/
     }
 
-    // Class for the "Enemy" entity
-    class Enemy {
-        // Fields
-        private String enemyType;
-        private int strength;
-        private int xLocation;
-        private int yLocation;
+    // accessors
+    public String getName() { /*insert code to return name*/ }
+    public String getRole() { /*insert code to return role*/ }
+    public int getExperience() { /*insert code to return experience*/ }
+    public boolean isBandLeader() { /*insert code to return isBandLeader*/ }
 
-        // Constructor
-        // Initialize all the fields
-        public Enemy(String type, int strength, int x, int y) {
-            // your code here
-        }
+    // mutators
+    public void setName(String name) { /*insert code to set name*/ }
+    public void setRole(String role) { /*insert code to set role*/ }
+    public void setExperience(int experience) { /*insert code to set experience*/ }
+    public void setIsBandLeader(boolean isBandLeader) { /*insert code to set isBandLeader*/ }
 
-        // Getters
-        // Your getters here
-
-        // Setters
-        // Your setters here
-
-        // Method to print info
-        // Your code here
+    // printInfo method
+    public void printInfo() {
+        /*insert code to print details about Person object*/
     }
 
-    // Main method
     public static void main(String[] args) {
-        // Create an instance of the Hunter class
-        // Your code here
-
-        // Create an instance of the Enemy class
-        // Your code here
-
-        // Game loop
-        // Your code here 
-    }
+        // create a new "Person" object
+        // Use the constructor to assign meaningful values
+        Person alice = new Person(/*insert constructor arguments here*/);
+        // print out the object's details
+        alice.printInfo();
+    } // end main method
+} // end class
 ```
