@@ -68,12 +68,15 @@ jobs:
 
       - name: Analyze and Respond
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TESTS_PASSED: ${{ needs.run-tests.outputs.tests_passed }}
+            OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+            GITHUB_REPOSITORY: ${{ github.repository }}
+            TESTS_PASSED: ${{ needs.run-tests.outputs.tests_passed }}
         run: |
-          if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
-            python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
-          else
-            python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
-          fi
+            if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
+              python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
+            else
+              python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
+            fi
+        
