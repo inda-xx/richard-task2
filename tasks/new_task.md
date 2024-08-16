@@ -1,137 +1,67 @@
-# Let's Play Java Game! 🕹️ 
+# Javamon: The Battle Begins! 🕹
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+In this exercise of JAV101, you're about to dive deeper into the realm of Object-Oriented Programming (OOP) in Java. You'll engage in creating instances and experiences for a simple but addictive game.
 
-### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+### 👾 Deadline
+This task should be completed before **Friday 21st October**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 👩‍🔬 Instructions
+For help on how to complete and submit the assignment, visit the [assignment section of the course handbook](https://jav101.edu/assignments).
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+## 📖 Preparation
+You must read through and grasp the provided learning materials for Chapter 3.
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+- Visit [Learning Java Basics](https://jav101.edu/java/basics)
+- If you haven't done so, visit https://jav101.edu, sign up, and bookmark the course using the key `jav101-2022`
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
-* Designing Java classes
-* Adding instance fields
+> **Assistant's Note:** The task and learning materials may not be entirely synchronous, please read through the material to ensure you understand the concepts.
+
+## ✅ Learning Goals
+
+The learning goals for this chapter include:
+
+* Designing robust Java classes
+* Declaring and utilizing instance fields
 * Adding a constructor method
-* Creating getters and setters
-* Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+* Creating getter and setter methods
+* Outputting information to the console
+* Utilizing the `main` method correctly
+* Understanding variable scope (or *variable shadowing*)
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+## 📚 Assignment
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+The small but bustling city of Javatown is known for its popular game, *Javamon*. Your task is to model these game elements in Java! 
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+#### Exercise 3.1 -- Fields
+To get started, create a new `Javamon.java` in the [`src`](src) folder. You need to model game characters called Javamon using [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html). The class, `Javamon`, should include the following fields:
 
-### 👾 Assignment
+* `String` name
+* `int` health (HP)
+* `int` power 
+* `String` type
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+#### Exercise 3.2 -- Getters and Setters
+Next, introduce [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) by applying *getters* and *setters* to all fields. This will offer controlled access to the class properties from outside.
 
-#### Exercise 1.0 -- Character Class
+#### Exercise 3.3 -- Constructor
+To save time and make your class more robust, create a *constructor* that can initialize a Javamon instance with one line of code.
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+#### Exercise 3.4 -- `printStatus()`
+To print out a Javamon's current status, implement a `printStatus()` method. This should output the Javamon's name, health, power, and type.
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+#### Exercise 3.5 -- The Battle System
+Implement a method called `battle` that takes another Javamon as a parameter. This method should simulate a battle between the Javamon that calls `battle` and the opponent Javamon. The attack causes damage to the opponent's health equal to the attacking Javamon's power. If a Javamon's health drops to 0 or below, it is considered "fainted".
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+#### Exercise 3.6 -- Scope and Variable Shadowing
+Look at the examples below. Try to understand the potential issues with *variable shadowing* illustrated. Be prepared to explain how to fix these issues, you might be asked during class. Read more about [variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) and the [`this` keyword](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html) in Java.
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
+## 💡 Troubleshooting
+In case of questions:
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+1. Check the [Assignment FAQ](https://jav101.edu/assignments/faq.md)
+2. Post your question on the course forum (avoid sharing answers!)
+3. Speak in person with a teaching assistant during the [weekly lab](https://jav101.edu/labs)
 
-#### Exercise 1.1 -- Getters and Setters 
+Remember, it's always smart to query a friend or the internet for help. But, you should never share answers in the end.
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
-
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
-
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
-
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
-
-#### Exercise 1.3 -- `printStatus()`
-
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
-
-#### Exercise 1.4 -- `move()`
-
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
-
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
-
-#### Exercise 1.6 -- Instance variable shadowing
-
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+Enjoy diving into Java classes and OOP concepts, and most importantly, have fun! 🎮
