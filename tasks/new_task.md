@@ -1,137 +1,80 @@
-# Let's Play Java Game! 🕹️ 
+# Code Clash: Battle of Pixels 🕹️
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+For this exercise of your Programming course, you will be practicing object-oriented programming in Java. You will interact with classes, instance fields, and constructors while working towards creating a simple game application.
 
 ### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+Complete this assignment before **Friday, 16th October**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 👩‍🏫 Instructions
+For detailed instructions on how to complete and submit the assignment, please visit the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### 📚 Preparation
+You must finish the lessons and quizzes for Module 2.
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- If you have not done so, go to https://kth.oli.cmu.edu/, sign up, and register for the course key `dd1337-ht22`
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
-* Designing Java classes
-* Adding instance fields
-* Adding a constructor method
-* Creating getters and setters
-* Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+> **Assistant's Note:** The provided material and tasks might not be perfectly aligned, so it is recommended to read ahead if you did not find all the material.
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+### ✅ Learning Goals
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+After this week, you should be able to:
+* Design Java classes 🏗️
+* Add instance fields to classes 📝
+* Create a constructor method 🟢
+* Craft *getters* and *setters* 🔧
+* Print output to the terminal 🖨️
+* Execute a `main` method 🔄
+* Understand Scope (or *variable shadowing*) 📏
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+### 🚨 Troubleshooting Guide
+If you encounter any issues or have any queries, follow these steps:
 
-### 👾 Assignment
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students experiencing the same problem?
+2. If not, post your question by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Add a descriptive title, starting with "Task *x*: *summary of problem here*"
+3. Consult with a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Consult your schedule to determine the next lab.
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+We promote discussion with your peers, but remember, **do not share solutions**!
 
-#### Exercise 1.0 -- Character Class
+### 🏛 Assignment
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+You have been tasked with simulating an exciting pixel-based combat game, Code Clash. This game will entail pixel soldiers battling out with pixel enemies on a digital terrain. Your mission is to write a Java application that models this epic clash!
+
+#### Exercise 1: The Soldier Class
+
+Start off by creating a new Soldier class. Your soldier should have the following attributes:
 
 - `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+- `int` health
+- `int` strength
+- `int` defense
+- `boolean` alive
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+The `alive` attribute will represent whether the soldier is still alive in the game.
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
+After creating your Soldier class, try instantiating a Soldier object and setting its attributes in the `main` function.
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+#### Exercise 2: Encapsulation with Getters and Setters
 
-#### Exercise 1.1 -- Getters and Setters 
+Now, you're going to encapsulate the attributes of the Soldier class. Make the attributes private and provide appropriate getter and setter methods for all attributes. 
+After encapsulating your Soldier class, amend your code in the `main` function to use getters and setters.
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
+#### Exercise 3: The Constructor 
 
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
+Constructors allow us to simplify our work. Define a constructor for your Soldier class that accepts arguments for all attributes. Modify your code in the `main` function to use the constructor when creating Soldier objects.
 
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
+#### Exercise 4: Display Information
 
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
+Your soldiers are ready for battle, and it's time to print out their stats. Implement a method called `displayInfo()` that outputs to the console the name, health, strength, defense, and living status of a soldier.
 
-#### Exercise 1.3 -- `printStatus()`
+#### Exercise 5: Battle system
 
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
+Time for some action! Implement a `fight()` method in the Soldier class. The `fight()` method receives another Soldier object (the enemy) and inflicts damage on it based on the attacking Soldier's strength and the defending Soldier's defense. When the health of a soldier reaches 0 or below, the soldier is marked as not alive. 
 
-#### Exercise 1.4 -- `move()`
+#### Exercise 6: Variable Shadowing
 
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
+Learn about variable shadowing by reading from reliable sources. Understand how the keyword 'this' works in Java. Try creating examples where variable shadowing happens, identify the issues, and fix them. This will not be graded, but it's a good practice to understand scope in Java.
 
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
+### 🐞 Bugs and errors?
 
-#### Exercise 1.6 -- Instance variable shadowing
-
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+If you find inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error here*". Bug spotters will be rewarded with mentions in the acknowledgment section.
