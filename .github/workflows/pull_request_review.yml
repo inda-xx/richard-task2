@@ -61,16 +61,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai
 
-      - name: Verify openai Installation
-        run: |
-          pip show openai
-          python -c "import openai; print('OpenAI package is installed and working.')"
+      - name: Set GITHUB_PR_NUMBER
+        run: echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
       - name: Analyze and Respond
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TESTS_PASSED: ${{ needs.run-tests.outputs.tests_passed }}
+          TESTS_PASSED: ${{ env.tests_passed }}
+          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}  # Ensure it's available here
         run: |
           if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
             python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
