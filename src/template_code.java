@@ -1,122 +1,60 @@
+```java
 
+    class Constellation {
+        // Instance variables (fields)
+        private String name;
+        private int stars;
+        private boolean visible;
+        private String seasonalViewing;
+        
+        // Constructor that accepts and sets values to all instance variables
+        public Constellation(String name, int stars, boolean visible, String seasonalViewing) {
+            this.name = name;
+            this.stars = stars;
+            this.visible = visible;
+            this.seasonalViewing = seasonalViewing;
+        }
+        
+        // Getters
+        public String getName() { return name; }
+        public int getStars() { return stars; }
+        public boolean getVisible() { return visible; }
+        public String getSeasonalViewing() { return seasonalViewing; }
+        
+        // Setters
+        public void setName(String newName) { this.name = newName; }
+        public void setStars(int newStars) { this.stars = newStars;}
+        public void setVisible(boolean newVisibleStatus) { this.visible = newVisibleStatus;}
+        public void setSeasonalViewing(String newSeason) { this.seasonalViewing = newSeason;}        
 
-// Player.java
+        // Method to print details
+        public void printDetails() {
+            System.out.println("Name: " + name);
+            System.out.println("Stars: " + stars);
+            System.out.println("Visible: " + visible);
+            System.out.println("Season for viewing: " + seasonalViewing);
+        }
+        
+        // Method to check if constellation is visible based on season
+        public boolean isVisible(String currentSeason) {
+            // Implement logic to use 'seasonalViewing' and determine if constellation is visible during 'currentSeason'.
+            // Return true or false.
+        }
 
-public class Player {
-    private String name;
-    private int health;
-    private int positionX;
-    private int positionY;
+        // TODO: Add examples for variable shadowing
 
-    // Player constructor
-    public Player(String name, int health, int positionX, int positionY) {
-        if (health < 0) throw new IllegalArgumentException("Health cannot be negative.");
-        this.name = name;
-        this.health = health;
-        this.positionX = positionX;
-        this.positionY = positionY;
+        // Main method for testing
+        public static void main(String[] args) {
+            // Create a new "Constellation" object
+            Constellation pegasus = new Constellation("Pegasus", 14, true, "Autumn");
+            
+            // Print out the object's info
+            pegasus.printDetails();
+            
+            // Test isVisible() method
+            System.out.println("Is Pegasus visible in current season (Autumn)?: " + pegasus.isVisible("Autumn"));
+        } 
     }
-
-    // Define getters
-    public String getName() { return name; }
-    public int getHealth() { return health; }
-    public int getPositionX() { return positionX; }
-    public int getPositionY() { return positionY; }
-
-    // Define setters
-    public void setName(String name) { this.name = name; }
-    public void setHealth(int health) {
-        if (health < 0)
-            throw new IllegalArgumentException("Health cannot be negative.");
-        this.health = health;
-    }
-    public void setPositionX(int positionX) { this.positionX = positionX; }
-    public void setPositionY(int positionY) { this.positionY = positionY; }
-
-    public void printStatus() {
-        System.out.println("Player Name: " + name);
-        System.out.println("Health: " + health);
-        System.out.println("Position: (" + positionX + ", " + positionY + ")");
-    } 
-}
-
-// Enemy.java
-
-public class Enemy {
-    private String type;
-    private int positionX;
-    private int positionY;
-    private boolean isAlive;
-
-    // Enemy constructor
-    public Enemy(String type, int positionX, int positionY, boolean isAlive) {
-        if (positionX < 0 || positionX > 100 || positionY < 0 || positionY > 100)
-            throw new IllegalArgumentException("Position out of bounds");
-        this.type = type;
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.isAlive = isAlive;
-    }
-
-    // Define getters
-    public String getType() { return type; }
-    public int getPositionX() { return positionX; }
-    public int getPositionY() { return positionY; }
-    public boolean isAlive() { return isAlive; }
-
-    // Define setters
-    public void setType(String type) { this.type = type; }
-    public void setPositionX(int positionX) {
-        if (positionX < 0 || positionX > 100)
-            throw new IllegalArgumentException("positionX out of bounds");
-        this.positionX = positionX;
-    }
-    public void setPositionY(int positionY) {
-        if (positionY < 0 || positionY > 100)
-            throw new IllegalArgumentException("positionY out of bounds");
-        this.positionY = positionY;
-    }
-    public void setAlive(boolean isAlive) { this.isAlive = isAlive; }
-
-    public void printStatus() {
-        System.out.println("Enemy type: " + type);
-        System.out.println("Position: (" + positionX + ", " + positionY + ")");
-        System.out.println("Is Alive?: " + isAlive);
-    }   
-}
-
-// Score.java
-
-public class Score {
-    private int points;
-    private Player player;
-
-    public Score(int points, Player player) {
-        if (points < 0)
-            throw new IllegalArgumentException("Points cannot be negative.");
-        this.points = points;
-        this.player = player;
-    }
-
-    // Define getters
-    public int getPoints() { return points; }
-    public Player getPlayer() { return player; }
-
-    // Define setters
-    public void setPoints(int points) {
-        if (points < 0)
-            throw new IllegalArgumentException("Points cannot be negative.");
-        this.points = points;
-    }
-
-    public void increment(int points) {
-        if (points < 0)
-            throw new IllegalArgumentException("Points cannot be negative.");
-        this.points += points;
-    }
-
-    public void printStatus() {
-        System.out.println("Player: " + player.getName());
-        System.out.println("Score: " + points);
-    }   
-}
+    
+```
+This template maintains the structure from the original code while incorporating the necessary placeholders, methods, and comments as per the provided task. It includes a main method for testing and leaves space for a variable shadowing example, which the student will need to complete.
