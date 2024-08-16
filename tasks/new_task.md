@@ -1,137 +1,91 @@
-# Let's Play Java Game! 🕹️ 
+# Digital Duel: A Simple Game 🎮
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+For your new task in Java, you will design and implement a simple game application where you'll control a player and interact with enemies. You're expected to learn the ropes about object-oriented programming using Java.
 
-### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+### ⏳ Deadline
+This task should be finished before the exercise, on **Tuesday 20th September**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 🧑‍🏫 Instructions
+For the full details on how to carry out and submit the task, kindly refer to the [section on assignments](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) of the course instruction manual. 
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### 📝 Preparation
+Read and provide responses to the questions in the OLI module for this week's material:
+- [Taking a Peak Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+> **Assistant's Note:** The OLI assignments might differ slightly from what we've outlined, so feel free to get ahead of things if you don't find all the material immediately.
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
+### ✅ Learning Goals
+
+The learning goals for this week include:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
-* Creating getters and setters
+* Creating *getters* and *setters*
 * Printing to the terminal
 * Utilising the `main` method
-* Scope (or variable shadowing)
+* Scope (or *variable shadowing*)
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+### 🚨 Troubleshooting Guide
+When faced with issues or uncertainties, follow this procedure:
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+1. Look through this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students asking similar questions?
+2. If not, create a new issue by clicking on [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new).
+3. Next, find a TA at the [weekly lab](https://queue.csc.kth.se/Queue/INDA).
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+Remember, you're encouraged to engage in discussions with your peers. But please, **do not share answers**!
 
-### 👾 Assignment
+### 🏛 Assignment
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+You are required to create a simple game with Java where a player can move around and score points by interacting with enemies. The game will be console based and the complexity will depend on your creativity and expertise. 
 
-#### Exercise 1.0 -- Character Class
+#### Specification: 
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+Create 2 interrelated classes: `Player.java` and `Enemy.java`.
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+Follow the next steps:
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+#### Step 1: Player Class 🏃
+Design a player class that includes the following:
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
+The Player class should have the following instance fields:
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+* `String` name
+* `int` points 
+* `double` xPosition 
+* `double` yPosition
 
-#### Exercise 1.1 -- Getters and Setters 
+Add a constructor method to the class. The constructor should have parameters for every field of the class and use these parameters to initialise the fields of a new player object.
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
+Add *getters* and *setters* to all fields in the class.
 
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
+#### Step 2: Enemy Class 👾
+Design an enemy class that includes the following:
 
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
+The Enemy class should have the following instance fields:
 
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
+* `string` id
+* `string` type
+* `double` xPosition
+* `double` yPosition
 
-#### Exercise 1.3 -- `printStatus()`
+Add a constructor method to the class. The constructor should have parameters for every field of the class and use these parameters to initialise the fields of a new enemy object.
 
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
+Add *getters* and *setters* to all fields in the class.
 
-#### Exercise 1.4 -- `move()`
+#### Step 3: Moving Player
+Implement method `public void move(double x, double y)`, in the Player class which should update the xPosition and yPosition of the player using the x and y parameters it receives.
 
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
+#### Step 4: Player Interactions with Enemies
+In the Player class, create a method `public String attack(Enemy enemy)` which includes code to simulate the player attacking an enemy. The enemy's ID and type should be extracted by getter methods, and the method should return a String, such as "Player " + this.name + " attacked enemy " + enemy.getId() + ", type " + enemy.getType()+"."
 
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
+#### Step 5: Scoring System
+Establish a point scoring system related to player-enemy interaction. Add points to the player every time they attack an enemy.
 
-#### Exercise 1.6 -- Instance variable shadowing
+#### Step 6: Main Method
+Make use of the `main` method in your `Player` class to create instances of Player and Enemy classes, move the player and simulate player-enemy interaction with the attack method. 
 
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
+#### Step 7: Variable Shadowing
+Illustrate variable shadowing in your Game App by creating a field and local variable with the same name. Use the `this` keyword to rectify this problem and access the scope of the class instance field.
 
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+### 🐞 Bugs and errors?
+Please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error here*" if you notice any inconsistences or errors in this task. Bug identifiers will be rewarded with mentions in the acknowledgment section.
