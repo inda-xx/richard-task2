@@ -26,6 +26,7 @@ on:
 
 permissions:
   contents: write  # Grant write permission for the GITHUB_TOKEN
+  pull-requests: write  # Making sure the PR comments can be added
 
 jobs:
   generate-task-description:

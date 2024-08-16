@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write  # Grant write permission for the GITHUB_TOKEN
+  pull-requests: write  # Making sure the PR comments can be added
 
 jobs:
   run-tests:
@@ -67,12 +68,13 @@ jobs:
       - name: Analyze and Respond
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Use the PAT token
           TESTS_PASSED: ${{ env.tests_passed }}
-          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}  # Ensure it's available here
+          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}  
         run: |
           if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
             python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           else
             python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           fi
+      
