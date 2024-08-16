@@ -16,10 +16,15 @@ def main(api_key, head_branch, base_branch):
         "Generate a brief compliment and analysis of what has been achieved in the task. "
         "Be positive and provide a clear summary of the student's accomplishments."
     )
-    
+
     compliment = generate_with_retries(client, prompt, max_retries=3)
     if compliment is None:
         print("Error: Failed to generate compliment after multiple retries.")
+        sys.exit(1)
+
+    # Ensure compliment is not empty
+    if not compliment.strip():
+        print("Error: Generated compliment is empty.")
         sys.exit(1)
 
     # Post the compliment as a PR comment
@@ -49,11 +54,35 @@ def post_comment_on_pr(comment):
     pr_number = os.getenv('GITHUB_PR_NUMBER')
     repo = os.getenv('GITHUB_REPOSITORY')
 
+    # Check environment variables
+    if not pr_number:
+        print("Error: GITHUB_PR_NUMBER is not set.")
+        sys.exit(1)
+    if not repo:
+        print("Error: GITHUB_REPOSITORY is not set.")
+        sys.exit(1)
+
+    # Debugging: Print the variables to ensure they are not None
+    print(f"PR Number: {pr_number}")
+    print(f"Repository: {repo}")
+    print(f"Comment: {comment}")
+
+    # Properly escape the comment content
+    comment = comment.replace('"', '\\"')
+
     command = [
         'gh', 'pr', 'comment', pr_number,
-        '--body', f'"{comment}"'
+        '--body', comment
     ]
-    subprocess.run(command, check=True)
+
+    # Debugging: Print the command to ensure it's correct
+    print(f"Command: {command}")
+
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to post comment: {e}")
+        sys.exit(1)
 
 def merge_branch(head_branch, base_branch):
     try:
