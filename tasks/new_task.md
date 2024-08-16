@@ -1,137 +1,70 @@
-# Let's Play Java Game! 🕹️ 
+# Battle Beasts: The Java Quest! 🐾🔥
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+In this exciting assignment of INDA, you're going to simulate a Game App by creating Java objects for gaming components. Buckle up to encounter the cutting-edge principles of Object-Oriented Programming (OOP).
 
-### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+### 💀 Deadline
+This work should be accomplished before the exercise GHC Lab **4P, Tuesday 27th September**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 👩‍🏫 Instructions
+For instructions on how to do and submit the assignment, please check out the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments). 
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### 📝 Preparation
+You should complete the following tasks in the OLI material prior to diving into the assignment:
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+- Read [The Structure of a Java Class](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f8e5ca808ac1f088812f2a8ce315bac60)
+- Complete the Registration process on `https://kth.oli.cmu.edu/`, using our course key `dd1337-ht22`
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
-* Designing Java classes
-* Adding instance fields
-* Adding a constructor method
-* Creating getters and setters
-* Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+> **Assistant's Note:** The OLI material and tasks might be slightly off-track for the current year. If you don't find all the material directly related, feel free to skip through or read ahead.
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+### ✅ Learning Goals
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+The learning goals for this assignment are as follows:
+* Designing Java Classes
+* Adding Instance Fields
+* Adding Constructor methods
+* Creating *getters* and *setters*
+* Printing to the Terminal
+* Using the `main` method
+* Understanding Scope (or *Variable Shadowing*)
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+### 🚨 Troubleshooting Guide
+In case of pressing questions or issues, follow this procedure:
 
-### 👾 Assignment
+1. Refer to this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). You might find someone who has the same issue.
+2. If not, start a new query yourself, by raising a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure to provide an expressive title, and always start with "Task *x*: *Brief of your issue*"
+3. Seek guidance from a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Keep track of your schedule for the next lab timing.
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+Feel free to connect with other students in the course, but **please refrain from sharing answers**!
 
-#### Exercise 1.0 -- Character Class
+### 🏛 Assignment
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+You're about to enter a fictional gaming world where Battle Beasts are the epic heroes! With distinct player rankings and enemy interactions, the game has gained popularity in the Royal Institute of Technology. Your task is to extract these collections into a tempting Java Model! The *[modern technology](https://huggingface.co/spaces/dalle-mini/dalle-mini)* has helped us with an image to visualize:
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+<img src="images/dallemini-battlebeasts.png" width="800">
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+#### Exercise 1.0 -- Fields
+In the [`src`](src) folder, create a new class called `BattleBeast.java`. Model all the properties of the Battle Beasts using [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html). Refer to the given main method for the correct names and types for these fields.
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+#### Exercise 1.1 -- Getters and Setters
+Your next task is to implement **accessors** and **mutators**; the so-called *getters* and *setters* for all fields. All fields must be accompanied with these, in total ten methods!
 
-#### Exercise 1.1 -- Getters and Setters 
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
+#### Exercise 1.2 -- Constructor
+Move on to implement a *constructor* for the BattleBeast class. This will enable you to instantiate objects with meaningful values. Test your implementation by again referring to the main method.
 
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
 
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
+#### Exercise 1.3 -- `printInfo()`
+For a fast and complete display of current game objects' details, implement a method named `printInfo()`. This should print all information to the Terminal.
 
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
 
-#### Exercise 1.3 -- `printStatus()`
+#### Exercise 1.4 -- BattleBeast, Fight!
+The action-packed Battle Beasts Game revolves around fierce fights between multiple beasts. Update your model to incorporate this aspect. You need to define an `attack` method that takes a BattleBeast object (the enemy) as an argument and computes damage following a formula. 
 
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
+Refer to the provided main method to see how it's integrated.
 
-#### Exercise 1.4 -- `move()`
+#### Exercise 1.5 -- Variable Shadowing
+In this final exercise, you need to identify and fix an issue of *Variable Shadowing* in the provided examples. Understand the local and global scopes for variables and correct any possible shadowing effects.
 
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
-
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
-
-#### Exercise 1.6 -- Instance variable shadowing
-
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+### 🐞 Bugs and errors?
+If you encounter any problems with the task, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error here*". Bug finders will be credited in the acknowledgment section.
