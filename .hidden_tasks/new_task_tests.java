@@ -3,81 +3,62 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GameTest {
-    private Hunter hunter;
-    private Enemy enemy;
+public class PersonTest {
+    private Person person1;
+    private Person person2;
 
     @Before
     public void setUp() {
-        hunter = new Hunter("Role", 0, 0);
-        enemy = new Enemy("Orc", 10, 2, 2);
+        person1 = new Person("Alice", "Guitarist", 10, true);
+        person2 = new Person("Bob", "Bass Guitarist", 5, false);
     }
 
     @Test
-    public void testGetHunterName() {
-        assertEquals("Role", hunter.getName());
+    public void testGetName() {
+        assertEquals("Alice", person1.getName());
+        assertEquals("Bob", person2.getName());
     }
 
     @Test
-    public void testGetHunterLocation() {
-        assertEquals(0, hunter.getXLocation());
-        assertEquals(0, hunter.getYLocation());
+    public void testGetRole() {
+        assertEquals("Guitarist", person1.getRole());
+        assertEquals("Bass Guitarist", person2.getRole());
     }
 
     @Test
-    public void testGetHunterScore() {
-        assertEquals(0, hunter.getScore());
+    public void testGetExperience() {
+        assertEquals(10, person1.getExperience());
+        assertEquals(5, person2.getExperience());
     }
 
     @Test
-    public void testSetHunterLocation() {
-        hunter.setXLocation(5);
-        hunter.setYLocation(10);
-        assertEquals(5, hunter.getXLocation());
-        assertEquals(10, hunter.getYLocation());
+    public void testIsBandLeader() {
+        assertEquals(true, person1.isBandLeader());
+        assertEquals(false, person2.isBandLeader());
     }
 
     @Test
-    public void testSetHunterScore() {
-        hunter.setScore(10);
-        assertEquals(10, hunter.getScore());
+    public void testSetName() {
+        person1.setName("NewName");
+        assertEquals("NewName", person1.getName());
     }
 
     @Test
-    public void testGetEnemyType() {
-        assertEquals("Orc", enemy.getType());
+    public void testSetRole() {
+        person1.setRole("Drummer");
+        assertEquals("Drummer", person1.getRole());
     }
 
     @Test
-    public void testGetEnemyStrength() {
-        assertEquals(10, enemy.getStrength());
+    public void testSetExperience() {
+        person1.setExperience(7);
+        assertEquals(7, person1.getExperience());
     }
 
     @Test
-    public void testGetEnemyLocation() {
-        assertEquals(2, enemy.getXLocation());
-        assertEquals(2, enemy.getYLocation());
-    }
-
-    @Test
-    public void testSetEnemyStrength() {
-        enemy.setStrength(5);
-        assertEquals(5, enemy.getStrength());
-    }
-
-    @Test
-    public void testHunterMove() {
-        hunter.tallyScore(); // No enemies to avoid score = 0
-        hunter.move(2, 2); // Moving to enemy location, score reduces by enemy strength
-        assertEquals(-10, hunter.getScore());
-    }
-
-    @Test
-    public void testHunterAvoidEnemy() {
-        hunter.move(5, 5); // Moving away from enemies
-        hunter.tallyScore(); // Avoiding 1 enemy, score = 1
-        assertEquals(1, hunter.getScore());
+    public void testSetIsBandLeader() {
+        person1.setIsBandLeader(false);
+        assertEquals(false, person1.isBandLeader());
     }
 }
-
 ```
