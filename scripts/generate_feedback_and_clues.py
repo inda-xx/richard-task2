@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import openai
 from openai import OpenAI
 
 def main(api_key, head_branch, base_branch):

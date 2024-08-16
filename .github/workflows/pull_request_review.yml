@@ -64,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TESTS_PASSED: ${{ env.tests_passed }}
         run: |
-          if [ "${{ env.tests_passed }}" == "true" ]; then
+          if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
             python scripts/generate_compliment_and_merge.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           else
             python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
