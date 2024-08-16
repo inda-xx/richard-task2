@@ -68,8 +68,8 @@ jobs:
       - name: Analyze and Respond
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Use the PAT token
-          TESTS_PASSED: ${{ env.tests_passed }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the PAT token or GITHUB_TOKEN
+          TESTS_PASSED: ${{ needs.run-tests.outputs.tests_passed }}
           GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}  
         run: |
           if [ "${{ env.TESTS_PASSED }}" == "true" ]; then
@@ -77,4 +77,3 @@ jobs:
           else
             python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           fi
-      
