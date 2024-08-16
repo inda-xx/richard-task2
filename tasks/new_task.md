@@ -1,74 +1,155 @@
-# Hazard Hunters! 
+# Java Zoo: The Animal Kingdom 🦁 
 
-For this project, you will develop a simple game in Java. You are going to apply your understanding of Java classes.
+During this exercise, we will delve deeper into the essence of object-oriented programming. We will design and create a blueprint of the Animal Kingdom in Java!
 
-### 🏷 Deadline
-Be ready to submit your work by **Friday, 25th February**.
+### 💀 Deadline
+This exercise should be completed before the deadline, on **Friday 23th September**.
 
-### 💼 Project Brief
-For instructions on how to carry out and submit the assignment, please refer to the [project section of the course instructions](https://project.org/course-instructions#course-assignments).
+### 👩‍🏫 Instructions
+For instructions on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🔖 Prep Work
-You must read and fulfill the exercises in the documentation for Module 3 before starting the assignment.
+### 📝 Preparation
+You must read and answer the questions in the OLI material for Module 2.
 
-- Review [Intro to Class Design](https://javaclass.design.cmu.edu/jcourse/webui/syllabus/module.do?context=1919a808ac1f650b132f650bac60f8)
-- If you have yet to do so, visit https://javaclass.design.cmu.edu/ and register for the course `hc1337-ht23`.
+- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- If you have not done so, go to https://kth.oli.cmu.edu/, sign up and register for the course key `dd1337-ht22`
 
-> **Assistant's Note:** As the material and tasks may vary slightly every year, feel free to read ahead if you aren't finding all of the material needed.
+### ✅ Learning Goals
 
-### 🔨 Learning Objectives
+This week's learning goals include:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Using the `main` method
+* Scope (or *variable shadowing*)
 
-The learning goals of this week include:
+### 🚨 Troubleshooting Guide
+If you have any questions or problems, follow this procedure:
 
-* Designing Java classes 
-* Adding instance fields 
-* Adding a constructor method 
-* Creating getters and setters 
-* Printing to the terminal 
-* Using the `main` method 
-* Scope (or variable shadowing)
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students asking about your problem?
+2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
+3. Ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when the next lab is.
 
-### 📚 Assignment
+### 🏛 Assignment
 
-Your mission is to create a simple game, **Hazard Hunters**, where a hunter must navigate through a dangerous forest and avoid or overcome enemies.
+For this exercise, we are going to model the creatures of an imaginary Java Zoo. Your task is to create different `Animal` classes in Java that imitate the attributes and behavior of various zoo animals. 
 
-#### Exercise 3.1
-Create Java classes for the game entities. Your game should include, at a minimum:
+#### Exercise 2.0 -- Fields
+In the [`src`](src) folder, create a new class called `Animal.java`. The `Animal` class should have attributes such as:
 
-- `Hunter` class: This will handle player movement and scoring. It should include fields for the name, current location (x and y coordinates), and score.
-- `Enemy` class: This will handle enemy interactions and behaviors. It should include fields for the enemy’s type, their strength, and their own location (x and y coordinates).
+- `String` species
+- `int` lifespan
+- `String` origin
+- `boolean` carnivore
+- `String` diet
 
-#### Exercise 3.2
-Add a constructor method to each class. This constructor should set all the instance fields according to the parameters provided.
+You should be able to see a similar output with the main method provided in Example 1 if added to `Animal.java`.
 
-#### Exercise 3.3
-Create getters and setters for the attributes that need to be accessed or modified from outside the class.
+<details>
+  <summary> 🛠 Example 1 </summary>
 
-#### Exercise 3.4
-Put in a simple method for tallying the score. This method should calculate points based on how many enemies the Hunter was able to outrun.
+  ```java
+  class Animal {
 
-#### Exercise 3.5
-Define a method in your `Hunter` class for moving the Hunter. Update the Hunter's location based on user input and check if the new location coincides with an Enemy's location. If it does, reduce the Hunter's score based on the enemy’s power.
+    // Declare your fields here!
 
-#### Exercise 3.6
-Add a `printInfo()` method to both classes. This method should print all the information about the Hunter or Enemy to the terminal.
+    public static void main(String[] args) {
+      // create a new "Animal" object
+      Animal lion = new Animal();
 
-#### Exercise 3.7
-Implement the functionality for the main game loop within a `main` method. It should create instances of the Hunter and Enemy classes, accept inputs for movement, and check for collisions.
+      // assign the instance variables to meaningful values
+      lion.species = "Lion";
+      lion.lifespan = 14;
+      lion.origin = "Africa";
+      lion.carnivore = true;
+      lion.diet = "Meat";
 
-#### Exercise 3.8
-Variable shadowing: Study the example in the assignment briefing and understand how to prevent variable shadowing.
+      // print the information of the assigned values
+      System.out.println("Animal: " + lion.species);
+      System.out.println("Lifespan: " + lion.lifespan);
+      System.out.println("Origin: " + lion.origin);
+      System.out.println("Carnivore: " + lion.carnivore);
+      System.out.println("Diet: " + lion.diet);
+    }
+  }
+  ```
+</details>
 
-### ⚠️ Troubleshooting
+#### Exercise 2.1 -- Getters and Setters
+Make the fields of your `Animal` class `private` for proper encapsulation. To read or write to these fields, you will need to add *accessors* and *mutators* (i.e., *getters* and *setters*). Don't forget the naming convention for *getters* and *setters* of `boolean` fields.
+The amended `main` function in Example 2 should compile if added to `Animal.java`.
 
-If you face any issues or have questions, follow these steps:
+<details>
+  <summary> 🛠 Example 2 </summary>
 
-1. Refer to this week's [project queries](https://project.org/help/issues). Are other students raising similar issues?
-2. If not, post your question by creating a [New Post](https://project.org/help/issues/new). Add a clear title, starting with "Task *x*: *summary of problem*"
-3. Ask a project mentor in person during the [project consultation session](https://queue.csc.kth.se/Queue/HC). Check your schedule to find out when the next session will be held.
+  ```java
+  class Animal {
 
-Discussions on the project with friends are encouraged, but **code sharing is strictly prohibited**!
+    // Declare your fields here!
 
-### 🪲 Bugs and mistakes?
+    // Declare your getters and setters here!
 
-If you come across any errors or discrepancies in this exercise, please open a [New Post](https://project.org/help/issues/new) with the title "Task *x* Error: *summary of error here*". Anyone who spots errors will be acknowledged in the acknowledgment section.
+    public static void main(String[] args) {
+      // create a new "Animal" object
+      Animal lion = new Animal();
+
+      // use setters to assign values to the new "Animal" object
+      lion.setSpecies("Lion");
+      lion.setLifespan(14);
+      lion.setOrigin("Africa");
+      lion.setCarnivore(true);
+      lion.setDiet("Meat");
+
+      // use getters to retrieve and print the values
+      System.out.println("Animal: " + lion.getSpecies());
+      System.out.println("Lifespan: " + lion.getLifespan());
+      System.out.println("Origin: " + lion.getOrigin());
+      System.out.println("Carnivore: " + lion.isCarnivore());
+      System.out.println("Diet: " + lion.getDiet());
+    }
+  }
+  ```
+</details>
+
+#### Exercise 2.2 -- Constructor
+Implement a constructor for the `Animal` class to initialize all fields simultaneously. Once this is done, creating an `Animal` object and setting its attributes will be a lot easier and compact.
+
+#### Exercise 2.3 -- `printAnimalInfo()`
+Print all the information about an animal to the terminal with the `printAnimalInfo()` method. After its implementation, the `main` method should look similar to Example 3.
+
+<details>
+  <summary> 🛠 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args){
+    // create a new "Animal" object
+    Animal lion = new Animal("Lion", 14, "Africa", true, "Meat");
+
+    // print all information about the animal
+    lion.printAnimalInfo();
+  }
+  ```
+  
+  The output should be:
+  
+  ```
+  > Animal: Lion
+  > Lifespan: 14
+  > Origin: Africa
+  > Carnivore: true
+  > Diet: Meat
+  ```
+</details>
+
+#### Exercise 2.4 -- `attemptEat()`
+Animals have different diets. In our imaginary Java Zoo, each animal attempts to eat a certain type of food. Implement a method called `attemptEat()` which takes as input the type of food an animal tries to eat. This function should check whether this type of food matches the animal's diet. If it does, the animal eats the food; if it doesn't, the animal refuses to eat.
+
+#### Exercise 2.5 -- Variable Shadowing
+Understand and analyze the provided examples of variable shadowing. You may be asked to explain a solution to these scenarios in class so be prepared. 
+
+Please submit the link to your repo and with your Java files included before the deadline.
+
+### 🐞 Bugs and Errors 
+If you encounter any irregularities within the assignment, please let us know by opening an issue with the title "Task *x* Error: *summary of error here*". We appreciate your help in making the assignment as clear as possible for everybody!
