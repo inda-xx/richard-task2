@@ -1,81 +1,82 @@
-```java
+class BattleBeast {
+    private String name;
+    private int hp;
+    private int attack;
+    private int defense;
+    private boolean fainted;
 
-    //create class BattleBeast
-    class BattleBeast {
-        // declare all the properties of BattleBeast as fields
-        private String name;
-        private int hp;
-        private int attack;
-        private int defense;
-        private boolean fainted;
+    public BattleBeast(String name, int hp, int attack, int defense) {
+        this.name = name;
+        this.hp = hp;
+        this.attack = attack;
+        this.defense = defense;
+        this.fainted = false;
+    }
 
-        // constructor for the class
-        public BattleBeast(String name, int hp, int attack, int defense) {
-            // You will need to set all the fields to their initial values, using the parameters of this constructor
+    public String getName() {
+        return this.name;
+    }
+
+    public int getHp() {
+        return this.hp;
+    }
+
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public boolean getFainted() {
+        return this.fainted;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public void setFainted(boolean fainted) {
+        this.fainted = fainted;
+    }
+
+    public void attack(BattleBeast enemy) {
+        int damage = this.attack / enemy.defense;
+        enemy.hp -= damage;
+        if(enemy.hp <= 0) {
+            enemy.fainted = true;
         }
+    }
 
-        // Getters
-        public String getName() {
-            // You need to return the name property
-        }
+    public void printInfo() {
+        System.out.printf("Name: %s, Hp: %d, Attack: %d, Defense: %d, Fainted: %b\n", this.name, this.hp, this.attack, this.defense, this.fainted);
+    }
 
-        public int getHp() {
-            // You will need to return the hp property
-        }
+    public static void main(String[] args) {
+        
+        BattleBeast beast1 = new BattleBeast("Griffon", 20, 10, 10);
+        beast1.printInfo();
 
-        public int getAttack() {
-            // You have to return the attack property
-        }
+        BattleBeast beast2 = new BattleBeast("Phoenix", 30, 15, 20);
+        beast2.printInfo();
 
-        public int getDefense() {
-            // You need to return the defense property
-        }
-
-        public boolean getFainted() {
-            // You need to return the fainted property
-        }
-
-        // Setters
-        public void setName(String name) {
-            // You will need to update the name property, using the passed parameter
-        }
-
-        public void setHp(int hp) {
-            // You need to set the hp property, using the provided parameter
-        }
-
-        public void setAttack(int attack) {
-            // You will need to set the attack property, using the passed parameter
-        }
-
-        public void setDefense(int defense) {
-            // You need to update the defense property, using the provided parameter
-        }
-
-        public void setFainted(boolean fainted) {
-            // You have to set the fainted property using the passed parameter
-        }
-
-        // attack method
-        public void attack(BattleBeast enemy) {
-            // You will need to compute damage and update the state of the enemy BattleBeast object. Refer to the task description for damage calculation.
-        }
-
-        // print info method
-        public void printInfo() {
-            // You are required to print all information to the Terminal
-        }
-
-        // main method
-        public static void main(String[] args) {
-            // Testing all methods in here
-            
-            // create BattleBeast objects
-            // print out the objects' info
-            // call the attack method
-            
-        }
+        beast1.attack(beast2);
+        beast1.printInfo();
+        beast2.printInfo();
 
     }
-    
-```
+
+}
