@@ -1,77 +1,74 @@
-```java
-// Player class
-class Player {
 
-    // Attributes according to the task description
+class Player {
     private String name;
     private int score;
     private int healthPOINTS;
     private boolean isAlive;
 
-    // Constructor
-    public Player (/*set the parameters required*/) {
-        // Set the fields here
+    public Player (String name, int score, int healthPOINTS, boolean isAlive) {
+        this.name = name;
+        this.score = score;
+        this.healthPOINTS = healthPOINTS;
+        this.isAlive = isAlive;
     }
 
-    // Getters
-    public String getName() { //implement this }
-    public int getScore() { //implement this }
-    public int getHealthPOINTS() { //implement this }
-    public boolean getIsAlive() { //implement this }
+    public String getName() { return name; }
+    public int getScore() { return score; }
+    public int getHealthPOINTS() { return healthPOINTS; }
+    public boolean getIsAlive() { return isAlive; }
 
-    // Setters
-    public void setName(String name) { //implement this }
-    public void setScore(int score) { //implement this }
-    public void setHealthPOINTS(int healthPOINTS) { //implement this }
-    public void setIsAlive(boolean isAlive) { //implement this }
+    public void setName(String name) { this.name = name; }
+    public void setScore(int score) { this.score = score; }
+    public void setHealthPOINTS(int healthPOINTS) { 
+        this.healthPOINTS = healthPOINTS;
+        if (healthPOINTS <= 0) {
+            this.isAlive = false;
+        }
+    }
+    public void setIsAlive(boolean isAlive) { this.isAlive = isAlive; }
 
-    // Action methods
-    public void move() { //implement this }
-    public void jump() { //implement this }
-    public void attack() { //implement this }
+    public void move() { System.out.println("Player is moving"); }
+    public void jump() { System.out.println("Player is jumping"); }
+    public void attack() { System.out.println("Player is attacking"); }
 
-    public static void main(String[] args) {
-        // initialize a Player instance here using constructor and setters
-        // display the fields of the instance using getters
-        // exercise the action methods
+    public void playerAttack(Enemy enemy) { 
+        enemy.setHealthPOINTS(enemy.getHealthPOINTS() - 50); 
     }
 }
 
-// Enemy class
 class Enemy {
-
-    // Attributes according to the task description
     private String name;
     private int healthPOINTS;
     private String type;
     private boolean isDefeated;
 
-    // Constructor
-    public Enemy (/*set the parameters required*/) {
-        // Set the fields here
+    public Enemy (String name, int healthPOINTS, String type, boolean isDefeated) {
+        this.name = name;
+        this.healthPOINTS = healthPOINTS;
+        this.type = type;
+        this.isDefeated = isDefeated;
     }
 
-    // Getters
-    public String getName() { //implement this }
-    public int getHealthPOINTS() { //implement this }
-    public String getType() { //implement this }
-    public boolean getIsDefeated() { //implement this }
+    public String getName() { return name; }
+    public int getHealthPOINTS() { return healthPOINTS; }
+    public String getType() { return type; }
+    public boolean getIsDefeated() { return isDefeated; }
 
-    // Setters
-    public void setName(String name) { //implement this }
-    public void setHealthPOINTS(int healthPOINTS) { //implement this }
-    public void setType(String type) { //implement this }
-    public void setIsDefeated(boolean isDefeated) { //implement this }
+    public void setName(String name) { this.name = name; }
+    public void setHealthPOINTS(int healthPOINTS) { 
+        this.healthPOINTS = healthPOINTS; 
+        if (healthPOINTS <= 0) {
+            this.isDefeated = true;
+        }
+    }
+    public void setType(String type) { this.type = type; }
+    public void setIsDefeated(boolean isDefeated) { this.isDefeated = isDefeated; }
 
-    // Action methods
-    public void move() { //implement this }
-    public void jump() { //implement this }
-    public void attack() { //implement this }
+    public void move() { System.out.println("Enemy is moving"); }
+    public void jump() { System.out.println("Enemy is jumping"); }
+    public void attack() { System.out.println("Enemy is attacking"); }
 
-    public static void main(String[] args) {
-        // initialize an Enemy instance here using constructor and setters
-        // display the fields of the instance using getters
-        // exercise the action methods
+    public void enemyAttack(Player player) { 
+        player.setHealthPOINTS(player.getHealthPOINTS() - 50); 
     }
 }
-```
