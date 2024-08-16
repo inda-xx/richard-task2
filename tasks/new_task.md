@@ -1,74 +1,60 @@
-# Hazard Hunters! 
+# Java Researchers, Assemble! 🕵️‍♀️
 
-For this project, you will develop a simple game in Java. You are going to apply your understanding of Java classes.
+For this programming task, you are going to practice designing and implementing classes in Java. You'll also get familiar with methods like getters, setters, and constructors. Additionally, you'll see the outcome of your hard work printed on the terminal! 
 
-### 🏷 Deadline
-Be ready to submit your work by **Friday, 25th February**.
+### ⏰ Deadline
+This task needs to be completed and submitted by **Thursday 22nd September**.
 
-### 💼 Project Brief
-For instructions on how to carry out and submit the assignment, please refer to the [project section of the course instructions](https://project.org/course-instructions#course-assignments).
+### 📚 Instructions
+Check the [instructions on assignments section](https://gits-15.sys.kth.se/java-21/course-instructions#assignments) to familiarize yourself with how to do and submit an assignment.
 
-### 🔖 Prep Work
-You must read and fulfill the exercises in the documentation for Module 3 before starting the assignment.
+### 🖥️ Preparation
+You should go through and answer the questions on the OLI material for Module 2.
 
-- Review [Intro to Class Design](https://javaclass.design.cmu.edu/jcourse/webui/syllabus/module.do?context=1919a808ac1f650b132f650bac60f8)
-- If you have yet to do so, visit https://javaclass.design.cmu.edu/ and register for the course `hc1337-ht23`.
+- Read the material on [Inside Java Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- Go to https://kth.oli.cmu.edu/, signup and register for the course key `dd1338-ht22` if you haven't already done so.
 
-> **Assistant's Note:** As the material and tasks may vary slightly every year, feel free to read ahead if you aren't finding all of the material needed.
+> **Assistant's Note:** The OLI material might not align exactly with the tasks, so feel free to study ahead if you don't find all the material.
 
-### 🔨 Learning Objectives
+### 🎯 Learning Goals
+Goals to be achieved in this week's exercise are:
 
-The learning goals of this week include:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Using the `main` method
+* Scope (or *variable shadowing*).
 
-* Designing Java classes 
-* Adding instance fields 
-* Adding a constructor method 
-* Creating getters and setters 
-* Printing to the terminal 
-* Using the `main` method 
-* Scope (or variable shadowing)
+### 🙋‍♂️ issues and problems
+Having any questions or problems? Follow this troubleshooting guide:
 
-### 📚 Assignment
+1. Check if there are [posted issues](https://gits-15.sys.kth.se/java-21/help/issues) related to yours. Someone might be having the same problem.
+2. If there are no related issues, create a [New Issue](https://gits-15.sys.kth.se/java-21/help/issues/new) yourself. Make sure your title is clear, for example: "Task 3: Having trouble with constructors".
+3. If your issue is still unresolved, ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/JAVA). Check your schedule for the next lab.
 
-Your mission is to create a simple game, **Hazard Hunters**, where a hunter must navigate through a dangerous forest and avoid or overcome enemies.
+Feel free to discuss the problems with your classmates, but **do not share direct answers! Do not infringe academic policies**!
 
-#### Exercise 3.1
-Create Java classes for the game entities. Your game should include, at a minimum:
+### 🏗️ Assignment
 
-- `Hunter` class: This will handle player movement and scoring. It should include fields for the name, current location (x and y coordinates), and score.
-- `Enemy` class: This will handle enemy interactions and behaviors. It should include fields for the enemy’s type, their strength, and their own location (x and y coordinates).
+Your assignment is to design a `Researcher` class in a Java file, `Researcher.java`. Your `Researcher` should have these attributes:
 
-#### Exercise 3.2
-Add a constructor method to each class. This constructor should set all the instance fields according to the parameters provided.
+- `String` name
+- `int` age
+- `String` field
+- `boolean` isPhd
 
-#### Exercise 3.3
-Create getters and setters for the attributes that need to be accessed or modified from outside the class.
+For each attribute, you need to implement a *getter* and a *setter*.
 
-#### Exercise 3.4
-Put in a simple method for tallying the score. This method should calculate points based on how many enemies the Hunter was able to outrun.
+Using the `main` method, create a new `Researcher` object, assign values to its attributes, and print them to the terminal.
 
-#### Exercise 3.5
-Define a method in your `Hunter` class for moving the Hunter. Update the Hunter's location based on user input and check if the new location coincides with an Enemy's location. If it does, reduce the Hunter's score based on the enemy’s power.
+Extend your `Researcher` class by adding a *constructor method*. The constructor method should take arguments for all attributes and set them accordingly.
 
-#### Exercise 3.6
-Add a `printInfo()` method to both classes. This method should print all the information about the Hunter or Enemy to the terminal.
+Finally, add a `printInfo` method to your `Researcher` class. This method should print all the attributes of a `Researcher`.
 
-#### Exercise 3.7
-Implement the functionality for the main game loop within a `main` method. It should create instances of the Hunter and Enemy classes, accept inputs for movement, and check for collisions.
+Remember, the main aim of this exercise is to get familiar with designing classes in Java, adding fields, implementing getters, setters, and constructors, using the `main` method, and understanding the scope (or *variable shadowing*). 
 
-#### Exercise 3.8
-Variable shadowing: Study the example in the assignment briefing and understand how to prevent variable shadowing.
+Keep an aesthetic indenting of your code and use proper variable names to make your code clean and understandable.
 
-### ⚠️ Troubleshooting
-
-If you face any issues or have questions, follow these steps:
-
-1. Refer to this week's [project queries](https://project.org/help/issues). Are other students raising similar issues?
-2. If not, post your question by creating a [New Post](https://project.org/help/issues/new). Add a clear title, starting with "Task *x*: *summary of problem*"
-3. Ask a project mentor in person during the [project consultation session](https://queue.csc.kth.se/Queue/HC). Check your schedule to find out when the next session will be held.
-
-Discussions on the project with friends are encouraged, but **code sharing is strictly prohibited**!
-
-### 🪲 Bugs and mistakes?
-
-If you come across any errors or discrepancies in this exercise, please open a [New Post](https://project.org/help/issues/new) with the title "Task *x* Error: *summary of error here*". Anyone who spots errors will be acknowledged in the acknowledgment section.
+Give your best shot, Java Researchers!
