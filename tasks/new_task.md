@@ -1,74 +1,156 @@
-# Hazard Hunters! 
+# Java Jamboree: Let's Create a Band 🎵🎸✨
 
-For this project, you will develop a simple game in Java. You are going to apply your understanding of Java classes.
+For the inaugural assignment of the INDA course, we'll dive into the core principles of working with Java. You'll model real-world objects, and design and interact with Java classes.
 
-### 🏷 Deadline
-Be ready to submit your work by **Friday, 25th February**.
+### 💀 Deadline
+This work should be completed before the exercise, on **Friday 16th September**.
 
-### 💼 Project Brief
-For instructions on how to carry out and submit the assignment, please refer to the [project section of the course instructions](https://project.org/course-instructions#course-assignments).
+### 👩‍🏫 Instructions
+For instructions on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🔖 Prep Work
-You must read and fulfill the exercises in the documentation for Module 3 before starting the assignment.
+### 📝 Preparation
+Complete the reading and answer the questions in module 2 of OLI.
+- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- If you haven't done so already visit [kth.oli.cmu.edu](https://kth.oli.cmu.edu/), sign up and register for the course with the course key `dd1337-ht22`.
 
-- Review [Intro to Class Design](https://javaclass.design.cmu.edu/jcourse/webui/syllabus/module.do?context=1919a808ac1f650b132f650bac60f8)
-- If you have yet to do so, visit https://javaclass.design.cmu.edu/ and register for the course `hc1337-ht23`.
+> **Assistant's Note:** The OLI material and tasks might be slightly misaligned this year, so it is okay to read ahead if you did not find all the material.
 
-> **Assistant's Note:** As the material and tasks may vary slightly every year, feel free to read ahead if you aren't finding all of the material needed.
+### ✅ Learning Goals
 
-### 🔨 Learning Objectives
+This weeks learning goals include:
+* Designing Java classes 🏗
+* Adding instance fields 📝
+* Adding a constructor method 🚧
+* Creating *getters* and *setters* 🔑
+* Printing to the terminal 🖨
+* Using the `main` method 📚
+* Scope (or *variable shadowing*) 👥
 
-The learning goals of this week include:
+### 🚨 Troubleshooting Guide
+Encountered an issue or need clarification? Follow these steps:
 
-* Designing Java classes 
-* Adding instance fields 
-* Adding a constructor method 
-* Creating getters and setters 
-* Printing to the terminal 
-* Using the `main` method 
-* Scope (or variable shadowing)
+1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Have other students encountered a similar problem?
+2. If not, go ahead and post your question by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Remember to add a descriptive title, start it with "Task *x*: *summary of problem here*".
+3. Ask a TA directly during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when your next lab is scheduled.
 
-### 📚 Assignment
+We encourage you to discuss with your classmates but remember, **do not share answers**!
 
-Your mission is to create a simple game, **Hazard Hunters**, where a hunter must navigate through a dangerous forest and avoid or overcome enemies.
+### 🏛 Assignment
 
-#### Exercise 3.1
-Create Java classes for the game entities. Your game should include, at a minimum:
+Let's form a band! This assignment is to model a 'Band' in Java. Your task is to design a `Person` class where each `Person` is a member of the band, and has attributes, such as a name and a musical role in the band. The `Person` class should have the following attributes:
 
-- `Hunter` class: This will handle player movement and scoring. It should include fields for the name, current location (x and y coordinates), and score.
-- `Enemy` class: This will handle enemy interactions and behaviors. It should include fields for the enemy’s type, their strength, and their own location (x and y coordinates).
+- `String` name
+- `String` role
+- `int` experience
+- `boolean` isBandLeader
 
-#### Exercise 3.2
-Add a constructor method to each class. This constructor should set all the instance fields according to the parameters provided.
+And these attributes will be manipulated using the OOP concepts you'll learn in this assignment.
 
-#### Exercise 3.3
-Create getters and setters for the attributes that need to be accessed or modified from outside the class.
+#### Exercise 1.0 -- Fields
+In the [`src`](src) folder, create a new class called `Person.java`. In Java, the attributes of real-world objects are modelled using [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html). The `Person` class should have the fields described above.
 
-#### Exercise 3.4
-Put in a simple method for tallying the score. This method should calculate points based on how many enemies the Hunter was able to outrun.
+If done correctly, the main method provided in Example 1 should compile if added to `Person.java`.
 
-#### Exercise 3.5
-Define a method in your `Hunter` class for moving the Hunter. Update the Hunter's location based on user input and check if the new location coincides with an Enemy's location. If it does, reduce the Hunter's score based on the enemy’s power.
+<details>
+  <summary> 🛠 Example 1 </summary>
 
-#### Exercise 3.6
-Add a `printInfo()` method to both classes. This method should print all the information about the Hunter or Enemy to the terminal.
+  ```java
+  class Person {
 
-#### Exercise 3.7
-Implement the functionality for the main game loop within a `main` method. It should create instances of the Hunter and Enemy classes, accept inputs for movement, and check for collisions.
+    // Put your fields here!
 
-#### Exercise 3.8
-Variable shadowing: Study the example in the assignment briefing and understand how to prevent variable shadowing.
+    public static void main(String[] args) {
+      // create a new "Person" object
+      Person alice = new Person();
 
-### ⚠️ Troubleshooting
+      // assign the instance variables to meaningful values
+      alice.name = "Alice";
+      alice.role = "Guitarist";
+      alice.experience = 10;
+      alice.isBandLeader = true;
 
-If you face any issues or have questions, follow these steps:
+      // get the information of the assigned values
+      System.out.println("Name: " + alice.name);
+      System.out.println("Role: " + alice.role);
+      System.out.println("Experience value: " + alice.experience);
+      System.out.println("Is band leader: " + alice.isBandLeader);
+    } // end main method
 
-1. Refer to this week's [project queries](https://project.org/help/issues). Are other students raising similar issues?
-2. If not, post your question by creating a [New Post](https://project.org/help/issues/new). Add a clear title, starting with "Task *x*: *summary of problem*"
-3. Ask a project mentor in person during the [project consultation session](https://queue.csc.kth.se/Queue/HC). Check your schedule to find out when the next session will be held.
+  } // end class
+  ```
+</details>
 
-Discussions on the project with friends are encouraged, but **code sharing is strictly prohibited**!
+#### Exercise 1.1 -- Getters and Setters
+Avoid direct access to the state of your Person objects by setting the [access modifiers](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) of the fields in the `Person` class to `private`. Then, use **accessors** and **mutators** (the so-called *getters* and *setters* methods) to read from and write to the fields. Implement these methods for all fields. The provided main method in Example 2 should compile if added to `Person.java`.
 
-### 🪲 Bugs and mistakes?
+<details>
+  <summary> 🛠 Example 2 </summary>
 
-If you come across any errors or discrepancies in this exercise, please open a [New Post](https://project.org/help/issues/new) with the title "Task *x* Error: *summary of error here*". Anyone who spots errors will be acknowledged in the acknowledgment section.
+  ```java
+  class Person {
+
+    // Put your fields here!
+
+    // Put your getters and setters here!
+
+    public static void main(String[] args) {
+      // create a new "Person" object
+      Person alice = new Person();
+
+      // assign the instance variables to meaningful values
+      alice.setName("Alice");
+      alice.setRole("Guitarist");
+      alice.setExperience(10);
+      alice.setIsBandLeader(true);
+
+      // get the information of the assigned values
+      System.out.println("Name: " + alice.getName());
+      System.out.println("Role: " + alice.getRole());
+      System.out.println("Experience value: " + alice.getExperience());
+      System.out.println("Is band leader: " + alice.getIsBandLeader());
+    } // end main method
+
+  } // end class
+  ```
+</details>
+
+> **Assistant's Note:** The getters and setters of a field of `boolean` type follows a different naming convention from the usual `getXXX()` and `setXXX`: `isBandLeader()` and `setIsBandLeader()`.
+
+#### Exercise 1.2 -- Constructor
+Now, implement a constructor for your `Person` class as per the examples in the OLI material (or the [Official Oracle tutorial](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html)). This constructor will allow you to add attributes to each object you create much more easily.
+
+#### Exercise 1.3 -- `printInfo()`
+Implement a method called `printInfo()` for printing all the info about the person to the terminal. This method should return `void`.
+
+<details>
+  <summary> 🛠 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args){
+    // create a new "Person" object
+    Person alice = new Person("Alice", "Guitarist", 10, true);
+
+    // print information
+    alice.printInfo();
+  }
+  ```
+
+  This code should output:
+
+  ```
+  > INFO
+  > Name: Alice
+  > Role: Guitarist
+  > Experience: 10 years
+  > Band Leader: true
+  ```
+</details>
+
+#### Exercise 1.4 -- Practice!
+Model a 'Band' class that encompasses multiple 'Person' objects (the band members). Implement functions like `addMember()`, `removeMember()`, and `changeLeader()`. 
+
+#### Exercise 1.5 -- Scope (or Variable Shadowing)
+Understand the concept of variable shadowing. Ensure you can explain how to fix the examples provided in the 'Scope (or Variable Shadowing)' section.
+
+### 🐞 Bugs and errors?
+Spot any errors or inconsistencies? Kindly open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error here*". Found bugs will be rewarded with special mentions in the acknowledgment section. Happy programming! 🎉
