@@ -1,137 +1,76 @@
-# Let's Play Java Game! 🕹️ 
-
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+# Code Quest: The Legend of JavaLandia! 🎮
+In the third exercise of INDA, you are delving into the world of Java game development! Let's build simple game fundamentals in Java.
 
 ### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+This work should be completed before **Friday 23rd September**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 📚 Instructions
+For steps on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### 📝 Preparation
+You should complete the following before starting the assignment:
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
+- Read [How to design classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f3e5a808ac1f088812f2a8ce315b8754)
+- If you have not done so, go to https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht22`
+- Familiarize yourself with Java game development basics.
 
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
-* Designing Java classes
-* Adding instance fields
-* Adding a constructor method
-* Creating getters and setters
-* Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+### ✅ Learning Goals
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+This week's learning goals include:
+* Designing Java classes 🏗️
+* Adding instance fields 📦
+* Adding a constructor method 🚧
+* Creating *getters* and *setters* 🔧🔩
+* Printing to the terminal 🖨️
+* Using the `main` method 🖥️
+* Scope (or *variable shadowing*) 🕵️‍♀️
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+### 🔨 Assignment
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+You're tasked with creating an adventure game set in JavaLandia. Hastily, three main components have been identified as necessary to start your quest: `Player.java`, `Enemy.java`, and `Score.java`. 
 
-### 👾 Assignment
+#### Exercise 3.1 -- The Adventurous Player
+In the `Player.java` class, create the player attributes using `private` instance fields:
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+- `String` playerName
+- `int` playerHealth
+- `int` playerAttack
+- `int` playerDefense
+- `boolean` playerAlive
 
-#### Exercise 1.0 -- Character Class
+All fields must have *getters* and *setters*. Create a constructor for `Player.java` class, and then instantiate `Player` in `main` method. Test the constructor and *getters* by printing field values to the terminal.
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+#### Exercise 3.2 -- The Ferocious Enemy
+In `Enemy.java` create enemy attributes similar to the player, but do not include `playerName`. Instead add `enemyId` as `int`. 
+Create a `main` method and follow Exercise 3.1 steps for instantiation and testing.
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+#### Exercise 3.3 -- Scoring System
+In `Score.java` class, characterize the score using the following `private` instance fields:
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+- `int` playerId
+- `int` enemiesDefeated
+- `int` totalScore
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
+Create *getters* and *setters*, a constructor, instantiate `Score` in `main` method, and test it out like before.
 
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
+#### Exercise 3.4 -- Battle Royale: Player vs. Enemy
+Back in `Player.java`, create a `void` method called `battle` that receives an `Enemy` object. 
 
-#### Exercise 1.1 -- Getters and Setters 
+This method should simulate a battle between the player and the enemy using a simple damage formula: `damage = playerAttack - enemyDefense` (if the result is less than 0, consider it as 0).
 
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
+Decrease the `Enemy` object's health by `damage`. If `enemyHealth` becomes 0 or less, set `enemyAlive` to `false`.
 
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
+Print the battle summary to the terminal, including enemy ID, damage dealt, remaining enemy health, and whether they're alive.
 
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
+#### Exercise 3.5 -- High Scores
+In `Score.java`, create a `void` method called `updateScore` that takes a `Player` and `Enemy` objects as parameters.
 
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
+If `enemyAlive` of `Enemy` is `false`, increase `enemiesDefeated` by 1, and `totalScore` by `enemyId * 10`.
 
-#### Exercise 1.3 -- `printStatus()`
+In the `main` method, create a `Player` and multiple `Enemy` objects along with a `Score` object. Simulate battles and score updates. 
 
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
+#### Exercise 3.6 -- Shadows in JavaLandia
+Add a local variable in `updateScore` method with the same name as one of the instance variables, and try adding to that variable instead of the instance variable. Run the program. Analyze what happens, with focus on variable shadowing concepts.
 
-#### Exercise 1.4 -- `move()`
-
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
-
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
-
-#### Exercise 1.6 -- Instance variable shadowing
-
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+### 🐜 Bugs and Errors?
+If you encounter any, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) titled "Task *x* Error: *summary of error here*". Your contribution will be appreciated!
