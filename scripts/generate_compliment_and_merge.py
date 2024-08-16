@@ -23,7 +23,11 @@ def main(api_key, head_branch, base_branch):
         sys.exit(1)
 
     # Post the compliment as a PR comment
-    post_comment_on_pr(compliment)
+    if compliment.strip():  # Ensure compliment is not None or empty
+        post_comment_on_pr(compliment)
+    else:
+        print("Error: Compliment is empty.")
+        sys.exit(1)
 
     # Merge the branch
     merge_branch(head_branch, base_branch)
@@ -56,6 +60,9 @@ def post_comment_on_pr(comment):
     if not pr_number or not repo:
         print("Error: GITHUB_PR_NUMBER or GITHUB_REPOSITORY environment variables not set.")
         sys.exit(1)
+
+    # Ensure the comment is correctly formatted
+    comment = comment.replace('"', '\\"')
 
     command = [
         'gh', 'pr', 'comment', pr_number,
