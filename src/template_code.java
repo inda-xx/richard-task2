@@ -1,68 +1,44 @@
 ```java
+    /*
+     * In the 'src' folder, create a new class called "Animal". This class should have the 
+     * following attributes, called instance fields.
+     */
 
-    // Class for the "Hunter" entity
-    class Hunter {
-        // Fields
-        private String hunterName;
-        private int xLocation;
-        private int yLocation;
-        private int score;
+    public class Animal {
+        // Declare the instance fields of the Class 'Animal' here
+        private String species;   // Species of the animal
+        private int lifespan;     // Lifespan term of the animal
+        private String origin;    // Origin place of the animal
+        private boolean carnivore; // If the animal is a carnivore or not
+        private String diet;      // The diet of the animal
 
-        // Constructor
-        // Initialize all the fields
-        public Hunter(String name, int x, int y) {
-            // your code here
+        // Create the constructor of Animal class
+        public Animal(String species, int lifespan, String origin, boolean carnivore, String diet) {
+            // TODO: Implement the constructor here
         }
 
-        // Getters
-        // Your getters here
+        // Declare the getters and setters of the instance fields
+        // TODO: Implement the getters and setters here
 
-        // Setters
-        // Your setters here
-
-        // Method for scoring
-        // Your code here
-
-        // Method for moving the hunter
-        // Your code here
-
-        // Method to print info
-        // Your code here
-    }
-
-    // Class for the "Enemy" entity
-    class Enemy {
-        // Fields
-        private String enemyType;
-        private int strength;
-        private int xLocation;
-        private int yLocation;
-
-        // Constructor
-        // Initialize all the fields
-        public Enemy(String type, int strength, int x, int y) {
-            // your code here
+        // Print all the information about an animal
+        public void printAnimalInfo() {
+            // TODO: Implement the method to print the animal's info here
         }
 
-        // Getters
-        // Your getters here
+        // Implement a method to simulate an animal attempting to eat a certain type of food
+        public void attemptEat(String food) {
+            // TODO: Implement the method here
+        }
 
-        // Setters
-        // Your setters here
+        // Main Method
+        public static void main(String[] args){
+            /* Create an 'Animal' object and use the getters to print out the object's information 
+            and calling the 'attemptEat()' method */
+            // TODO: Implement the main method here
+        } // end main method
 
-        // Method to print info
-        // Your code here
     }
-
-    // Main method
-    public static void main(String[] args) {
-        // Create an instance of the Hunter class
-        // Your code here
-
-        // Create an instance of the Enemy class
-        // Your code here
-
-        // Game loop
-        // Your code here 
-    }
+    /*
+    Thanks you for your efforts for building the Java Zoo! Look forward to seeing the amazing Animal Kingdom!
+    */
 ```
