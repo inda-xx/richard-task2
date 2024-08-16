@@ -1,15 +1,15 @@
 import os
 import sys
 import subprocess
-import openai
-from openai import OpenAI
+import openai  # Import openai directly
 
 def main(api_key, head_branch, base_branch):
     if not api_key:
         print("Error: OpenAI API key is missing.")
         sys.exit(1)
 
-    client = OpenAI(api_key=api_key)
+    # Set the OpenAI API key
+    openai.api_key = api_key
 
     # Read the student's code
     try:
@@ -27,7 +27,7 @@ def main(api_key, head_branch, base_branch):
         f"```java\n{student_code}\n```\n\n"
     )
     
-    feedback = generate_with_retries(client, prompt, max_retries=3)
+    feedback = generate_with_retries(prompt, max_retries=3)
     if feedback is None:
         print("Error: Failed to generate feedback after multiple retries.")
         sys.exit(1)
@@ -35,17 +35,17 @@ def main(api_key, head_branch, base_branch):
     # Post the feedback as a PR comment
     post_comment_on_pr(feedback)
 
-def generate_with_retries(client, prompt, max_retries=3):
+def generate_with_retries(prompt, max_retries=3):
     for attempt in range(max_retries):
         try:
-            response = client.chat.completions.create(
+            response = openai.ChatCompletion.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": prompt}
                 ]
             )
-            return response.choices[0].message.content.strip()
+            return response.choices[0].message['content'].strip()
         except Exception as e:
             print(f"Error generating feedback: {e}")
             if attempt < max_retries - 1:
