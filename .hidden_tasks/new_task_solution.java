@@ -1,134 +1,144 @@
+ed Tests
+
 ```java
-class Hunter {
-    // Fields
-    private String hunterName;
-    private int xLocation;
-    private int yLocation;
-    private int score;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-    // Constructor
-    public Hunter(String name, int x, int y) {
-        this.hunterName = name;
-        this.xLocation = x;
-        this.yLocation = y;
-        this.score = 0;  // all Hunters start with a score of 0
+public class AnimalTest {
+    private Animal lion1;
+    private Animal lion2;
+
+    @Before
+    public void setUp() {
+        lion1 = new Animal("Lion", 14, "Africa", true, "Meat");
+        lion2 = new Animal("Lion", 14, "Africa", true, "Meat");
     }
 
-    // Getters
-    public String getName() {
-        return this.hunterName;
+    @Test
+    public void testGetSpecies() {
+        assertEquals("Lion", lion1.getSpecies());
+        assertEquals("Lion", lion2.getSpecies());
     }
 
-    public int getXLocation() {
-        return this.xLocation;
+    @Test
+    public void testGetLifespan() {
+        assertEquals(14, lion1.getLifespan());
+        assertEquals(14, lion2.getLifespan());
     }
 
-    public int getYLocation() {
-        return this.yLocation;
+    @Test
+    public void testGetOrigin() {
+        assertEquals("Africa", lion1.getOrigin());
+        assertEquals("Africa", lion2.getOrigin());
     }
 
-    public int getScore() {
-        return this.score;
+    @Test
+    public void testIsCarnivore() {
+        assertEquals(true, lion1.isCarnivore());
+        assertEquals(true, lion2.isCarnivore());
     }
 
-    // Setters
-    public void setXLocation(int x) {
-        this.xLocation = x;
+    @Test
+    public void testGetDiet() {
+        assertEquals("Meat", lion1.getDiet());
+        assertEquals("Meat", lion2.getDiet());
     }
 
-    public void setYLocation(int y) {
-        this.yLocation = y;
+    @Test
+    public void testSetSpecies() {
+        lion1.setSpecies("Tiger");
+        assertEquals("Tiger", lion1.getSpecies());
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    @Test
+    public void testSetLifespan() {
+        lion1.setLifespan(20);
+        assertEquals(20, lion1.getLifespan());
     }
 
-    // Method for scoring
-    public void tallyScore() {
-        // Assuming 1 point for avoiding an enemy
-        this.score += 1;
+    @Test
+    public void testSetOrigin() {
+        lion1.setOrigin("Asia");
+        assertEquals("Asia", lion1.getOrigin());
     }
 
-    // Method for moving the hunter
-    public void move(int x, int y, Enemy enemy) {
-        this.xLocation = x;
-        this.yLocation = y;
-        if (this.xLocation == enemy.getXLocation() && this.yLocation == enemy.getYLocation()) {
-            this.score -= enemy.getStrength();
-        }
+    @Test
+    public void testSetCarnivore() {
+        lion1.setCarnivore(false);
+        assertEquals(false, lion1.isCarnivore());
     }
 
-    // Method to print info
-    public void printInfo() {
-        System.out.println("Hunter Name: " + this.hunterName + ", Location: " + this.xLocation + ", " + this.yLocation + ", Score: " + this.score);
-    }
-}
-
-class Enemy {
-    // Fields
-    private String enemyType;
-    private int strength;
-    private int xLocation;
-    private int yLocation;
-
-    // Constructor
-    public Enemy(String type, int strength, int x, int y) {
-        this.enemyType = type;
-        this.strength = strength;
-        this.xLocation = x;
-        this.yLocation = y;
+    @Test
+    public void testSetDiet() {
+        lion1.setDiet("Plant");
+        assertEquals("Plant", lion1.getDiet());
     }
 
-    // Getters
-    public String getType() {
-        return this.enemyType;
-    }
-
-    public int getStrength() {
-        return this.strength;
-    }
-
-    public int getXLocation() {
-        return this.xLocation;
-    }
-
-    public int getYLocation() {
-        return this.yLocation;
-    }
-
-    // Setters
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    // Method to print info
-    public void printInfo() {
-        System.out.println("Enemy Type: " + this.enemyType + ", Location: " + this.xLocation + ", " + this.yLocation + ", Strength: " + this.strength);
-    }
-}
-
-// Main method
-public static void main(String[] args) {
-    // Create an instance of the Hunter class
-    Hunter hunter = new Hunter("Role", 0, 0);
-
-    // Create an instance of the Enemy class
-    Enemy enemy = new Enemy("Orc", 10, 2, 2);
-
-    // Game loop
-    Boolean gameOver = false;
-    while (!gameOver) {
-        // Imaginary input received from user to move to a location
-        int x = 5;
-        int y = 5;
-        hunter.move(x, y, enemy);
-        
-        if (hunter.getScore() < -50) { // End game if hunter's score is less than -50
-            gameOver = true;
-        }
+    @Test
+    public void testAttemptEat() {
+        assertEquals(true, lion1.attemptEat("Meat")); // Expectation is true because lion's diet is "Meat"
+        assertEquals(false, lion1.attemptEat("Plant")); // Expectation is false because lion's diet is "Meat", not "Plant"
     }
 }
 ```
-    
-`inputTest()` and `invalidParameterTest()` might also be necessary, but we omitted them due to the lack of representation for the game loop and user input in the current implementation. Additionally, tests covering multiple enemies and hunters would make the code more robust in real-world scenarios.
+
+### Suggested Solution
+
+```java
+public class Animal {
+    private String species;
+    private int lifespan;
+    private String origin;
+    private boolean carnivore;
+    private String diet;
+
+    // Constructor
+    public Animal(String species, int lifespan, String origin, boolean carnivore, String diet) {
+        this.species = species;
+        this.lifespan = lifespan;
+        this.origin = origin;
+        this.carnivore = carnivore;
+        this.diet = diet;
+    }
+
+    // Getters and Setters
+    public String getSpecies() { return species; }
+    public int getLifespan() { return lifespan; }
+    public String getOrigin() { return origin; }
+    public boolean isCarnivore() { return carnivore; }
+    public String getDiet() { return diet; }
+
+    public void setSpecies(String species) { this.species = species; }
+    public void setLifespan(int lifespan) { this.lifespan = lifespan; }
+    public void setOrigin(String origin) { this.origin = origin; }
+    public void setCarnivore(boolean carnivore) { this.carnivore = carnivore; }
+    public void setDiet(String diet) { this.diet = diet; }
+
+    // Method to print out animal's information
+    public void printAnimalInfo() {
+        System.out.println("Animal: " + species);
+        System.out.println("Lifespan: " + lifespan);
+        System.out.println("Origin: " + origin);
+        System.out.println("Carnivore: " + carnivore);
+        System.out.println("Diet: " + diet);
+    }
+
+    // Method to emulate an animal attempting to eat a certain type of food
+    public boolean attemptEat(String food) {
+        if (food.equals(diet))
+            return true;
+        else
+            return false;
+    }
+
+    // Main Method
+    public static void main(String[] args){
+        Animal lion = new Animal("Lion", 14, "Africa", true, "Meat");
+        lion.printAnimalInfo();
+        System.out.println("Attempt to eat meat: " + lion.attemptEat("Meat"));
+        System.out.println("Attempt to eat plant: " + lion.attemptEat("Plant"));
+    } // end main method
+
+}
+```
