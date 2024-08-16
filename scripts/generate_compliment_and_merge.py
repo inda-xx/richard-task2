@@ -16,22 +16,17 @@ def main(api_key, head_branch, base_branch):
         "Generate a brief compliment and analysis of what has been achieved in the task. "
         "Be positive and provide a clear summary of the student's accomplishments."
     )
-
+    
     compliment = generate_with_retries(client, prompt, max_retries=3)
     if compliment is None:
         print("Error: Failed to generate compliment after multiple retries.")
-        sys.exit(1)
-
-    # Ensure compliment is not empty
-    if not compliment.strip():
-        print("Error: Generated compliment is empty.")
         sys.exit(1)
 
     # Post the compliment as a PR comment
     post_comment_on_pr(compliment)
 
     # Merge the branch
-    merge_branch(head_branch, base_branch)
+    fetch_and_merge_branch(head_branch, base_branch)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
@@ -54,40 +49,30 @@ def post_comment_on_pr(comment):
     pr_number = os.getenv('GITHUB_PR_NUMBER')
     repo = os.getenv('GITHUB_REPOSITORY')
 
-    # Check environment variables
-    if not pr_number:
-        print("Error: GITHUB_PR_NUMBER is not set.")
+    if not pr_number or not repo:
+        print("Error: GITHUB_PR_NUMBER or GITHUB_REPOSITORY environment variables not set.")
         sys.exit(1)
-    if not repo:
-        print("Error: GITHUB_REPOSITORY is not set.")
-        sys.exit(1)
-
-    # Debugging: Print the variables to ensure they are not None
-    print(f"PR Number: {pr_number}")
-    print(f"Repository: {repo}")
-    print(f"Comment: {comment}")
-
-    # Properly escape the comment content
-    comment = comment.replace('"', '\\"')
 
     command = [
         'gh', 'pr', 'comment', pr_number,
-        '--body', comment
+        '--body', f'"{comment}"'
     ]
+    subprocess.run(command, check=True)
 
-    # Debugging: Print the command to ensure it's correct
-    print(f"Command: {command}")
-
+def fetch_and_merge_branch(head_branch, base_branch):
     try:
-        subprocess.run(command, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to post comment: {e}")
-        sys.exit(1)
-
-def merge_branch(head_branch, base_branch):
-    try:
+        # Fetch all branches
+        subprocess.run(["git", "fetch", "--all"], check=True)
+        
+        # Checkout the base branch and pull the latest changes
         subprocess.run(["git", "checkout", base_branch], check=True)
-        subprocess.run(["git", "merge", head_branch], check=True)
+        subprocess.run(["git", "pull"], check=True)
+        
+        # Checkout the head branch and merge it into the base branch
+        subprocess.run(["git", "checkout", head_branch], check=True)
+        subprocess.run(["git", "merge", base_branch], check=True)
+        
+        # Push the merged changes
         subprocess.run(["git", "push"], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error merging branch {head_branch} into {base_branch}: {e}")
