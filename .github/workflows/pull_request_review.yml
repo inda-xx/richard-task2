@@ -53,6 +53,11 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai
+
       - name: Analyze and Respond
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
@@ -64,3 +69,4 @@ jobs:
           else
             python scripts/generate_feedback_and_clues.py "${{ secrets.OPENAI_TOKEN }}" "${{ github.head_ref }}" "${{ github.base_ref }}"
           fi
+
