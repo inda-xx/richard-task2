@@ -61,6 +61,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai
 
+      - name: Verify openai Installation
+        run: |
+          pip show openai
+          python -c "import openai; print('OpenAI package is installed and working.')"
+
       - name: Analyze and Respond
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TOKEN }}
