@@ -1,47 +1,52 @@
-```java
-// A class to model a character in the Javamon game
+
 public class Javamon {
     // Fields for the Javamon class
-    private String name; // The name of the character
-    private int health; // The health of the character
-    private int power; // The power of the character
-    private String type; // The type of the character
-    
-    // Constructor for the Javamon class
+    private String name;
+    private int health;
+    private int power;
+    private String type;
+
     public Javamon(String name, int health, int power, String type) {
         this.name = name;
         this.health = health;
         this.power = power;
         this.type = type;
     }
-    
-    // Getters methods for the Javamon class
+
     public String getName() { return name; }
     public int getHealth() { return health; }
     public int getPower() { return power; }
     public String getType() { return type; }
-    
-    // Setters methods for the Javamon class
+
     public void setName(String name) { this.name = name; }
     public void setHealth(int health) { this.health = health; }
     public void setPower(int power) { this.power = power; }
     public void setType(String type) { this.type = type; }
-    
-    // Method that prints the status of a Javamon
+
     public void printStatus() {
-        // Add the logic to print the name, health,
-        // power and type of a Javamon
+        System.out.println("Javamon's Name: " + this.name);
+        System.out.println("Javamon's Health: " + this.health);
+        System.out.println("Javamon's Power: " + this.power);
+        System.out.println("Javamon's Type: " + this.type);
     }
-    
-    // Method that simulates a battle between two Javamons
+
     public void battle(Javamon opponent) {
-        // Add the logic to simulate a battle between two Javamons
+        if(opponent == null) {
+            throw new IllegalArgumentException("Opponent Javamon cannot be null");
+        }
+
+        opponent.health -= this.power;
+        if(opponent.health < 0)
+            opponent.health = 0;
+
+        printStatus();
+        opponent.printStatus();
     }
-    
-    // Main method to test your Javamon class
+
     public static void main(String[] args) {
-        // Instantiate two Javamons and engage them in battle
-        // Don't forget to print their status!
+        Javamon javamon1 = new Javamon("Blastoise", 100, 10, "Water");
+        Javamon javamon2 = new Javamon("Charizard", 100, 8, "Fire");
+
+        javamon1.battle(javamon2);
     }
-} // End of Javamon class
-```
+}
