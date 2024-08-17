@@ -1,107 +1,100 @@
-```java
-    // Let's start with the Player class
-    class Player {
-        private String name;
-        private int health;
-        private int score;
-        private String weapon;
+class Player {
+    private String name;
+    private int health;
+    private int score;
+    private String weapon;
 
-        // Constructor Method
-        public Player(int health, String weapon) {
-            // Implementation here
-        }
-
-        // getters
-        public String getName() {
-            // Implementation here
-            return null;
-        }
-        public int getHealth() {
-            // Implementation here
-            return 0;
-        }
-        public int getScore() {
-            // Implementation here
-            return 0;
-        }
-        public String getWeapon() {
-            // Implementation here
-            return null;
-        }
-
-        // setters
-        public void setName(String name) {
-            // Implementation here
-        }
-        public void setHealth(int health) {
-            // Implementation here
-        }
-        public void setScore(int score) {
-            // Implementation here
-        }
-        public void setWeapon(String weapon) {
-            // Implementation here
-        }
-
-        // Fight method in the Player class
-        public void fight(Enemy enemy) {
-            // Implementation here
-        }
-
-        // Player info method
-        public void playerInfo() {
-            // Implementation here
-        }
+    public Player(int health, String weapon) {
+        this.health = health;
+        this.weapon = weapon;
     }
 
-    // Let's design the Enemy class
-    class Enemy {
-        private String name;
-        private int enemyHealth;
-        private String weapon;
-        private int weaponDamage; // Additional field for weapon damage
-
-        // Constructor Method
-        public Enemy(int enemyHealth, String weapon) {
-            // Implementation here
-        }
-
-        // getters
-        public String getName() {
-            // Implementation here
-            return null;
-        }
-        public int getEnemyHealth() {
-            // Implementation here
-            return 0;
-        }
-        public String getWeapon() {
-            // Implementation here
-            return null;
-        }
-        public int getWeaponDamage() {
-            // Implementation here
-            return 0;
-        }
-
-        // setters
-        public void setName(String name) {
-            // Implementation here
-        }
-        public void setEnemyHealth(int enemyHealth) {
-            // Implementation here
-        }
-        public void setWeapon(String weapon) {
-            // Implementation here
-        }
-        public void setWeaponDamage(int weaponDamage) {
-            // Implementation here
-        }
+    public String getName() {
+        return this.name;
     }
-    
-    // This will be your driver code.
-    public static void main(String[] args) {
-        // Appropriate code here based on the samples given in the description
+    public int getHealth() {
+        return this.health;
     }
-    
-```
+    public int getScore() {
+        return this.score;
+    }
+    public String getWeapon() {
+        return this.weapon;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+
+    public void fight(Enemy enemy) {
+        this.health = this.health - enemy.getWeaponDamage();
+    }
+
+    public void playerInfo() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Health: " + this.health);
+        System.out.println("Score: " + this.score);
+        System.out.println("Weapon: " + this.weapon);
+    }
+}
+
+class Enemy {
+    private String name;
+    private int enemyHealth;
+    private String weapon;
+    private int weaponDamage;
+
+    public Enemy(int enemyHealth, String weapon) {
+        this.enemyHealth = enemyHealth;
+        this.weapon = weapon;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+    public int getEnemyHealth() {
+        return this.enemyHealth;
+    }
+    public String getWeapon() {
+        return this.weapon;
+    }
+    public int getWeaponDamage() {
+        return this.weaponDamage;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setEnemyHealth(int enemyHealth) {
+        this.enemyHealth = enemyHealth;
+    }
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+    public void setWeaponDamage(int weaponDamage) {
+        this.weaponDamage = weaponDamage;
+    }
+}
+
+public static void main(String[] args) {
+    Player player = new Player(100, "Sword");
+    player.setName("Hero");
+    player.setScore(0);
+  
+    Enemy enemy = new Enemy(50, "Axe");
+    enemy.setName("Goblin");
+    enemy.setWeaponDamage(10);
+  
+    player.fight(enemy);
+  
+    System.out.println("Player Health after fight: " + player.getHealth());
+}
