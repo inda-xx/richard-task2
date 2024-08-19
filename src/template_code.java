@@ -1,86 +1,89 @@
-### Template
+class Spaceship {
+    private String spaceshipID;
+    private int health;
+    private int attackDamage;
+    private boolean isDestroyed;
 
-Here's your starter code to inspire your work! Be sure to fill out the <...> placeholders with your own code.
-
-```java
-    class Spaceship {
-        private String spaceshipID;
-        private int health;
-        private int attackDamage;
-        private boolean isDestroyed;
-
-        public Spaceship(String spaceshipID, int health, int attackDamage) {
-            this.spaceshipID = spaceshipID;
-            this.health = health;
-            this.attackDamage = attackDamage;
-            this.isDestroyed = false;
-        }
-
-        // getters
-        public String getSpaceshipID() { <...> }
-        public int getHealth() { <...> }
-        public int getAttackDamage() { <...> }
-        public boolean getIsDestroyed() { <...> }
-
-        // setters
-        public void setSpaceshipID(String spaceshipID) { <...> }
-        public void setHealth(int health) { <...> }
-        public void setAttackDamage(int attackDamage) { <...> }
-        public void setIsDestroyed(boolean isDestroyed) { <...> }
-        
-        // attack method
-        public void attack(Alien target) {
-            <...>
-            if (target.getHealth() <= 0) {
-                target.setIsDestroyed(true);
-            }
-        }
+    public Spaceship(String spaceshipID, int health, int attackDamage) {
+        this.spaceshipID = spaceshipID;
+        this.health = health;
+        this.attackDamage = attackDamage;
+        this.isDestroyed = false;
     }
 
-    class Alien {
-        private String alienID;
-        private int health;
-        private boolean isDestroyed;
-        
-        public Alien(String alienID, int health) {
-             this.alienID = alienID;
-             this.health = health;
-             this.isDestroyed = false;
-        }
-        
-        // getters
-        public String getAlienID() { <...> }
-        public int getHealth() { <...> }
-        public boolean getIsDestroyed() { <...> }
-        
-        // setters
-        public void setAlienID(String alienID) { <...> }
-        public void setHealth(int health) { <...> }
-        public void setIsDestroyed(boolean isDestroyed) { <...> }
-    }
-        
-    class Score {
-        private int spaceshipScore;
-        private int alienScore;
+    // getters
+    public String getSpaceshipID() { return spaceshipID; }
+    public int getHealth() { return health; }
+    public int getAttackDamage() { return attackDamage; }
+    public boolean getIsDestroyed() { return isDestroyed; }
 
-        // getters
-        public int getSpaceshipScore() { <...> }
-        public int getAlienScore() { <...> }
-
-        // setters
-        public void setSpaceshipScore(int spaceshipScore) { <...> }
-        public void setAlienScore(int alienScore) { <...> }
-    }
+    // setters
+    public void setSpaceshipID(String spaceshipID) { this.spaceshipID = spaceshipID; }
+    public void setHealth(int health) { this.health = health; }
+    public void setAttackDamage(int attackDamage) { this.attackDamage = attackDamage; }
+    public void setIsDestroyed(boolean isDestroyed) { this.isDestroyed = isDestroyed; }
     
+    // attack method
+    public void attack(Alien target) {
+        target.setHealth(target.getHealth() - this.attackDamage);
+        if (target.getHealth() <= 0) {
+            target.setIsDestroyed(true);
+        }
+    }
+}
+
+class Alien {
+    private String alienID;
+    private int health;
+    private boolean isDestroyed;
+
+    public Alien(String alienID, int health) {
+        this.alienID = alienID;
+        this.health = health;
+        this.isDestroyed = false;
+    }
+
+    // getters
+    public String getAlienID() { return alienID; }
+    public int getHealth() { return health; }
+    public boolean getIsDestroyed() { return isDestroyed; }
+
+    // setters
+    public void setAlienID(String alienID) { this.alienID = alienID; }
+    public void setHealth(int health) { this.health = health; }
+    public void setIsDestroyed(boolean isDestroyed) { this.isDestroyed = isDestroyed; }
+}
+
+class Score {
+    private int spaceshipScore;
+    private int alienScore;
+
+    // getters
+    public int getSpaceshipScore() { return spaceshipScore; }
+    public int getAlienScore() { return alienScore; }
+
+    // setters
+    public void setSpaceshipScore(int spaceshipScore) { this.spaceshipScore = spaceshipScore; }
+    public void setAlienScore(int alienScore) { this.alienScore = alienScore; }
+}
+
+public class Main {
     public static void main(String[] args) {
-        // create a spaceship and alien instances
-        <...>
-        // attack
-        <...>
-        // update score
-        <...>
-        // print status
-        <...>
-    } //end main method
-```
-Remember to replace the "<...>" placeholders with your own code.
+        Spaceship spaceship1 = new Spaceship("S1", 100, 50);
+        Alien alien1 = new Alien("A1", 50);
+        Score score = new Score();
+        
+        spaceship1.attack(alien1);
+        if(alien1.getIsDestroyed()) {
+            score.setSpaceshipScore(score.getSpaceshipScore() + 1);
+        }
+         
+        System.out.println("Spaceship ID: " + spaceship1.getSpaceshipID());
+        System.out.println("Spaceship Health: " + spaceship1.getHealth());
+        System.out.println("Spaceship Attack Damage: " + spaceship1.getAttackDamage());
+        System.out.println("Spaceship Score: " + score.getSpaceshipScore());
+        System.out.println("Alien ID: " + alien1.getAlienID());
+        System.out.println("Alien Health: " + alien1.getHealth());
+        System.out.println("Alien destroyed: " + alien1.getIsDestroyed());
+    }
+}
