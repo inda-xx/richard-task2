@@ -1,92 +1,89 @@
-
-public class Player {
+```java
+public class JavaKnight {
+    // Fields or instance variables
     private String name;
-    private int health;
-    private int score;
-
-    public Player(String name) {
-        this.name = name;
-        this.health = 100;
-        this.score = 0;
+    private int healthPoints;
+    private int attackPower;
+    private int defensePower;
+    private boolean isAlive;
+  
+    // TODO: Replace "default" with your own values or create parameters to initialize fields in constructor
+    public JavaKnight(){
+        // Constructor to initialize fields
+        this.name = "default";
+        this.healthPoints = 20;
+        this.attackPower = 10;
+        this.defensePower = 5;
+        this.isAlive = true;
     }
-    
+  
+    // Getters
     public String getName() {
+        // TODO: Return the name of the JavaKnight
         return this.name;
     }
-
+  
+    public int getHealthPoints() {
+        // TODO: Return the health points of the JavaKnight
+        return this.healthPoints;
+    }
+  
+    public int getAttackPower() {
+        // TODO: Return the attack power of the JavaKnight
+        return this.attackPower;
+    }
+  
+    public int getDefensePower() {
+        // TODO: Return the defense power of the JavaKnight
+        return this.defensePower;
+    }
+  
+    public boolean getIsAlive() {
+        // TODO: Return the 'isAlive' status of the JavaKnight
+        return this.isAlive;
+    }
+  
+    // Setters
     public void setName(String name) {
+        // TODO: Set the name of the JavaKnight
         this.name = name;
     }
-
-    public int getHealth() {
-        return this.health;
+  
+    public void setHealthPoints(int healthPoints) {
+        // TODO: Set the health points of the JavaKnight
+        this.healthPoints = healthPoints;
     }
-
-    public void setHealth(int health) {
-        this.health = health;
+  
+    public void setAttackPower(int attackPower) {
+        // TODO: Set the attack power of the JavaKnight
+        this.attackPower = attackPower;
     }
-
-    public int getScore() {
-        return this.score;
+  
+    public void setDefensePower(int defensePower) {
+        // TODO: Set the defense power of the JavaKnight
+        this.defensePower = defensePower;
     }
-
-    public void setScore(int score) {
-        this.score = score;
+  
+    public void setIsAlive(boolean isAlive) {
+        // TODO: Set the 'isAlive' status of the JavaKnight
+        this.isAlive = isAlive;
     }
-
-    public void moveUp() {
-        System.out.println("Player moved up");
-    }
-
-    public void moveDown() {
-        System.out.println("Player moved down");
-    }
-
-    public void moveLeft() {
-        System.out.println("Player moved left");
-    }
-
-    public void moveRight() {
-        System.out.println("Player moved right");
-    }
-
-    public void attack(Enemy enemy) {
-        if(enemy.getHealth() > 0) {
-            enemy.setHealth(enemy.getHealth() - 10);
-        }
-        System.out.println("Enemy's remaining health: " + enemy.getHealth());
-    }
-}
-
-public class Enemy {
-    private int health;
-
-    public Enemy(int health) {
-        this.health = health;
-    }
-
-    public int getHealth() {
-        return this.health;
-    }
-
-    public void setHealth(int health) {
-        this.health = Math.max(0, health);
-    }
-}
-
-public class Scoreboard {
-    public void printScore(Player player) {
-        System.out.println("Player's current score: " + player.getScore());
-    }
-}
-
-public class Main {
+  
     public static void main(String[] args) {
-        Player player = new Player("Gamer");
-        Enemy enemy = new Enemy(100);
-        Scoreboard scoreboard = new Scoreboard();
-
-        player.attack(enemy);
-        scoreboard.printScore(player);
+        // TODO: Create a new JavaKnight object and use getter/setter methods to manipulate and print its data
+        // Example of creating and using JavaKnight object
+        JavaKnight knight1 = new JavaKnight();
+        knight1.setName("Sir Code-a-lot");
+        knight1.setHealthPoints(20);
+        knight1.setAttackPower(10);
+        knight1.setDefensePower(5);
+        knight1.setIsAlive(true);
+        
+        System.out.println("Name: " + knight1.getName());
+        System.out.println("Health Points: " + knight1.getHealthPoints());
+        System.out.println("Attack Power: " + knight1.getAttackPower());
+        System.out.println("Defense Power: " + knight1.getDefensePower());
+        System.out.println("Is Alive: " + knight1.getIsAlive());
     }
 }
+```
