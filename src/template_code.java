@@ -1,85 +1,92 @@
-### Template
 
-```java
-// Start by implementing the Player class
 public class Player {
-    // Exercise 1: Add fields for name, health, and score
     private String name;
     private int health;
     private int score;
-    
-    // Exercise 2: Implement the constructor method for the Player class
+
     public Player(String name) {
-        // Assign the parameter value to the field
-        // Note: use "this" to refer to the class field
-        // ...
-        
-        // Initialize health and score to their default values
-        // ...
+        this.name = name;
+        this.health = 100;
+        this.score = 0;
     }
     
-    // Implement getters and setters for name, health, and score
-    // name getter
     public String getName() {
-        // return the name
-        // ...
+        return this.name;
     }
 
-    // name setter
     public void setName(String name) {
-        // set the name
-        // ...
+        this.name = name;
     }
 
-    // Implement health getter and setter and score getter and setter the same way
+    public int getHealth() {
+        return this.health;
+    }
 
-    // Exercise 3: Implement player movement methods
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void moveUp() {
-        // Print movement message
-        // ...
+        System.out.println("Player moved up");
     }
 
-    // Implement moveDown, moveLeft, moveRight the same way
+    public void moveDown() {
+        System.out.println("Player moved down");
+    }
 
-    // Exercise 5: Implement the attack method
+    public void moveLeft() {
+        System.out.println("Player moved left");
+    }
+
+    public void moveRight() {
+        System.out.println("Player moved right");
+    }
+
     public void attack(Enemy enemy) {
-        // Decrease the enemy's health by 10
-        // Print a message indicating the enemy's remaining health
-        // ...
+        if(enemy.getHealth() > 0) {
+            enemy.setHealth(enemy.getHealth() - 10);
+        }
+        System.out.println("Enemy's remaining health: " + enemy.getHealth());
     }
 }
 
-// Exercise 4: Implement the Enemy class
 public class Enemy {
-    // Add a field for health
     private int health;
 
-    // Implement the constructor method, getters, and setters for health
-    // ...
+    public Enemy(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = Math.max(0, health);
+    }
 }
 
-// Exercise 6: Implement the Scoreboard class
 public class Scoreboard {
-    // Implement the method to print the score of a player
     public void printScore(Player player) {
-        // Print the player's score
-        // ...
+        System.out.println("Player's current score: " + player.getScore());
     }
 }
 
 public class Main {
-    // Exercise 7: Implement the game in the main method
     public static void main(String[] args) {
-        // Create a new player, enemy, and scoreboard
-        // ...
-        
-        // Have the player attack the enemy
-        // Update the scoreboard accordingly
-        // ...
+        Player player = new Player("Gamer");
+        Enemy enemy = new Enemy(100);
+        Scoreboard scoreboard = new Scoreboard();
+
+        player.attack(enemy);
+        scoreboard.printScore(player);
     }
 }
-```
-
-Exercise 8: Understand variable shadowing and its consequences. Make use of the `this` keyword in your explanations. Analyze and explain the scope in Java. Provide examples.
-
-Note: You can extend the game as a bonus exercise. Implement additional game mechanics or even a graphical interface if you wish. Make sure to maintain a clear separation of responsibilities among your classes.
