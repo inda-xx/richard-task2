@@ -1,24 +1,21 @@
-# Game On, Code On! 🎮👩‍💻
+# Java Knight Rise! 🛡️⚔️
 
-For this round of programming adventure, we'll be diving deep into the world of object-oriented design and Java syntax. The task ahead: a simple game!
+In this exercise, you are going to delve deeper into object-oriented programming by further exploring components of a Java class.
 
-## 📅 Deadline
-Our journey should wrap up by **Tuesday, 15th February**.
+### 🏷️ Deadline
+This task should be completed before the day of the next class, **Saturday, 30th April**.
 
-## 💡 Instructions
-To get started and submit this assignment, follow the guide in the [course instructions' assignments section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
+### 📚 Instructions
+Please refer to the [assignment's section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) for guidelines on how to do and submit the assignment.
 
-## 📚 Preparation
-For a successful mission, please study the OLI material for Module 2.
+### 🔍 Preparation
+Before attempting the task, make sure to read and answer questions in the OLI material for Module 2:
 
-- Review [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
-  
-Remember to sign up and register for the course key `dd1337-ht22` if you haven't.
+- Read [Looking Inside Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60)
+- If you haven't done so already, go to https://kth.oli.cmu.edu/, sign up, and register for the course key `dd1337-ht22`
 
-> **Assistant's Note:** The OLI material and tasks might not sync perfectly, so feel free to read forward if needed.
-
-## 🎯 Learning Goals
-The objectives for this week are:
+### ✏️ Learning Goals
+This week's learning objectives include:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
@@ -27,47 +24,126 @@ The objectives for this week are:
 * Using the `main` method
 * Understanding Scope (or *variable shadowing*)
 
-## 🆘 Troubleshooting 
-If you stumble upon any obstacles or have questions, follow these steps:
+### 🚒 Troubleshooting Guide
+If you encounter any issues or problems, follow the structure below:
 
-1. Consult this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are others facing the same problem?
-2. If not, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) yourself. Title it "Task *x*: *problem summary*".
-3. Reach out to a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA) in person. Consult your schedule for the next lab's timing.
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are there questions asked by other students similar to yours?
+2. If not, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed title starting with "Task *x*: *summary of the problem here*"
+3. Consult a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA), check your schedule for the next lab session.
 
-Result exchange with peers is allowed, but **do not share the solution**!
+Feel free to discuss the assignment with your classmates, but remember, **do not share answers**!
 
-## 📝 Assignment
+### 🏛️ Assignment
 
-Your mission is to create a basic game application including a player, scoring system, and enemies. 
+In the magical world of KTH, there are legendary warriors known as 'Java Knights'. Your task for the day is to model these legendary 'Java Knights' in Java! 
 
-Here are the exercises:
-
-**Exercise 1:** Implement a `Player` class. Model following attributes using fields:
+#### Exercise 2.1 -- Fields
+In the [`src`](src) directory, create a new class titled `JavaKnight.java`. In this class, you should model attributes of the knights using [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html). The attributes of each `JavaKnight` should include:
 
 - `String` name
-- `int` health
-- `int` score
+- `int` healthPoints
+- `int` attackPower
+- `int` defensePower
+- `boolean` isAlive
 
-Create `getters` and `setters` for each field. Set access modifiers to `private`.
+The fields attribute you create should allow the main method in Example 1 to compile and run successfully if added to `JavaKnight.java`.
 
-**Exercise 2:** Add a constructor method to the `Player` class. It should receive the player's name as a parameter and initialize the name, health (100), and score (0).
+<details>
+  <summary> 🛠 Example 1</summary>
 
-**Exercise 3:** Add methods for player movement: `moveUp()`, `moveDown()`, `moveLeft()`, and `moveRight()`. Print corresponding movement messages within these methods.
+  ```java
+  class JavaKnight {
 
-**Exercise 4:** Implement an `Enemy` class with an `int` health field. Add a constructor method and `getters` and `setters`.
+    // Fields go here.
 
-**Exercise 5:** In the `Player` class, implement a `attack(Enemy enemy)` method. The method should decrease the enemy's health by 10. Print a message indicating the enemy's remaining health.
+    public static void main(String[] args) {
+      // Create a new "JavaKnight" object
+      JavaKnight knight1 = new JavaKnight();
 
-**Exercise 6:** Create a `Scoreboard` class. Add a `printScore(Player player)` method that prints the current score of the given player.
+      // Assign values to instance variables
+      knight1.name = "Sir Code-a-lot";
+      knight1.healthPoints = 20;
+      knight1.attackPower = 10;
+      knight1.defensePower = 5;
+      knight1.isAlive = true;
 
-**Exercise 7:** Run a simple game in the `main` method. Create a player, an enemy, and a scoreboard. Make the player attack the enemy and update the scoreboard accordingly.
+      // Retrieve and print the information of the assigned values
+      System.out.println("Name: " + knight1.name);
+      System.out.println("Health Points: " + knight1.healthPoints);
+      System.out.println("Attack Power: " + knight1.attackPower);
+      System.out.println("Defense Power: " + knight1.defensePower);
+      System.out.println("Is Alive: " + knight1.isAlive);
+    } 
 
-**Exercise 8:** Discuss variable shadowing and how to avoid it with an example. Understand and explain the scope in Java and how the `this` keyword can be used.
+  }
+  ```
+</details>
 
-**Bonus:** Enhance your game. Add multiples enemies, more complex mechanics or a graphical interface if you wish!
+#### Exercise 2.2 -- Getters and Setters
+To practice [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)), prevent direct access to the state of your JavaKnight by setting the [access modifiers](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) of the fields to `private`. Yet, you'll still require the ability to read and write the fields. Implement *getters* and *setters* methods for each field. Confirm your solution by making sure the main method in Example 2 compiles when added to `JavaKnight.java`.
 
-> **Assistant's Note:** Aim to create a well-structured and organized code with a clear separation of concerns among your classes.
+<details>
+  <summary> 🛠 Example 2 </summary>
 
+  ```java
+  class JavaKnight {
 
-## 🥳 Acknowledgments
-Keep your spirits up, and rock this coding adventure! Your contribution could end up in our next acknowledgment section!
+    // Fields go here.
+
+    // Getters and setters go here!
+
+    public static void main(String[] args) {
+      // Create a new "JavaKnight" object
+      JavaKnight knight1 = new JavaKnight();
+
+      // Assign values to instance variables through setters
+      knight1.setName("Sir Code-a-lot");
+      knight1.setHealthPoints(20);
+      knight1.setAttackPower(10);
+      knight1.setDefensePower(5);
+      knight1.setIsAlive(true);
+      
+      // Retrieve and print the information of the assigned values through getters
+      System.out.println("Name: " + knight1.getName());
+      System.out.println("Health Points: " + knight1.getHealthPoints());
+      System.out.println("Attack Power: " + knight1.getAttackPower());
+      System.out.println("Defense Power: " + knight1.getDefensePower());
+      System.out.println("Is Alive: " + knight1.getIsAlive());
+    }
+
+  } 
+  ```
+</details>
+
+#### Exercise 2.3 -- Constructor
+Design a constructor method for the `JavaKnight` class. This constructor should accept values for all fields and assign them accordingly. Your solution should enable the main method provided in Example 3 to compile when added to `JavaKnight.java`.
+
+<details>
+  <summary> 🛠 Example 3 </summary>
+
+  ```java
+  class JavaKnight {
+
+    // Fields go here.
+
+    // Constructor goes here!
+
+    // Getters and setters go here!
+
+    public static void main(String[] args) {
+      // Create a new "JavaKnight" object
+      JavaKnight knight1 = new JavaKnight("Sir Code-a-lot", 20, 10, 5, true);
+      
+      // Retrieve and print the information of the assigned values through getters
+      System.out.println("Name: " + knight1.getName());
+      System.out.println("Health Points: " + knight1.getHealthPoints());
+      System.out.println("Attack Power: " + knight1.getAttackPower());
+      System.out.println("Defense Power: " + knight1.getDefensePower());
+      System.out.println("Is Alive: " + knight1.getIsAlive());
+    }
+
+  } 
+  ```
+</details>
+
+Further assignment descriptions will be continued in the next part of the text due to character length restrictions.
