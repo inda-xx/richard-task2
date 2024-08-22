@@ -58,7 +58,21 @@ public class Player {
     }
 }
 
+public class Enemy {
+    private int health;
 
+    public Enemy(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = Math.max(0, health);
+    }
+}
 
 public class Scoreboard {
     public void printScore(Player player) {
