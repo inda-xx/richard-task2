@@ -4,122 +4,118 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import java.util.*;
-
-public class Game {
-    // fields
-    private String playerName;
-    private int playerScore;
-    private int playerPosition;
-    private String enemyName;
-    private int enemyPosition;
-
-    // constructor
-    public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-        this.playerName = playerName;
-        this.playerScore = playerScore;
-        this.playerPosition = playerPosition;
-        this.enemyName = enemyName;
-        this.enemyPosition = enemyPosition;
+class Tree {
+    
+    // Declare the private fields for the Tree class
+    private String species;
+    private double height;
+    private int age;
+    private boolean evergreen;
+    
+    // Constructor to initialize Tree objects
+    public Tree(String species, double height, int age, boolean evergreen) {
+        this.species = species;
+        this.height = height;
+        this.age = age;
+        this.evergreen = evergreen;
+    }
+    
+    // Getter methods for each field
+    public String getSpecies() {
+        return species;
     }
 
-    // getters and setters
-    public String getPlayerName() {
-        return playerName;
+    public double getHeight() {
+        return height;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public int getAge() {
+        return age;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public boolean isEvergreen() {
+        return evergreen;
+    }
+    
+    // Setter methods for each field
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
-    public int getPlayerPosition() {
-        return playerPosition;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
+    public void setEvergreen(boolean evergreen) {
+        this.evergreen = evergreen;
     }
-
-    public String getEnemyName() {
-        return enemyName;
+    
+    // Method to print tree details
+    public void describe() {
+        System.out.println("> TREE INFO");
+        System.out.println("> Species: " + getSpecies());
+        System.out.println("> Height: " + getHeight() + " meters");
+        System.out.println("> Age: " + getAge() + " years");
+        System.out.println("> Evergreen: " + isEvergreen());
     }
-
-    public void setEnemyName(String enemyName) {
-        this.enemyName = enemyName;
+    
+    // Method that increases the tree's height and age
+    public void grow(double growthFactor) {
+        System.out.println("\n> Growing by " + growthFactor + " meters...");
+        this.height += growthFactor;
+        this.age += 1;
     }
-
-    public int getEnemyPosition() {
-        return enemyPosition;
-    }
-
-    public void setEnemyPosition(int enemyPosition) {
-        this.enemyPosition = enemyPosition;
-    }
-
-    // method for player movement
-    public void movePlayer(int steps) {
-        playerPosition += steps;
-        updateScore(steps);
-        System.out.println(playerName + " moved to position " + playerPosition);
-        checkEncounter();
-    }
-
-    // method to update score
-    public void updateScore(int steps) {
-        playerScore += steps;
-        System.out.println(playerName + " has a score of " + playerScore);
-    }
-
-    // method for enemy interaction
-    public void checkEncounter() {
-        if (playerPosition == enemyPosition) {
-            System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
-        }
-    }
-
-    // main method
+    
     public static void main(String[] args) {
-        Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-
-        System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-        System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-
-        // Test moving the player
-        game.movePlayer(3);
-        game.movePlayer(2); // This move should initiate an encounter with the enemy
+        Tree oak = new Tree("Oak", 15.5, 80, false);
+        oak.describe();
+        oak.grow(0.5);
+        oak.describe();
     }
 }
 
-// Shadowing Example
-class ShadowGame {
-    private int position = 0; // We want this position printed
+public class TreeTest {
+    
+    private Tree tree;
 
-    public void printShadow() {
-        System.out.println(this.position); // Using this.position to print the instance variable
+    @Before
+    public void setUp() {
+        tree = new Tree("Pine", 10.0, 12, true);
     }
 
-    public static void main(String[] args) {
-        new ShadowGame().printShadow();
-    }
-}
-
-// Shadowing Example
-class Creature {
-    private String name;
-
-    public Creature(String name) {
-        this.name = name; // Using this.name to refer to the instance variable
+    @Test
+    public void testGetters() {
+        assertEquals("Pine", tree.getSpecies());
+        assertEquals(10.0, tree.getHeight(), 0.01);
+        assertEquals(12, tree.getAge());
+        assertTrue(tree.isEvergreen());
     }
 
-    public void announce() {
-        System.out.println(this.name + " approaches!"); // Using this.name to access the instance variable
+    @Test
+    public void testSetters() {
+        tree.setSpecies("Birch");
+        tree.setHeight(12.5);
+        tree.setAge(15);
+        tree.setEvergreen(false);
+
+        assertEquals("Birch", tree.getSpecies());
+        assertEquals(12.5, tree.getHeight(), 0.01);
+        assertEquals(15, tree.getAge());
+        assertFalse(tree.isEvergreen());
+    }
+
+    @Test
+    public void testGrow() {
+        double initialHeight = tree.getHeight();
+        int initialAge = tree.getAge();
+
+        tree.grow(1.5);
+
+        assertEquals(initialHeight + 1.5, tree.getHeight(), 0.01);
+        assertEquals(initialAge + 1, tree.getAge());
     }
 }
