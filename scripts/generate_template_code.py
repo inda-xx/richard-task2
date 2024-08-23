@@ -100,6 +100,7 @@ def main(api_key, branch_name):
 
     # Combine task description, original task, and original template into a single prompt
     prompt = (f"Based on the following new task description and the original task description, generate a detailed Java code template. "
+            "The code template is a general structure for the student to solve the task in, so it should not include any solution but a skeleton to solve the task in. "
             "The template should include all necessary placeholders and comments to guide the students in completing the task. "
             "Ensure that the template aligns with the exercises and instructions provided in both the new and original task descriptions. "
             "Use the provided original code template as inspiration for the structure and formatting of the new code template.\n\n"
