@@ -2,100 +2,88 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GameTest {
-    private Game game;
-    private Game encounterGame;
-
+public class JungleBeastTest {
+    
+    private JungleBeast leopard;
+    private JungleBeast tiger;
+    private JungleBeast elephant;
+    
     @Before
-    public void setup() {
-        game = new Game("Player1", 0, 0, "Enemy1", 5);
-        encounterGame = new Game("Player1", 10, 3, "Enemy1", 5);
-    }
-
-    @Test
-    public void testInitialPlayerSetup() {
-        assertEquals("Player1", game.getPlayerName());
-        assertEquals(0, game.getPlayerScore());
-        assertEquals(0, game.getPlayerPosition());
-    }
-
-    @Test
-    public void testInitialEnemySetup() {
-        assertEquals("Enemy1", game.getEnemyName());
-        assertEquals(5, game.getEnemyPosition());
-    }
-
-    @Test
-    public void testPlayerMovement() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-        assertEquals(3, game.getPlayerScore());
-
-        game.movePlayer(2);
-        assertEquals(5, game.getPlayerPosition());
-        assertEquals(5, game.getPlayerScore());
-    }
-
-    @Test
-    public void testEncounter() {
-        encounterGame.movePlayer(2);
-        assertEquals(5, encounterGame.getPlayerPosition());
-        assertEquals(12, encounterGame.getPlayerScore());
+    public void setUp() {
+        leopard = new JungleBeast("Leopard", 100, 80, 90);
+        tiger = new JungleBeast("Tiger", 120, 85, 88);
+        elephant = new JungleBeast("Elephant", 150, 50, 30);
     }
     
     @Test
-    public void testPlayerScoreAfterMove() {
-        game.movePlayer(4);
-        assertEquals(4, game.getPlayerScore());
-        assertEquals(4, game.getPlayerPosition());
+    public void testConstructorAndGetters() {
+        assertEquals("Leopard", leopard.getSpecies());
+        assertEquals(100, leopard.getEnergyLevel());
+        assertEquals(80, leopard.getStrength());
+        assertEquals(90, leopard.getAgility());
+        assertFalse(leopard.isAsleep());
+
+        assertEquals("Tiger", tiger.getSpecies());
+        assertEquals(120, tiger.getEnergyLevel());
+        assertEquals(85, tiger.getStrength());
+        assertEquals(88, tiger.getAgility());
+        assertFalse(tiger.isAsleep());
     }
     
     @Test
-    public void testPlayerPositionAfterMove() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
+    public void testSetters() {
+        leopard.setSpecies("Jaguar");
+        leopard.setEnergyLevel(90);
+        leopard.setStrength(70);
+        leopard.setAgility(85);
+        leopard.setAsleep(true);
+
+        assertEquals("Jaguar", leopard.getSpecies());
+        assertEquals(90, leopard.getEnergyLevel());
+        assertEquals(70, leopard.getStrength());
+        assertEquals(85, leopard.getAgility());
+        assertTrue(leopard.isAsleep());
     }
     
     @Test
-    public void testModifyPlayerName() {
-        game.setPlayerName("NewPlayer");
-        assertEquals("NewPlayer", game.getPlayerName());
+    public void testTussleGreaterStrength() {
+        JungleBeast lion = new JungleBeast("Lion", 110, 75, 80);
+        JungleBeast jaguar = new JungleBeast("Jaguar", 100, 70, 85);
+
+        jaguar.tussle(lion);
+        assertEquals(110, lion.getEnergyLevel()); // Lion should be undamaged
+        assertEquals(100 - 10, jaguar.getEnergyLevel()); // Jaguar should lose 10 points of energy
+    }
+    
+    @Test
+    public void testTussleEqualStrength() {
+        JungleBeast beastOne = new JungleBeast("Wolf", 100, 60, 60);
+        JungleBeast beastTwo = new JungleBeast("Fox", 90, 60, 60);
+
+        beastOne.tussle(beastTwo);
+        assertEquals(100, beastOne.getEnergyLevel());
+        assertEquals(90, beastTwo.getEnergyLevel());
     }
 
     @Test
-    public void testModifyEnemyPosition() {
-        game.setEnemyPosition(10);
-        assertEquals(10, game.getEnemyPosition());
+    public void testTussleNegativeStrength() {
+        JungleBeast gorilla = new JungleBeast("Gorilla", 120, 55, 70);
+        JungleBeast cheetah = new JungleBeast("Cheetah", 90, 80, 85);
+
+        gorilla.tussle(cheetah);
+        assertEquals(120 - 40, gorilla.getEnergyLevel()); // Gorilla should lose 40 points of energy
+        assertEquals(90, cheetah.getEnergyLevel()); // Cheetah should be undamaged
     }
 
-    @Test
-    public void testModifyPlayerPosition() {
-        game.setPlayerPosition(8);
-        assertEquals(8, game.getPlayerPosition());
-    }
+    @Test 
+    public void testPerformanceTussle() {
+        JungleBeast strongBeast = new JungleBeast("StrongBeast", 100000, 999, 999);
+        JungleBeast weakBeast = new JungleBeast("WeakBeast", 100000, 1, 1);
+        
+        long start = System.currentTimeMillis();
+        strongBeast.tussle(weakBeast);
+        long duration = System.currentTimeMillis() - start;
 
-    @Test
-    public void testNegativeMovement() {
-        game.movePlayer(-3);
-        assertEquals(-3, game.getPlayerPosition());
-        assertEquals(-3, game.getPlayerScore());
-    }
-}
-
-class ShadowGameTest {
-    @Test
-    public void testShadowingExample() {
-        ShadowGame shadowGame = new ShadowGame();
-        shadowGame.printShadow();
-        // No assertions, this test is for verifying shadowing behavior and console output
-    }
-}
-
-class CreatureTest {
-    @Test
-    public void testCreatureAnnouncement() {
-        Creature creature = new Creature("Dragon");
-        creature.announce();
-        // No assertions, this test is for verifying creature announcement behavior and console output
+        assertTrue(duration < 1000); // The method should run in less than 1000 milliseconds
     }
 }
