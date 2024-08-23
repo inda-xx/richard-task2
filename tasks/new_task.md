@@ -1,82 +1,84 @@
-# Ace the Space! 🚀
+# Code the Cosmos! 🚀
 
-In this assignment for JProg, you are going to practice object-oriented programming using Java by building a simple game. You will create classes and implement methods to model a fun space-themed game.
+For this assignment, you will be diving into the cosmic universe of classes and objects in Java. You will be creating a `Planet` class.
 
-### 🗓️ Due Date 
-This assignment should be completed by **Monday, 12th December**.
+### 🗓 Deadline
+This assignment should be completed before Monday, 19th September.
 
-### 👩‍🏫 Instructions
-You can find instructions on how to approach and submit your work in the [assignment section of the course portal](https://jprog.kth.se/assignments#ace-space).
+### 💼 Instructions
+For a step-by-step guide on how to undertake and submit the assignment, follow the link to the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 📚 Preparation
-Before starting, it's recommended to read and answer the questions in the W3Schools tutorial for Java OOP.
+### 📖 Preparation
+Ensure you have finished the OLI material for Module 2, and make sure you can answer everything.
 
-- Read [Java OOP](https://www.w3schools.com/java/java_oop.asp)
+- Review the topic [Understanding Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f6fd6485a8fe02482719ee1f07d5860e)
+- If you haven't already, register on https://kth.oli.cmu.edu/, signup and use the course key `dd1337-ht22`
 
-### ✅ Learning Goals
-By completing this assignment, you will achieve the following learning goals:
+> **Assistant's Note:** Though the OLI material and tasks might not exactly align, it’s okay to read ahead if you find something new.
+
+### 📚 Learning Goals
+
+This week's learning goals include:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
-* Creating *getters* and *setters*
+* Crafting getters and setters
 * Printing to the terminal
 * Using the `main` method
-* Understanding of Scope (or *variable shadowing*)
+* Understanding scope (or variable shadowing)
 
-### 🚨 Troubleshooting Guide
-Having problems? Here's what to do:
+### 🎯 Troubleshooting Guide
+Follow this procedure for help:
 
-1. Check the [posted issues](https://jprog.kth.se/help/issues) to see if any other students are facing the same issue.
-2. If not found, post a question yourself by creating a [New Issue](https://jprog.kth.se/help/issues/new) and summarize the problem in the title.
-3. Consult a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/JProg). Check your timetable for the next session.
+1. Take a look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Someone might have asked your question already!
+2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Add a descriptive title, beginning with "Task x: summary of problem here".
+3. Ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the next lab.
 
-It's encouraged to discuss and collaborate with your coursemates but remember **not to share solutions!**
+You can discuss with your peers, but **don't share answers**!
 
-### 🕹️ Assignment
+### 🪐 Assignment
 
-Your game, called "Ace the Space", features a rocket that flies in space evading asteroids and scoring points. Your rocket and asteroids will be modeled in Java!
+Your task is to model celestial bodies, or more simply, 'Planets', in Java. Each `Planet` instance should represent its own unique planet, with its own characteristics.
 
-#### Exercise 1 - Rocket Class 🚀
-
-Create a new class called `Rocket.java`. Your Rocket should have these attributes:
+#### Exercise 1.0 -- Fields
+In the [`src`](src) folder, create a new class named `Planet.java`. Use [fields](https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html) to model the attributes of a planet. The `Planet` class should have these fields:
 
 - `String` name
-- `float` speed
-- `int` score
-- `boolean` crashed
+- `double` mass (in kilograms)
+- `double` radius (in kilometers)
+- `boolean` inhabited
 
-#### Exercise 2 - Getters and Setters 🛠️
+#### Exercise 1.1 -- Constructor
+In the `Planet` class, define a constructor to initialize all the fields. Ensure that the constructor accepts appropriate arguments to initialize all instance fields. 
 
-Prevent direct access of Rocket's state by setting field access modifiers to `private`. Then add getters and setters for each field. 
+#### Exercise 1.2 -- Getters and Setters
+Add getters and setters for each field in the `Planet` class. Remember to use the appropriate return types for the getter methods.
 
-#### Exercise 3 - Rocket Constructor 🏗️
+#### Exercise 1.3 -- `printPlanetDetails()`
+Define a method named `printPlanetDetails()`, which prints details of a planet to the console. The method should print the name, mass, radius, and whether the planet is inhabited or not.
 
-Implement a constructor in `Rocket.java` that sets name, speed, score, and crashed status of the rocket when a new rocket object is created. 
+#### Exercise 1.4 -- `calculateGravity()`
+Define a method called `calculateGravity()` which calculates the gravity of the planet based on its mass and radius. The formula to calculate gravity is:
 
-#### Exercise 4 - Asteroid Class ☄️
+Gravity = (G * mass) / (radius ^ 2)
 
-Next, you need to model the asteroids. Create a new class called `Asteroid.java`. Your Asteroid should have these attributes:
+Here, G is the gravitational constant, approximately equal to 6.674 × 10^-11. Have this method return the calculated gravity value. Make sure to test the method with some sample planets!
 
-- `String` asteroidType
-- `float` speed
+#### Exercise 1.5 -- Variable Shadowing
+Shadowing is a topic to be aware of when working with classes. It occurs when a variable in a scope has the same name as a variable in an outer scope, and can cause confusion if not handled properly. In your `Planet` class, add a method named `shadowedMethod().`
 
-Create all necessary getters, setters and a constructor for creating an Asteroid object.
+In this method, declare a local variable that has the same name as one of your instance variables, and assign it a different value. Now, within this method, try printing out both variable's values. Remember to use the `this` keyword!
 
-#### Exercise 5 - Collision Function 🔥
+### 💼 Additional Exercises (Optional)
 
-Now, model a collision between the rocket and an asteroid. Add a method named `collideWith` in Rocket class that checks if the rocket has collided with the asteroid. If rocket's speed is greater than or equal to that of the asteroid, the rocket survives and gains 10 points, else it crashes. Remember to update rocket's score and crashed status accordingly.
+#### Exercise 2.1 -- `compareGravity(Planet p)`
+Create a method `compareGravity(Planet p)` which receives an instance of `Planet`, calculates the difference between the current Planet's gravity and the received planet's gravity, and prints a message comparing them.
 
-#### Exercise 6 - Print Stats Function 📊
+#### Exercise 2.2 -- `isHabitable()`
+Provide an implementation for a method named `isHabitable()` in the `Planet` class. This method should return `true` if the planet is suitable for life in some way and `false` otherwise. The condition to determine this? Well, leave this up for your creative interpretation!  
 
-Implement a method named `printStats` in Rocket class. This method prints all info about the rocket to the console.
+#### Exercise 2.3 -- Scope Practice
+Modify the `printPlanetDetails()` method. Add a new local variable that shadows one of the instance fields and try using both in this method.
 
-#### Exercise 7 - Main Method 🎮
-
-Finally, create a main method to run your game. Inside the main method, create a rocket and a few asteroids. Let them interact and print the game results to the console. 
-
-#### Exercise 8 - Understand Scope 🎯
-
-Create a separate Java file named "ScopeExample.java" and replicate the given examples of Variable Shadowing to understand them better. Experiment by fixing them and observe the outcomes.
-
-### 🐞 Bugs and Errors
-In case you find mistakes in this description or the code examples, please report them as a [New Issue](https://jprog.kth.se/help/issues/new) and mention "Ace the Space: *error summary*" in the title. Your involvement in debugging will be much appreciated.
+### 🐞 Bugs and errors?
+Report any errors or inconsistencies in this assignment by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) titled "Task x Error: summary of error here". Your timely reports will be duly acknowledged in the acknowledgment section.
