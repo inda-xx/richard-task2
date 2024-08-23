@@ -1,273 +1,264 @@
-# 👾 Java Game Task: Simple Game Application
+# 🚀 Journey to the Stars: Java Galaxy Exploration!
 
-Welcome to your Java game development assignment! In this task, you will create a simple text-based game application that incorporates player movement, scoring, and enemy interactions.
+In this exercise, you will explore object-oriented programming in Java by modeling interstellar objects. You'll design classes, use instance fields, create constructors, and more. Ready to embark on this cosmic venture?
 
 ### 💀 Deadline
-This assignment is due by **Friday, 18th November**. Make sure to submit your solution before the deadline.
+Please complete this exercise by **Friday 15th October**.
 
 ### 👩‍🏫 Instructions
-For submission instructions, please refer to the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
+Ensure you follow the [assignment submission guidelines](https://gits-15.sys.kth.se/java-course/submissions).
 
 ### 📝 Preparation
-To prepare for this task, review the following materials:
+To be prepared for this assignment, please review the following OLI material:
 
-- Study [Java Class Design](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
-- Read about [Encapsulation in Java](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
+- [Objects and Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=9c8e5e45de7e714b9128c3e7f9c2ffa8)
+- Visit [OLI website](https://kth.oli.cmu.edu/) and register with the course code `dd1337-ht23` if you have not already done so.
+
+> **Teacher's Note:** There may be slight discrepancies in sequence with the OLI material this year, so it's perfectly fine to explore additional topics.
 
 ### ✅ Learning Goals
 
-Upon completing this assignment, you should be able to:
+This exercise focuses on:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Using the `main` method
+* Understanding scope and variable shadowing
 
-- Design Java classes
-- Add instance fields
-- Add a constructor method
-- Create *getters* and *setters*
-- Print to the terminal
-- Use the `main` method
-- Understand **Scope** (or variable shadowing)
+### 🚧 Help and Troubleshooting
+If you need assistance, here's what you can do:
 
-### 🚨 Troubleshooting Guide
-If you encounter issues during the task, follow these steps:
+1. Check the [current issues](https://gits-15.sys.kth.se/java-course/help/issues) to see if someone else has a similar question.
+2. Post a new question by creating a [New Issue](https://gits-15.sys.kth.se/java-course/help/issues/new).
+3. Reach out to a TA during the [scheduled lab sessions](https://queue.csc.kth.se/Queue/INDA).
 
-1. Check the [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues) to see if others have experienced your problem.
-2. If your problem is not listed, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description.
-3. Talk to a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Refer to your schedule for lab timings.
+Discussion with peers is encouraged, but remember to submit original work!
 
-Discussing concepts with peers is encouraged, but **do not share code solutions**!
+### 🌌 Assignment: Galactic Voyager
 
-### 🏛️ Assignment
+🪐 In the cosmos far away, astronomers have identified celestial objects known as **StarVoyagers**. Your mission? To encapsulate these interstellar explorers in a Java class. To aid your imagination, here's an artistic depiction of these galactic wonders:
 
-In this assignment, you will create a simple Java game! Your game will have a player, a scoring system, and interactions with enemies. Ready to start coding your adventure?
+<img src="images/starvoyager.png" width="800">
 
-#### 🌟 Exercise 1.0 -- Game Classes
+#### Exercise 1.0 -- Fields
+In your project’s `src` directory, create a new class `StarVoyager.java`. Your class should include these fields:
 
-Create a new Java class called `Game.java` inside the `src` directory. In this class, you'll begin by modeling the game's basic components. Start by defining these fields:
+- `String` name
+- `int` age
+- `double` speed (in light-years per year)
+- `boolean` active
 
-- `String` playerName
-- `int` playerScore
-- `int` playerPosition
-- `int` enemyPosition
-- `String` enemyName
-
-Create a main method within the `Game` class to instantiate a new player and an enemy, initializing default values for all fields.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      // Define fields here!
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.playerName = "Player1";
-          game.playerScore = 0;
-          game.playerPosition = 0;
-          game.enemyName = "Enemy1";
-          game.enemyPosition = 5;
-      
-          System.out.println("Player: " + game.playerName + " is at position " + game.playerPosition);
-          System.out.println("Enemy: " + game.enemyName + " is at position " + game.enemyPosition);
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.1 -- Implement Getters and Setters
-
-Encapsulate the fields by making them `private`. Implement their respective *getters* and *setters* to allow controlled access to their values.
+If set up correctly, the Example 1 main method should compile when added to `StarVoyager.java`.
 
 <details>
-  <summary> 🛠 Example Code </summary>
+  <summary> 🛠 Example 1 </summary>
 
   ```java
-  public class Game {
-      private String playerName;
-      private int playerScore;
-      private int playerPosition;
-      private String enemyName;
-      private int enemyPosition;
-      
-      // Getters and Setters
-      public String getPlayerName() { return playerName; }
-      public void setPlayerName(String playerName) { this.playerName = playerName; }
-      
-      public int getPlayerScore() { return playerScore; }
-      public void setPlayerScore(int playerScore) { this.playerScore = playerScore; }
-      
-      public int getPlayerPosition() { return playerPosition; }
-      public void setPlayerPosition(int playerPosition) { this.playerPosition = playerPosition; }
-      
-      public String getEnemyName() { return enemyName; }
-      public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
-      
-      public int getEnemyPosition() { return enemyPosition; }
-      public void setEnemyPosition(int enemyPosition) { this.enemyPosition = enemyPosition; }
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.setPlayerName("Player1");
-          game.setPlayerScore(0);
-          game.setPlayerPosition(0);
-          game.setEnemyName("Enemy1");
-          game.setEnemyPosition(5);
-      
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
+  class StarVoyager {
 
-#### 🌟 Exercise 1.2 -- Constructor Method
-
-Define a constructor for the `Game` class to initialize objects more efficiently. Use parameters to set initial values.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-          this.playerName = playerName;
-          this.playerScore = playerScore;
-          this.playerPosition = playerPosition;
-          this.enemyName = enemyName;
-          this.enemyPosition = enemyPosition;
-      }
-      
-      // Other existing methods...
-
-      public static void main(String[] args) {
-          Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-          
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.3 -- Player Movement
-
-Implement a method to allow the player to "move" by changing their position. Print the new position each time the player moves.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // Implement main method...
-  }
-  ```
-
-  Modify your `main` method to test `movePlayer()`.
-</details>
-
-#### 🌟 Exercise 1.4 -- Scoring System
-
-Implement a method that adds points to the player's score every time they move. Add 1 point per step moved.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void updateScore(int steps) {
-          playerScore += steps;
-          System.out.println(playerName + " has a score of " + playerScore);
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // main method...
-  }
-  ```
-
-  Update your `main` method to observe changes in the player's score.
-</details>
-
-#### 🌟 Exercise 1.5 -- Enemy Interaction
-
-Develop a method that detects when the player encounters the enemy, printing a fight message.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void checkEncounter() {
-          if (playerPosition == enemyPosition) {
-              System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
-          }
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-          checkEncounter();
-      }
-      
-      // main method...
-  }
-  ```
-
-  Ensure your `main` method tests player movement to the enemy's position.
-</details>
-
-#### 🌟 Exercise 1.6 -- Variable Shadowing
-
-Understand variable shadowing by exploring the examples below. What changes would you make to correctly refer to instance variables?
-
-Example 1:
-
-```java
-public class ShadowGame {
-    private int position = 0; // We want this position printed
-
-    public void printShadow() {
-        int position = 5;
-        System.out.println(position); // It's printing the wrong position :( What's happening?
-    }
+    // Declare your fields here!
 
     public static void main(String[] args) {
-        new ShadowGame().printShadow();
-    }
-}
-```
+      // Instantiating a new StarVoyager
+      StarVoyager voyager1 = new StarVoyager();
 
-Example 2:
+      // Assign values to instance variables
+      voyager1.name = "Galaxion";
+      voyager1.age = 100;
+      voyager1.speed = 2.5;
+      voyager1.active = true;
+
+      // Print fields
+      System.out.println("Name: " + voyager1.name);
+      System.out.println("Age: " + voyager1.age);
+      System.out.println("Speed: " + voyager1.speed + " light-years/year");
+      System.out.println("Active: " + voyager1.active);
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.1 -- Getters and Setters
+To embrace encapsulation, make fields `private`. Implement `getters` and `setters`:
+
+- `getName()`, `setName(String name)`
+- `getAge()`, `setAge(int age)`
+- `getSpeed()`, `setSpeed(double speed)`
+- `isActive()`, `setActive(boolean active)`
+
+The Example 2 code should compile if the methods are correctly implemented.
+
+<details>
+  <summary> 🛠 Example 2 </summary>
+
+  ```java
+  class StarVoyager {
+
+    // Declare fields here!
+
+    // Declare getters and setters here!
+
+    public static void main(String[] args) {
+      // Instantiating a new StarVoyager
+      StarVoyager voyager2 = new StarVoyager();
+
+      // Use setters
+      voyager2.setName("Astral Hunter");
+      voyager2.setAge(300);
+      voyager2.setSpeed(4.7);
+      voyager2.setActive(false);
+
+      // Print via getters
+      System.out.println("Name: " + voyager2.getName());
+      System.out.println("Age: " + voyager2.getAge());
+      System.out.println("Speed: " + voyager2.getSpeed() + " light-years/year");
+      System.out.println("Active: " + voyager2.isActive());
+    }
+  }
+  ```
+</details>
+
+> **Assistant's Note:** `boolean` getters often use the `is` prefix, for example, `isActive()`.
+
+#### Exercise 1.2 -- Constructor
+Refactor the class to use a constructor to set initial values for `name`, `age`, `speed`, and `active`:
 
 ```java
-public class Creature {
-    private String name;
-
-    public Creature(String name) {
-        name = name; // This doesn't set the instance variable :( Why not?
-    }
-
-    public void announce() {
-        String name = "Unknown";
-        System.out.println(name + " approaches!"); // It's printing the wrong name :( 
-    }
+public StarVoyager(String name, int age, double speed, boolean active) {
+  // Initialize fields with constructor parameters.
 }
 ```
 
-> **Hint:** Review how the `this` keyword is used in context of variable shadowing to access instance fields.
+Use this constructor in Example 3 to prove implementation correctness.
 
-### 🐞 Bugs and errors?
-If you discover any errors or inconsistencies in the task, please create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description. Identified bugs will be acknowledged!
+<details>
+  <summary> 🛠 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args) {
+    // Instantiate with constructor
+    StarVoyager voyager3 = new StarVoyager("Nebula Nomad", 180, 3.0, true);
+
+    // Direct info print
+    System.out.println("Voyager Details:\n" + "Name: " + voyager3.getName() +
+                       "\nAge: " + voyager3.getAge() +
+                       "\nSpeed: " + voyager3.getSpeed() + " light-years/year" +
+                       "\nActive: " + voyager3.isActive());
+  }
+  ```
+</details>
+
+#### Exercise 1.3 -- `printStatus()`
+Implement a method `printStatus()` that prints voyager information in a pre-formatted string.
+
+<details>
+  <summary> 🛠 Example 4 </summary>
+
+  ```java
+  class StarVoyager {
+
+    // Fields, constructor, getters, and setters ...
+
+    public void printStatus() {
+      System.out.println(">> VOYAGER STATUS <<");
+      System.out.println("Name: " + this.name);
+      System.out.println("Age: " + this.age);
+      System.out.println("Speed: " + this.speed + " light-years/year");
+      System.out.println("Active: " + this.active);
+    }
+
+    // Test in the main method:
+    public static void main(String[] args) {
+      StarVoyager voyager = new StarVoyager("Light Strider", 200, 5.2, true);
+      voyager.printStatus();
+    }
+  }
+  ```
+</details>
+
+🐾 The expected output format should be:
+
+```
+>> VOYAGER STATUS <<
+Name: Light Strider
+Age: 200
+Speed: 5.2 light-years/year
+Active: true
+```
+
+#### Exercise 1.4 -- Celestial Interaction
+The `interact` method simulates a Voyager having a hypothetical interaction with another. Assume interactions decrease speed by a constant (e.g., 0.5). Print the interaction effects on the terminal.
+
+<details>
+  <summary> 🛠 Example 5 </summary>
+
+  ```java
+  public void interact(StarVoyager voyager) {
+    // Interact logic
+    this.speed -= 0.5;
+    if (this.speed < 0) this.speed = 0; // Guard against negative speed
+
+    System.out.println(this.name + " interacted with " + voyager.getName());
+    System.out.println(this.name + "'s new speed: " + this.speed + " light-years/year");
+  }
+
+  public static void main(String[] args) {
+    StarVoyager voyager1 = new StarVoyager("Comet Cruiser", 150, 6.2, true);
+    StarVoyager voyager2 = new StarVoyager("Celestial Drifter", 230, 7.5, false);
+
+    voyager1.interact(voyager2);
+  }
+  ```
+
+  The console output should resemble:
+
+  ```
+  Comet Cruiser interacted with Celestial Drifter
+  Comet Cruiser's new speed: 5.7 light-years/year
+  ```
+</details>
+
+#### Exercise 1.5 -- Shadowing Examples
+Review the examples below and be ready to discuss potential solutions in class:
+
+```java
+public class SpaceAttributes {
+  private String type = "Dwarf Star"; // This should print
+
+  public void showType() {
+    String type = "Giant Star";
+    System.out.println(type); // Prints the incorrect type.
+  }
+
+  public static void main(String[] args) {
+    new SpaceAttributes().showType();
+  }
+}
+```
+
+Another scenario:
+
+```java
+public class CelestialBody {
+  private String identifier;
+  private double mass;
+
+  public CelestialBody(String identifier, double mass) {
+    identifier = identifier; // Misleading assignment
+    mass = mass;
+  }
+
+  public void displayInfo() {
+    System.out.println("Identifier: " + identifier + ", Mass: " + mass);
+  }
+}
+```
+
+> **Student Note:** Reflect on the concepts of scope, local vs. global variables, and the use of `this` in Java to address these issues.
+
+### 🌌 Problem Solving and Debugging
+If you spot errors or inconsistencies, document them by opening a [New Issue](https://gits-15.sys.kth.se/java-course/help/issues/new) titled "Galactic Task Error: *brief description*" for a chance to be acknowledged in future references. 
+
+Embark on this celestial coding journey and discover uncharted territories of Java programming!
