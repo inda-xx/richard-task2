@@ -39,11 +39,8 @@ def main(api_key, branch_name):
         f"### Task\n{task}\n\n"
         f"### Template\n{template}\n\n"
         f"### Existing Tests\n\n"
-        f"{existing_tests}\n\n"  # Removed the ```java formatting
-        "Format the response as follows:\n\n"
-        "### Tests\n<test_cases>\n\n"
-        "### Solution\n<solution_code>\n\n"
-        "Ensure that each class is placed in the correct file, and the test file is properly named and located."
+        f"{existing_tests}\n\n"
+        "IMPORTANT: The response must be plain Java code with no markdown formatting or ```java blocks. Ensure that the response is ready to be saved directly as a .java file."
     )
 
     response_content = generate_with_retries(client, prompt, max_retries=3)

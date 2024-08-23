@@ -89,12 +89,10 @@ def main(api_key, branch_name):
             f"### Task Description\n\n"
             f"{task_description}\n\n"
             "### Original Code Template\n\n"
-            f"{original_template}\n\n"  # Removed the ```java formatting
-            "Format the response as follows:\n\n"
-            "### Template\n<template_code>\n\n")
-
-    response_content = generate_with_retries(client, prompt, max_retries=3)
-
+            f"{original_template}\n\n"
+            "IMPORTANT: The response must be plain Java code with no markdown formatting or ```java blocks. "
+            "Ensure that the response is ready to be saved directly as a .java file."
+    )
 
     # Call OpenAI API to generate the template code
     response_content = generate_with_retries(client, prompt, max_retries=3)
