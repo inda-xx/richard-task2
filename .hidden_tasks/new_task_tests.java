@@ -2,100 +2,111 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GameTest {
-    private Game game;
-    private Game encounterGame;
+public class CookieTest {
+    private Cookie testCookie;
 
     @Before
-    public void setup() {
-        game = new Game("Player1", 0, 0, "Enemy1", 5);
-        encounterGame = new Game("Player1", 10, 3, "Enemy1", 5);
+    public void setUp() {
+        testCookie = new Cookie("Vanilla", 8, false, 150);
     }
 
     @Test
-    public void testInitialPlayerSetup() {
-        assertEquals("Player1", game.getPlayerName());
-        assertEquals(0, game.getPlayerScore());
-        assertEquals(0, game.getPlayerPosition());
+    public void testDefaultConstructorValues() {
+        Cookie defaultCookie = new Cookie();
+        assertEquals("Plain", defaultCookie.getFlavor());
+        assertEquals(0, defaultCookie.getSize());
+        assertFalse(defaultCookie.isHasChips());
+        assertEquals(0, defaultCookie.getCalories());
     }
 
     @Test
-    public void testInitialEnemySetup() {
-        assertEquals("Enemy1", game.getEnemyName());
-        assertEquals(5, game.getEnemyPosition());
+    public void testConstructorInitialization() {
+        assertEquals("Vanilla", testCookie.getFlavor());
+        assertEquals(8, testCookie.getSize());
+        assertFalse(testCookie.isHasChips());
+        assertEquals(150, testCookie.getCalories());
     }
 
     @Test
-    public void testPlayerMovement() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-        assertEquals(3, game.getPlayerScore());
-
-        game.movePlayer(2);
-        assertEquals(5, game.getPlayerPosition());
-        assertEquals(5, game.getPlayerScore());
+    public void testSetFlavor() {
+        testCookie.setFlavor("Chocolate");
+        assertEquals("Chocolate", testCookie.getFlavor());
     }
 
     @Test
-    public void testEncounter() {
-        encounterGame.movePlayer(2);
-        assertEquals(5, encounterGame.getPlayerPosition());
-        assertEquals(12, encounterGame.getPlayerScore());
-    }
-    
-    @Test
-    public void testPlayerScoreAfterMove() {
-        game.movePlayer(4);
-        assertEquals(4, game.getPlayerScore());
-        assertEquals(4, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testPlayerPositionAfterMove() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testModifyPlayerName() {
-        game.setPlayerName("NewPlayer");
-        assertEquals("NewPlayer", game.getPlayerName());
+    public void testSetSize() {
+        testCookie.setSize(12);
+        assertEquals(12, testCookie.getSize());
     }
 
     @Test
-    public void testModifyEnemyPosition() {
-        game.setEnemyPosition(10);
-        assertEquals(10, game.getEnemyPosition());
+    public void testSetHasChips() {
+        testCookie.setHasChips(true);
+        assertTrue(testCookie.isHasChips());
     }
 
     @Test
-    public void testModifyPlayerPosition() {
-        game.setPlayerPosition(8);
-        assertEquals(8, game.getPlayerPosition());
+    public void testSetCalories() {
+        testCookie.setCalories(200);
+        assertEquals(200, testCookie.getCalories());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNegativeSize() {
+        testCookie.setSize(-5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNegativeCalories() {
+        testCookie.setCalories(-100);
     }
 
     @Test
-    public void testNegativeMovement() {
-        game.movePlayer(-3);
-        assertEquals(-3, game.getPlayerPosition());
-        assertEquals(-3, game.getPlayerScore());
+    public void testBoundarySize() {
+        testCookie.setSize(0);
+        assertEquals(0, testCookie.getSize());
     }
-}
 
-class ShadowGameTest {
     @Test
-    public void testShadowingExample() {
-        ShadowGame shadowGame = new ShadowGame();
-        shadowGame.printShadow();
-        // No assertions, this test is for verifying shadowing behavior and console output
+    public void testBoundaryCalories() {
+        testCookie.setCalories(0);
+        assertEquals(0, testCookie.getCalories());
     }
-}
 
-class CreatureTest {
     @Test
-    public void testCreatureAnnouncement() {
-        Creature creature = new Creature("Dragon");
-        creature.announce();
-        // No assertions, this test is for verifying creature announcement behavior and console output
+    public void testFlavorTrimmed() {
+        testCookie.setFlavor(" Chocolate ");
+        assertEquals("Chocolate", testCookie.getFlavor().trim());
+    }
+
+    @Test
+    public void testLargeCookieSizePerformance() {
+        Cookie largeCookie = new Cookie("BigCookie", 10000, false, 5400);
+        assertEquals(10000, largeCookie.getSize());
+    }
+
+    @Test
+    public void testLargeCalorieCountPerformance() {
+        Cookie highCalorieCookie = new Cookie("BigCookie", 15, true, Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, highCalorieCookie.getCalories());
+    }
+
+    @Test
+    public void testPrintInfo() {
+        Cookie cookie = new Cookie("Tester", 5, true, 250);
+        // Redirect System.out to test the printed output
+        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
+        System.setOut(new java.io.PrintStream(outContent));
+        
+        cookie.printInfo();
+        String expectedOutput = "Cookie Info:\n" +
+                                "Flavor: Tester\n" +
+                                "Size: 5 cm\n" +
+                                "Has Chips: true\n" +
+                                "Calories: 250\n";
+        assertEquals(expectedOutput, outContent.toString());
+        
+        // Reset System.out to its original stream
+        System.setOut(System.out);
     }
 }
