@@ -1,170 +1,188 @@
-# 🕹️ Simple Java Game Assignment
+# 🎨 Art Exhibition Simulator
 
-In this exercise, you'll design and implement a simple game application in Java that incorporates player movement, scoring, and enemy interactions. Through this task, you will become familiar with Java classes and object-oriented programming concepts.
+Welcome to an exciting programming task where you'll create a simple simulation of an art exhibition using Java classes. Through this task, you'll develop a deeper understanding of object-oriented programming concepts such as designing classes, constructors, encapsulation, and more.
 
 ### 📅 Deadline
-Complete and submit the assignment before **Friday, October 20th**.
+Complete this task by **Monday, 20th March**.
 
-### 📘 Instructions
-For more information on submission procedures, refer to the [course instructions](https://example.com/course/instructions#assignments).
+### 👨‍🎓 Instructions
+For assignment details and submission guidelines, please refer to the [course instructions](https://example.com/course-instructions#assignments).
 
-### 📝 Preparation
-To prepare, review the following materials:
+### 📚 Preparation
+Make sure you have a solid understanding of Java basics and have read the following resources:
 
-- [Java Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
-- If you're unfamiliar with Java, sign up and complete the essential modules at [Java Programming Basics](https://example.com/online-java-course).
-
-> **Assistant's Note:** The materials might have slight discrepancies, so it's advisable to explore further if necessary.
+- Review [Java Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
+- Understanding [Encapsulation](https://docs.oracle.com/javase/tutorial/java/javaOO/encapsulation.html)
 
 ### 🎯 Learning Goals
-This assignment aims to bolster the following skills:
 
-- Designing Java classes
-- Adding instance fields
-- Adding a constructor method
-- Creating *getters* and *setters*
-- Printing to the terminal
-- Using the `main` method
-- Understanding and managing variable scope, including shadowing
+The goals for this week's task include:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Using the `main` method
+* Understanding scope (or *variable shadowing*)
 
-### 🛠️ Troubleshooting Guide
-In case of queries or issues, follow these steps:
+### 🆘 Troubleshooting
+If you encounter any issues, follow this method:
 
-1. Check this week’s [posted issues](https://example.com/help/issues) to see if other students have similar problems.
-2. If not, create a [New Issue](https://example.com/help/issues/new) with a clear title, such as "Game Task: specific problem".
-3. Seek help from a TA during weekly labs. Refer to the schedule for details.
+1. Check existing [issues on the forum](https://example.com/forum/issues) to see if someone else has already raised your query.
+2. Post a new question in the discussion forum if your issue is new.
+3. Consult a teaching assistant (TA) during the [scheduled lab sessions](https://example.com/labs).
 
-Collaborate constructively with peers, but **do not share solutions directly**.
+### 🖼️ Assignment: Art Exhibition
 
-### 🕹️ Game Assignment
+In this task, you will create classes that represent an art exhibition. The exhibition consists of various artworks, each with specific attributes. You will model these classes, practice encapsulation, and familiarize yourself with Java methods and scope.
 
-In this task, you'll create a basic and engaging text-based game. Your game will allow a player to move around a grid, collect points, and interact with enemies.
+#### Exercise 1 -- Fields
+Create a class called `Artwork.java`. Each artwork object should have the following fields:
 
-#### Exercise 1 -- Setting Up the Game Classes
-In the `src` folder, create a new Java file named `Game.java`. Implement the following components:
+- `String title`
+- `String artist`
+- `int year`
+- `boolean isOnDisplay`
 
-1. **Player Class**
+To check if everything is implemented correctly, you can use the `main` method provided below.
 
-   - Fields: `String name`, `int score`, `int x`, `int y`
-   - Methods: `constructor`, `move(int deltaX, int deltaY)`, `addScore(int points)`, `printPosition()`
+<details>
+  <summary> 🛠 Main Method Sample </summary>
 
-2. **Enemy Class**
+  ```java
+  public class Artwork {
 
-   - Fields: `int x`, `int y`, `int damage`
-   - Methods: `constructor`, `interact(Player player)`, `printPosition()`
-
-Ensure this setup matches the structure illustrated below:
-
-```java
-class Player {
-    private String name;
-    private int score;
-    private int x;
-    private int y;
-
-    public Player(String name, int startX, int startY) {
-        this.name = name;
-        this.score = 0;
-        this.x = startX;
-        this.y = startY;
-    }
-
-    // Getters and setters here
-    // Other methods here
-}
-
-class Enemy {
-    private int x;
-    private int y;
-    private int damage;
-
-    public Enemy(int startX, int startY, int damage) {
-        this.x = startX;
-        this.y = startY;
-        this.damage = damage;
-    }
-
-    // Methods here
-}
-```
-
-#### Exercise 2 -- Implement Movement and Scoring
-Extend your `Player` class with:
-
-- **Move Method**: Updates the player's current position. Enforce a grid size (5x5).
-- **AddScore Method**: Increases the player's score by specified points.
-
-Demonstrate functionality with the example main method provided:
-
-```java
-public class Game {
-    public static void main(String[] args) {
-        Player player = new Player("Hero", 0, 0);
-        player.move(1, 1);
-        player.printPosition();
-        player.addScore(10);
-    }
-}
-```
-
-Output Sample:
-
-```
-> Player is at position (1, 1).
-> Current score: 10 points.
-```
-
-#### Exercise 3 -- Interacting with Enemies
-Add interaction capabilities to the `Enemy` class:
-
-- **Interact Method**: Modifies the player's position and/or score upon enemy encounter.
-
-Sample main method to show interaction:
-
-```java
-public class Game {
-    public static void main(String[] args) {
-        Player player = new Player("Hero", 0, 0);
-        Enemy enemy = new Enemy(1, 1, 5);
-
-        player.move(1, 1);
-        enemy.interact(player); // Player encounters enemy
-
-        player.printPosition();
-        System.out.println("Player score: " + player.getScore());
-    }
-}
-```
-
-Expected Output:
-
-```
-> Player is at position (1, 1).
-> Oh no! Player encountered an enemy and lost 5 points.
-> Player score: -5
-```
-
-#### Exercise 4 -- Variable Shadowing Exploration
-Study and correct the shadowing problems shown below:
-
-```java
-public class ShadowExample {
-    private int value = 10;
-
-    public void showValue() {
-        int value = 5;
-        System.out.println("Value: " + value);
-    }
+    // Define your fields here
 
     public static void main(String[] args) {
-        new ShadowExample().showValue();
+      Artwork artwork = new Artwork();
+
+      // Assign values to fields
+      artwork.title = "Starry Night";
+      artwork.artist = "Vincent van Gogh";
+      artwork.year = 1889;
+      artwork.isOnDisplay = true;
+
+      // Print the artwork information
+      System.out.println("Title: " + artwork.title);
+      System.out.println("Artist: " + artwork.artist);
+      System.out.println("Year: " + artwork.year);
+      System.out.println("Is on display: " + artwork.isOnDisplay);
     }
+  }
+  ```
+</details>
+
+#### Exercise 2 -- Encapsulation: Getters and Setters
+Implement encapsulation by making the fields in `Artwork` private, and then add public getters and setters for each field.
+
+<details>
+  <summary> 🛠 Encapsulation Example </summary>
+
+  ```java
+  private String title;
+  private String artist;
+  private int year;
+  private boolean isOnDisplay;
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  // Repeat for other fields...
+  ```
+</details>
+
+#### Exercise 3 -- Constructors
+Add a constructor to `Artwork.java` that takes parameters for all fields, and initializes them accordingly. Refactor the `main` method to utilize this constructor.
+
+<details>
+  <summary> 🛠 Constructor Example </summary>
+
+  ```java
+  public Artwork(String title, String artist, int year, boolean isOnDisplay) {
+    this.title = title;
+    this.artist = artist;
+    this.year = year;
+    this.isOnDisplay = isOnDisplay;
+  }
+  
+  // Main method should now use the constructor to create 'artwork' objects
+  Artwork artwork = new Artwork("Starry Night", "Vincent van Gogh", 1889, true);
+  ```
+</details>
+
+#### Exercise 4 -- Printable Info
+Create a method named `printInfo()` in the `Artwork` class that outputs all information about the artwork to the terminal in a readable format.
+
+<details>
+  <summary> 🛠 Print Info Method </summary>
+
+  ```java
+  public void printInfo() {
+    System.out.println("Artwork Details:");
+    System.out.println("Title: " + title);
+    System.out.println("Artist: " + artist);
+    System.out.println("Year: " + year);
+    System.out.println("Is on display: " + isOnDisplay);
+  }
+  ```
+</details>
+
+#### Exercise 5 -- Exhibition
+Create a new class `Exhibition.java` that holds multiple `Artwork`. Add methods to add art pieces to the exhibition and list all of them.
+
+<details>
+  <summary> 🛠 Exhibition Example </summary>
+
+  ```java
+  import java.util.ArrayList;
+
+  public class Exhibition {
+    private ArrayList<Artwork> artworks;
+
+    public Exhibition() {
+      this.artworks = new ArrayList<>();
+    }
+
+    public void addArtwork(Artwork art) {
+      artworks.add(art);
+    }
+
+    public void listArtworks() {
+      for (Artwork art : artworks) {
+        art.printInfo();
+      }
+    }
+  }
+  ```
+</details>
+
+#### Exercise 6 -- Variable Shadowing
+Understand variable shadowing by fixing the code below. You should use the `this` keyword to resolve conflicts.
+
+```java
+public class Gallery {
+  private String galleryName = "National Gallery";
+
+  public void displayGalleryName(String galleryName) {
+    System.out.println(galleryName); // It prints the parameter 'galleryName', but I want the instance variable
+  }
+
+  public static void main(String[] args) {
+    Gallery gallery = new Gallery();
+    gallery.displayGalleryName("Local Gallery");
+  }
 }
 ```
 
-Consider how to utilize the `this` keyword to avoid scope issues like in the examples.
+> **Note:** Pay attention to where local variables might overshadow instance variables, and how `this` can resolve it.
 
-In conclusion, reflect on how declaring `Variable` at a different scope changes the output. Implement the fixes inside your game classes if necessary.
+### 🔍 Found Bugs?
+If you spot any issues with this task, report them via [New Task Error Report](https://example.com/support/new). Your feedback is valued and will be acknowledged.
 
-### 🐛 Bug Reporting
-Spot any discrepancies or bugs? Report them via a [New Issue](https://example.com/help/issues/new) under the title "Game Task Issue: *brief summary*". Acknowledgements await for valid bug finds!
+Happy Coding! 💻
