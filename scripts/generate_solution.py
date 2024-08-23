@@ -67,23 +67,24 @@ def generate_with_retries(client, prompt, max_retries=3):
                 print("Retrying...")
     return None
 
-def commit_and_push_changes(branch_name, tests_content, solution_content):
+def commit_and_push_tests(branch_name, test_content):
     try:
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
         
+        # Ensure the .hidden_tasks directory exists
         os.makedirs(".hidden_tasks", exist_ok=True)
 
+        # Define the file path for tests
         tests_file_path = os.path.join(".hidden_tasks", "new_task_tests.java")
-        solution_file_path = os.path.join(".hidden_tasks", "new_task_solution.java")
 
-        with open(tests_file_path, "w") as file:
-            file.write(tests_content)
-        with open(solution_file_path, "w") as file:
-            file.write(solution_content)
+        # Write the generated tests to the file
+        with open(tests_file_path, "w") as test_file:
+            test_file.write(test_content)
 
-        subprocess.run(["git", "add", tests_file_path, solution_file_path], check=True)
-        subprocess.run(["git", "commit", "-m", "Add generated tests and solution"], check=True)
+        # Add and commit the test file
+        subprocess.run(["git", "add", tests_file_path], check=True)
+        subprocess.run(["git", "commit", "-m", "Add generated tests"], check=True)
         subprocess.run(
             ["git", "push", "--set-upstream", "origin", branch_name],
             check=True,
