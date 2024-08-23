@@ -91,7 +91,8 @@ def main(api_key, branch_name):
             "### Original Code Template\n\n"
             f"{original_template}\n\n"
             "IMPORTANT: The response must be plain Java code with no markdown formatting or ```java blocks. "
-            "Ensure that the response is ready to be saved directly as a .java file."
+            "Ensure that the response is ready to be saved directly as a .java file. "
+            "Additionally, ensure that all import statements are placed at the top of the file and that all classes and methods are properly closed with curly braces."
     )
 
     # Call OpenAI API to generate the template code
@@ -100,6 +101,9 @@ def main(api_key, branch_name):
         print("Error: Failed to generate template code after multiple retries.")
         sys.exit(1)
 
+    # Validate and correct the generated code
+    response_content = validate_and_correct_java_code(response_content)
+
     # Write the template code to a Java file
     template_file_path = os.path.join("src", "template_code.java")
     with open(template_file_path, "w") as file:
@@ -107,6 +111,36 @@ def main(api_key, branch_name):
 
     # Commit and push changes
     commit_and_push_changes(branch_name, template_file_path)
+
+def validate_and_correct_java_code(java_code):
+    """Validate and correct common Java code errors."""
+    lines = java_code.splitlines()
+    imports = []
+    code = []
+    inside_class = False
+
+    for line in lines:
+        # Collect imports to ensure they are at the top
+        if line.startswith("import "):
+            imports.append(line)
+        else:
+            if "class " in line:
+                inside_class = True
+            if inside_class:
+                code.append(line)
+            else:
+                # Collect any code that should be outside the class
+                imports.append(line)
+
+    # Ensure all braces are properly closed
+    open_braces = sum(line.count('{') for line in code)
+    close_braces = sum(line.count('}') for line in code)
+    if open_braces > close_braces:
+        code.append("}" * (open_braces - close_braces))
+
+    # Reassemble the code with imports at the top
+    final_code = "\n".join(imports + [""] + code)
+    return final_code
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
