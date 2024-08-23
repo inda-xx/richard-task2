@@ -1,4 +1,4 @@
-finition for CharacterX
+
 class CharacterX {
     // Instance Variables
     private String characterName;
