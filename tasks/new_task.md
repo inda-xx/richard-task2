@@ -1,273 +1,213 @@
-# 👾 Java Game Task: Simple Game Application
+# 🌳 Tree Adventure!
 
-Welcome to your Java game development assignment! In this task, you will create a simple text-based game application that incorporates player movement, scoring, and enemy interactions.
+Welcome to the mystical world of Java programming! In this task, you'll delve into the wonders of object-oriented design by creating your very own "Tree" objects. This exercise will help you master the art of structuring Java classes and manipulating object properties.
 
-### 💀 Deadline
-This assignment is due by **Friday, 18th November**. Make sure to submit your solution before the deadline.
+### 📅 Deadline
+Please complete this assignment by **Friday 20th October**.
 
-### 👩‍🏫 Instructions
-For submission instructions, please refer to the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
+### 📚 Instructions
+For detailed submission guidelines, refer to the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 📝 Preparation
-To prepare for this task, review the following materials:
+### 📖 Preparation
+Before you embark on this adventure, make sure to explore the concepts in the OLI material for Module 3:
 
-- Study [Java Class Design](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
-- Read about [Encapsulation in Java](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
+- Read [Classes and Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac60).
+- Complete any necessary sign-ups at https://kth.oli.cmu.edu/ and register using the course key `dd1337-ht22`.
 
-### ✅ Learning Goals
+> **Assistant's Note:** The references may not perfectly align with this year's curriculum, so feel free to explore further if needed.
 
-Upon completing this assignment, you should be able to:
+### 🎯 Learning Goals
 
-- Design Java classes
-- Add instance fields
-- Add a constructor method
-- Create *getters* and *setters*
-- Print to the terminal
-- Use the `main` method
-- Understand **Scope** (or variable shadowing)
+This week’s objectives include:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Using the `main` method
+* Understanding Scope (including *variable shadowing*)
 
-### 🚨 Troubleshooting Guide
-If you encounter issues during the task, follow these steps:
+### 🦸‍♀️ Troubleshooting Guide
+If you encounter challenges, consider the following steps:
 
-1. Check the [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues) to see if others have experienced your problem.
-2. If your problem is not listed, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description.
-3. Talk to a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Refer to your schedule for lab timings.
+1. Review this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues) to see if your problem is covered.
+2. Post your own question if needed by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a descriptive title.
+3. Seek assistance from a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA).
 
-Discussing concepts with peers is encouraged, but **do not share code solutions**!
+While collaboration with peers is encouraged, remember to **keep your work to yourself!**
 
-### 🏛️ Assignment
+### 🌲 Assignment Overview
 
-In this assignment, you will create a simple Java game! Your game will have a player, a scoring system, and interactions with enemies. Ready to start coding your adventure?
+In the fantasy woodlands of the Royal Institute of Technology, there's a legendary species known as the **Arboretus**. Your mission is to represent these mythical trees in Java. Imagine the grandeur of these trees and let your creativity take root.
 
-#### 🌟 Exercise 1.0 -- Game Classes
+#### Exercise 3.0 -- Fields
+Create a new class called `Tree.java` in the `src` directory. In this class, define these fields representing characteristics of the Arboretus tree:
 
-Create a new Java class called `Game.java` inside the `src` directory. In this class, you'll begin by modeling the game's basic components. Start by defining these fields:
+- `String species`
+- `double height` (in meters)
+- `int age` (in years)
+- `boolean evergreen`
 
-- `String` playerName
-- `int` playerScore
-- `int` playerPosition
-- `int` enemyPosition
-- `String` enemyName
-
-Create a main method within the `Game` class to instantiate a new player and an enemy, initializing default values for all fields.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      // Define fields here!
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.playerName = "Player1";
-          game.playerScore = 0;
-          game.playerPosition = 0;
-          game.enemyName = "Enemy1";
-          game.enemyPosition = 5;
-      
-          System.out.println("Player: " + game.playerName + " is at position " + game.playerPosition);
-          System.out.println("Enemy: " + game.enemyName + " is at position " + game.enemyPosition);
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.1 -- Implement Getters and Setters
-
-Encapsulate the fields by making them `private`. Implement their respective *getters* and *setters* to allow controlled access to their values.
+If completed correctly, the initial example should compile when added to `Tree.java`.
 
 <details>
-  <summary> 🛠 Example Code </summary>
+  <summary> 🌳 Example 1 </summary>
 
   ```java
-  public class Game {
-      private String playerName;
-      private int playerScore;
-      private int playerPosition;
-      private String enemyName;
-      private int enemyPosition;
-      
-      // Getters and Setters
-      public String getPlayerName() { return playerName; }
-      public void setPlayerName(String playerName) { this.playerName = playerName; }
-      
-      public int getPlayerScore() { return playerScore; }
-      public void setPlayerScore(int playerScore) { this.playerScore = playerScore; }
-      
-      public int getPlayerPosition() { return playerPosition; }
-      public void setPlayerPosition(int playerPosition) { this.playerPosition = playerPosition; }
-      
-      public String getEnemyName() { return enemyName; }
-      public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
-      
-      public int getEnemyPosition() { return enemyPosition; }
-      public void setEnemyPosition(int enemyPosition) { this.enemyPosition = enemyPosition; }
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.setPlayerName("Player1");
-          game.setPlayerScore(0);
-          game.setPlayerPosition(0);
-          game.setEnemyName("Enemy1");
-          game.setEnemyPosition(5);
-      
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
+  class Tree {
 
-#### 🌟 Exercise 1.2 -- Constructor Method
-
-Define a constructor for the `Game` class to initialize objects more efficiently. Use parameters to set initial values.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-          this.playerName = playerName;
-          this.playerScore = playerScore;
-          this.playerPosition = playerPosition;
-          this.enemyName = enemyName;
-          this.enemyPosition = enemyPosition;
-      }
-      
-      // Other existing methods...
-
-      public static void main(String[] args) {
-          Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-          
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.3 -- Player Movement
-
-Implement a method to allow the player to "move" by changing their position. Print the new position each time the player moves.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // Implement main method...
-  }
-  ```
-
-  Modify your `main` method to test `movePlayer()`.
-</details>
-
-#### 🌟 Exercise 1.4 -- Scoring System
-
-Implement a method that adds points to the player's score every time they move. Add 1 point per step moved.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void updateScore(int steps) {
-          playerScore += steps;
-          System.out.println(playerName + " has a score of " + playerScore);
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // main method...
-  }
-  ```
-
-  Update your `main` method to observe changes in the player's score.
-</details>
-
-#### 🌟 Exercise 1.5 -- Enemy Interaction
-
-Develop a method that detects when the player encounters the enemy, printing a fight message.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void checkEncounter() {
-          if (playerPosition == enemyPosition) {
-              System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
-          }
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-          checkEncounter();
-      }
-      
-      // main method...
-  }
-  ```
-
-  Ensure your `main` method tests player movement to the enemy's position.
-</details>
-
-#### 🌟 Exercise 1.6 -- Variable Shadowing
-
-Understand variable shadowing by exploring the examples below. What changes would you make to correctly refer to instance variables?
-
-Example 1:
-
-```java
-public class ShadowGame {
-    private int position = 0; // We want this position printed
-
-    public void printShadow() {
-        int position = 5;
-        System.out.println(position); // It's printing the wrong position :( What's happening?
-    }
+    // Define your fields here!
 
     public static void main(String[] args) {
-        new ShadowGame().printShadow();
+      Tree oak = new Tree();
+
+      oak.species = "Oak";
+      oak.height = 15.5;
+      oak.age = 80;
+      oak.evergreen = false;
+
+      System.out.println("Species: " + oak.species);
+      System.out.println("Height: " + oak.height + " meters");
+      System.out.println("Age: " + oak.age + " years");
+      System.out.println("Evergreen: " + oak.evergreen);
+    } // end main method
+
+  } // end class
+  ```
+</details>
+
+#### Exercise 3.1 -- Getters and Setters
+To instill encapsulation, mark the fields in `Tree` as `private`. Then, create *getter* and *setter* methods for each field. This delicate balance of access requires ten methods in total! Verify your setup with the main method below.
+
+<details>
+  <summary> 🌳 Example 2 </summary>
+
+  ```java
+  class Tree {
+
+    // Your fields go here!
+
+    // Add your getters and setters here!
+
+    public static void main(String[] args) {
+      Tree oak = new Tree();
+
+      oak.setSpecies("Oak");
+      oak.setHeight(15.5);
+      oak.setAge(80);
+      oak.setEvergreen(false);
+
+      System.out.println("Species: " + oak.getSpecies());
+      System.out.println("Height: " + oak.getHeight() + " meters");
+      System.out.println("Age: " + oak.getAge() + " years");
+      System.out.println("Evergreen: " + oak.isEvergreen());
+    } // end main method
+
+  } // end class
+  ```
+</details>
+
+> **Assistant's Note:** Boolean getters use the `isXXX()` convention, such as `isEvergreen()`.
+
+#### Exercise 3.2 -- Constructor
+Using a constructor can streamline the object creation process found in Example 2. Amend the code with a more elegant constructor-based approach.
+
+#### Exercise 3.3 -- `describe()`
+Implement a `describe()` method in the `Tree` class to succinctly print its attributes. Aim for a pleasing, informative output as shown in the next example.
+
+<details>
+  <summary> 🌳 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args){
+    Tree oak = new Tree("Oak", 15.5, 80, false);
+
+    oak.describe();
+  }
+  ```
+
+  Expected Output:
+
+  ```
+  > TREE INFO
+  > Species: Oak
+  > Height: 15.5 meters
+  > Age: 80 years
+  > Evergreen: false
+  ```
+</details>
+
+#### Exercise 3.4 -- `grow()`
+Introduce a `grow` method for your trees to mimic growth over a year. This method increases the `height` by a `growthFactor` and `age` by one year, printing the changes to the terminal.
+
+<details>
+  <summary> 🌳 Example 4 </summary>
+
+  ```java
+  public static void main(String[] args) {
+    Tree pine = new Tree("Pine", 10.0, 12, true);
+
+    pine.describe();
+    pine.grow(0.5);  // The tree grows by 0.5 meters in height
+    pine.describe();
+  }
+  ```
+
+  Example Output:
+
+  ```
+  > TREE INFO
+  > Species: Pine
+  > Height: 10.0 meters
+  > Age: 12 years
+  > Evergreen: true
+
+  > Growing by 0.5 meters...
+
+  > TREE INFO
+  > Species: Pine
+  > Height: 10.5 meters
+  > Age: 13 years
+  > Evergreen: true
+  ```
+</details>
+
+#### Exercise 3.5 -- Variable Shadowing
+Observe these examples showing variable shadowing issues. Prepare to discuss potential solutions and understand the concept during class. Explore more about [Java variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) and the `this` keyword [here](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html).
+
+```Java
+public class Shadow2 {
+    private String description = "Shadowy field"; // This should display.
+
+    public void printShadow() {
+        String description = "Unclear"; 
+        System.out.println(description); // What will this print?
+    }
+
+    public static void main(String[] args){
+        new Shadow2().printShadow();
     }
 }
 ```
 
-Example 2:
+Another classical case:
 
-```java
-public class Creature {
-    private String name;
+```Java
+public class Forest {
+  private int numberOfTrees;
 
-    public Creature(String name) {
-        name = name; // This doesn't set the instance variable :( Why not?
-    }
+  public Forest(int numberOfTrees) {
+    numberOfTrees = numberOfTrees; // Can this be resolved?
+  }
 
-    public void announce() {
-        String name = "Unknown";
-        System.out.println(name + " approaches!"); // It's printing the wrong name :( 
-    }
+  public void announce(){
+    int numberOfTrees = 100; // Local scope takes over?
+    System.out.println("The forest hosts " + numberOfTrees + " trees.");
+  }
 }
 ```
 
-> **Hint:** Review how the `this` keyword is used in context of variable shadowing to access instance fields.
+> **Assistant's Note:** Reflect on the distinction between local and instance-level variables. How can `this` be employed to resolve shadowing?
 
-### 🐞 Bugs and errors?
-If you discover any errors or inconsistencies in the task, please create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description. Identified bugs will be acknowledged!
+### 🔎 Spot a Bug?
+If there's a mistake or anomaly in this exercise, please inform us by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Contributions shall be acknowledged in the acknowledgments section. Happy Coding! 🌳
