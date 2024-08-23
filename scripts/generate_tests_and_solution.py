@@ -31,16 +31,16 @@ def main(api_key, branch_name):
 
     # Combine task, template, and existing tests into a single prompt 
     prompt = (f"Given the following task, code template, and existing tests, generate a set of high-quality unit tests and a suggested solution. "
-              f"Ensure the tests are thorough, robust, and cover all edge cases, including invalid inputs, boundary conditions, and performance considerations. "
-              f"The tests should follow best practices, including descriptive naming conventions, setup and teardown methods if necessary, and detailed assertions to validate expected behavior. "
-              f"The solution should be complete and able to pass all the generated tests. Use meaningful variable names and comments to improve readability and maintainability.\n\n"
-              f"### Task\n{task}\n\n"
-              f"### Template\n{template}\n\n"
-              f"### Existing Tests\n\n"
-              f"```java\n{existing_tests}\n```\n\n"
-              "Format the response as follows:\n\n"
-              "### Tests\n<test_cases>\n\n"
-              "### Solution\n<solution_code>\n\n")
+            f"Ensure the tests are thorough, robust, and cover all edge cases, including invalid inputs, boundary conditions, and performance considerations. "
+            f"The tests should follow best practices, including descriptive naming conventions, setup and teardown methods if necessary, and detailed assertions to validate expected behavior. "
+            f"The solution should be complete and able to pass all the generated tests. Use meaningful variable names and comments to improve readability and maintainability.\n\n"
+            f"### Task\n{task}\n\n"
+            f"### Template\n{template}\n\n"
+            f"### Existing Tests\n\n"
+            f"{existing_tests}\n\n"  # Removed the ```java formatting
+            "Format the response as follows:\n\n"
+            "### Tests\n<test_cases>\n\n"
+            "### Solution\n<solution_code>\n\n")
 
     response_content = generate_with_retries(client, prompt, max_retries=3)
     if response_content is None:

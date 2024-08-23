@@ -83,15 +83,18 @@ def main(api_key, branch_name):
 
     # Combine task description and original template into a single prompt
     prompt = (f"Based on the following task description, generate a detailed Java code template. "
-              "The template should include all necessary placeholders and comments to guide the students in completing the task. "
-              "Ensure that the template aligns with the exercises and instructions provided in the task description. "
-              "Use the provided original code template as inspiration for the structure and formatting of the new code template.\n\n"
-              f"### Task Description\n\n"
-              f"{task_description}\n\n"
-              "### Original Code Template\n\n"
-              f"```java\n{original_template}\n```\n\n"
-              "Format the response as follows:\n\n"
-              "### Template\n<template_code>\n\n")
+            "The template should include all necessary placeholders and comments to guide the students in completing the task. "
+            "Ensure that the template aligns with the exercises and instructions provided in the task description. "
+            "Use the provided original code template as inspiration for the structure and formatting of the new code template.\n\n"
+            f"### Task Description\n\n"
+            f"{task_description}\n\n"
+            "### Original Code Template\n\n"
+            f"{original_template}\n\n"  # Removed the ```java formatting
+            "Format the response as follows:\n\n"
+            "### Template\n<template_code>\n\n")
+
+    response_content = generate_with_retries(client, prompt, max_retries=3)
+
 
     # Call OpenAI API to generate the template code
     response_content = generate_with_retries(client, prompt, max_retries=3)

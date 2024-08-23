@@ -25,23 +25,17 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'  # You can choose your JDK distribution
-          java-version: '11'     # Adjust to the JDK version you need
-
-      - name: Verify Branch and Test Files
-        run: |
-          echo "Checking out branch: ${{ github.head_ref }}"
-          git branch
-          ls -R .hidden_tasks
+          distribution: 'adopt'  
+          java-version: '11'     # Adjust JDK version
 
       - name: Compile the Code
         run: |
-          javac -d .hidden_tasks/ .hidden_tasks/*.java src/*.java
+          javac -d .hidden_tasks/ src/*.java
 
       - name: Run Tests
         id: run-tests
         run: |
-          java -cp .hidden_tasks/:path/to/junit-platform-console-standalone.jar org.junit.runner.JUnitCore .hidden_tasks.GameTest
+          java -cp .hidden_tasks/:path/to/junit-platform-console-standalone.jar org.junit.runner.JUnitCore .hidden_tasks.IndamonTest
 
       - name: Determine Test Result
         id: determine-result
@@ -60,13 +54,13 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}  # Ensure the same branch is checked out here
+          ref: ${{ github.head_ref }}  # Ensure its the right branch
 
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'  # You can choose your JDK distribution
-          java-version: '11'     # Adjust to the JDK version you need
+          distribution: 'adopt'  # Choose JDK distribution
+          java-version: '11'     # Adjust to JDK version
 
       - name: Set GITHUB_PR_NUMBER
         run: echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
