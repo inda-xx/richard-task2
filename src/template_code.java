@@ -1,64 +1,95 @@
 ### Template
 
 ```java
-// Starting with Rocket Class
-class Rocket {
-    // Declaring private instance fields/attributes
+public class Planet {
+    // declare fields
     private String name;
-    private float speed;
-    private int score;
-    private boolean crashed;
-    
-    // Add your constructor here
-    public Rocket(String name, float speed, int score, boolean crashed) {
-        // Initialize instance fields here
-    }
-    
-    // Declare your getter methods here
-    // Example: public String getName() { return name; }
-    
-    // Declare your setter methods here
-    // Example: public void setName(String name) { this.name = name; }
-    
-    // Add a method collideWith here to handle the rocket collisions
-    public void collideWith(Asteroid asteroid) {
-        // Implement your code here
-    }
-    
-    // Implement the printStats function here
-    public void printStats() {
-        // Implement your code here
-    }
-}
+    private double mass;
+    private double radius;
+    private boolean inhabited;
 
-// Now continue with the Asteroid Class
-class Asteroid {
-    // Declare private instance fields for Asteroid here
-    private String asteroidType;
-    private float speed;
-    
-    // Add your constructor here
-    public Asteroid(String asteroidType, float speed) {
-        // Initialize instance fields here
+    // create constructor
+    public Planet(String name, double mass, double radius, boolean inhabited) {
+        // initialize the fields with parameters
+        // your code goes here
     }
-    
-    // Declare your getter methods here
-    
-    // Declare your setter methods here
-}
 
-// Add the main method here
-public static void main(String[] args) {
-    // Create your Rocket and Asteroid objects here
-    // Let them interact
-    // Print the game results
-}
+    // create getters for each field
+    public String getName() {
+        // your code goes here
+    }
 
-// Create a separate Class for scope understanding
-class ScopeExample {
-    // Replicate the given examples of Variable shadowing here
-    // Fix and observe outcomes
+    public double getMass() {
+        // your code goes here
+    }
+
+    public double getRadius() {
+        // your code goes here
+    }
+
+    public boolean isInhabited() {
+        // your code goes here
+    }
+
+    // create setters for each field
+    public void setName(String name) {
+        // your code goes here
+    }
+
+    public void setMass(double mass) {
+        // your code goes here
+    }
+
+    public void setRadius(double radius) {
+        // your code goes here
+    }
+
+    public void setInhabited(boolean inhabited) {
+        // your code goes here
+    }
+
+    // method to print details of a planet
+    public void printPlanetDetails() {
+        // your code goes here
+    }
+
+    // method to calculate gravity of the planet
+    public double calculateGravity() {
+        // your code goes here
+    }
+
+    // method to exhibit variable shadowing
+    public void shadowedMethod() {
+        // your code goes here
+    }
+
+    // main method to test the Planet class
+    public static void main(String[] args) {
+        // create some Planet objects and test the methods
+        // your code goes here
+    }
 }
 ```
 
-Remember, replace the comments with actual Java code that reflects the requirements of each exercise. For instance, in the Rocket constructor, you would replace `// Initialize instance fields here` with specific code that assigns the inputted parameters to the class's fields, such as `this.name = name; this.speed = speed;`, etc. Also, be sure to fully implement the `collideWith` and `printStats` methods as per the task description.
+### Additional Exercises (Optional)
+
+Define additional methods. 
+
+```java
+public class Planet {
+    // ...
+
+    public double compareGravity(Planet p) {
+        // your code goes here
+    }
+
+    public boolean isHabitable() {
+        // your code goes here
+    }
+
+    // redefine printPlanetDetails() method for scope practice
+    public void printPlanetDetails() {
+        // your code goes here
+    }
+}
+```
