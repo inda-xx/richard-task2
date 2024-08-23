@@ -23,40 +23,38 @@ def main(api_key, branch_name):
             task = file.read()
         with open("src/template_code.java", "r") as file:
             template = file.read()
-        with open("src/IndamonTest.java", "r") as file:
-            existing_tests = file.read()
     except FileNotFoundError:
         print("Error: new_task.md or template_code.java file not found.")
         sys.exit(1)
 
-    # Combine task, template, and existing tests into a single prompt 
+    # Combine task and template into a single prompt for solution generation
     prompt = (
-        f"Given the following task, code template, and existing tests, generate a set of high-quality unit tests and a suggested solution. "
-        f"Ensure the tests are thorough, robust, and cover all edge cases, including invalid inputs, boundary conditions, and performance considerations. "
-        f"The tests should follow best practices, including descriptive naming conventions, setup and teardown methods if necessary, and detailed assertions to validate expected behavior. "
-        f"Ensure that the tests use the correct imports and that each class is placed in the correct file as per Java naming conventions. "
-        f"The solution should be complete and able to pass all the generated tests. Use meaningful variable names and comments to improve readability and maintainability.\n\n"
+        f"Given the following task and code template, generate a complete Java solution that meets all the requirements. "
+        f"The solution should be able to pass all potential unit tests that cover edge cases, invalid inputs, and boundary conditions. "
+        f"Use meaningful variable names and comments to improve readability and maintainability.\n\n"
         f"### Task\n{task}\n\n"
         f"### Template\n{template}\n\n"
-        f"### Existing Tests\n\n"
-        f"{existing_tests}\n\n"
         "IMPORTANT: The response must be plain Java code with no markdown formatting or ```java blocks. Ensure that the response is ready to be saved directly as a .java file."
     )
 
     response_content = generate_with_retries(client, prompt, max_retries=3)
     if response_content is None:
-        print("Error: Failed to generate tests and solution after multiple retries.")
+        print("Error: Failed to generate the solution after multiple retries.")
         sys.exit(1)
 
-    tests, solution = extract_tests_solution(response_content)
+    # Write the solution code to a Java file
+    solution_file_path = os.path.join("src", "new_task_solution.java")
+    with open(solution_file_path, "w") as file:
+        file.write(response_content)
 
-    commit_and_push_changes(branch_name, tests, solution)
+    # Commit and push changes
+    commit_and_push_changes(branch_name, solution_file_path)
 
 def generate_with_retries(client, prompt, max_retries=3):
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                model="gpt-4o-2024-08-06",
+                model="gpt-4",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": prompt}
@@ -64,40 +62,18 @@ def generate_with_retries(client, prompt, max_retries=3):
             )
             return response.choices[0].message.content.strip()
         except Exception as e:
-            print(f"Error generating tests and solution: {e}")
+            print(f"Error generating the solution: {e}")
             if attempt < max_retries - 1:
                 print("Retrying...")
     return None
 
-def extract_tests_solution(content):
-    tests_marker = "### Tests"
-    solution_marker = "### Solution"
-
-    tests_start = content.find(tests_marker)
-    solution_start = content.find(solution_marker)
-
-    tests = content[tests_start + len(tests_marker):solution_start].strip()
-    solution = content[solution_start + len(solution_marker):].strip()
-
-    return tests, solution
-
-def commit_and_push_changes(branch_name, tests_content, solution_content):
+def commit_and_push_changes(branch_name, solution_file_path):
     try:
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
-        
-        os.makedirs(".hidden_tasks", exist_ok=True)
 
-        tests_file_path = os.path.join(".hidden_tasks", "new_task_tests.java")
-        solution_file_path = os.path.join(".hidden_tasks", "new_task_solution.java")
-
-        with open(tests_file_path, "w") as file:
-            file.write(tests_content)
-        with open(solution_file_path, "w") as file:
-            file.write(solution_content)
-
-        subprocess.run(["git", "add", tests_file_path, solution_file_path], check=True)
-        subprocess.run(["git", "commit", "-m", "Add generated tests and solution"], check=True)
+        subprocess.run(["git", "add", solution_file_path], check=True)
+        subprocess.run(["git", "commit", "-m", "Add generated solution"], check=True)
         subprocess.run(
             ["git", "push", "--set-upstream", "origin", branch_name],
             check=True,
