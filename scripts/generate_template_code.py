@@ -10,12 +10,20 @@ def main(api_key, branch_name):
 
     client = OpenAI(api_key=api_key)
 
-    # Read the task description
+    # Read the new task description
     try:
         with open("tasks/new_task.md", "r") as file:
             task_description = file.read()
     except FileNotFoundError:
         print("Error: new_task.md file not found.")
+        sys.exit(1)
+
+    # Read the original task description
+    try:
+        with open("tasks/original_task.md", "r") as file:
+            original_task_description = file.read()
+    except FileNotFoundError:
+        print("Error: original_task.md file not found.")
         sys.exit(1)
 
     # Read the original code template
@@ -81,13 +89,24 @@ def main(api_key, branch_name):
     }
     """
 
-    # Combine task description and original template into a single prompt
-    prompt = (f"Based on the following task description, generate a detailed Java code template. "
+    # Required imports
+    required_imports = """
+    import org.junit.Before;
+    import org.junit.Test;
+    import static org.junit.Assert.*;
+    import java.util.Arrays;
+    import java.util.List;
+    """
+
+    # Combine task description, original task, and original template into a single prompt
+    prompt = (f"Based on the following new task description and the original task description, generate a detailed Java code template. "
             "The template should include all necessary placeholders and comments to guide the students in completing the task. "
-            "Ensure that the template aligns with the exercises and instructions provided in the task description. "
+            "Ensure that the template aligns with the exercises and instructions provided in both the new and original task descriptions. "
             "Use the provided original code template as inspiration for the structure and formatting of the new code template.\n\n"
-            f"### Task Description\n\n"
+            f"### New Task Description\n\n"
             f"{task_description}\n\n"
+            f"### Original Task Description\n\n"
+            f"{original_task_description}\n\n"
             "### Original Code Template\n\n"
             f"{original_template}\n\n"
             "IMPORTANT: The response must be plain Java code with no markdown formatting or ```java blocks. "
@@ -104,10 +123,13 @@ def main(api_key, branch_name):
     # Validate and correct the generated code
     response_content = validate_and_correct_java_code(response_content)
 
+    # Prepend the required imports to the generated code
+    final_code = required_imports.strip() + "\n\n" + response_content.strip()
+
     # Write the template code to a Java file
     template_file_path = os.path.join("src", "template_code.java")
     with open(template_file_path, "w") as file:
-        file.write(response_content)
+        file.write(final_code)
 
     # Commit and push changes
     commit_and_push_changes(branch_name, template_file_path)
