@@ -1,101 +1,95 @@
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class GameTest {
-    private Game game;
-    private Game encounterGame;
-
-    @Before
-    public void setup() {
-        game = new Game("Player1", 0, 0, "Enemy1", 5);
-        encounterGame = new Game("Player1", 10, 3, "Enemy1", 5);
-    }
-
-    @Test
-    public void testInitialPlayerSetup() {
-        assertEquals("Player1", game.getPlayerName());
-        assertEquals(0, game.getPlayerScore());
-        assertEquals(0, game.getPlayerPosition());
-    }
-
-    @Test
-    public void testInitialEnemySetup() {
-        assertEquals("Enemy1", game.getEnemyName());
-        assertEquals(5, game.getEnemyPosition());
-    }
-
-    @Test
-    public void testPlayerMovement() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-        assertEquals(3, game.getPlayerScore());
-
-        game.movePlayer(2);
-        assertEquals(5, game.getPlayerPosition());
-        assertEquals(5, game.getPlayerScore());
-    }
-
-    @Test
-    public void testEncounter() {
-        encounterGame.movePlayer(2);
-        assertEquals(5, encounterGame.getPlayerPosition());
-        assertEquals(12, encounterGame.getPlayerScore());
-    }
+class StarVoyagerTest {
     
-    @Test
-    public void testPlayerScoreAfterMove() {
-        game.movePlayer(4);
-        assertEquals(4, game.getPlayerScore());
-        assertEquals(4, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testPlayerPositionAfterMove() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testModifyPlayerName() {
-        game.setPlayerName("NewPlayer");
-        assertEquals("NewPlayer", game.getPlayerName());
+    private StarVoyager voyager1;
+    private StarVoyager voyager2;
+
+    @BeforeEach
+    void setUp() {
+        voyager1 = new StarVoyager("Nebula Nomad", 180, 3.0, true);
+        voyager2 = new StarVoyager("Celestial Drifter", 230, 7.5, false);
     }
 
     @Test
-    public void testModifyEnemyPosition() {
-        game.setEnemyPosition(10);
-        assertEquals(10, game.getEnemyPosition());
+    void testCreationOfStarVoyager() {
+        assertEquals("Nebula Nomad", voyager1.getName(), "Name should be Nebula Nomad");
+        assertEquals(180, voyager1.getAge(), "Age should be 180");
+        assertEquals(3.0, voyager1.getSpeed(), "Speed should be 3.0");
+        assertTrue(voyager1.isActive(), "Voyager should be active");
     }
 
     @Test
-    public void testModifyPlayerPosition() {
-        game.setPlayerPosition(8);
-        assertEquals(8, game.getPlayerPosition());
+    void testSetName() {
+        voyager1.setName("Galactic Wanderer");
+        assertEquals("Galactic Wanderer", voyager1.getName(), "Name should be Galactic Wanderer");
     }
 
     @Test
-    public void testNegativeMovement() {
-        game.movePlayer(-3);
-        assertEquals(-3, game.getPlayerPosition());
-        assertEquals(-3, game.getPlayerScore());
+    void testSetAge() {
+        voyager1.setAge(300);
+        assertEquals(300, voyager1.getAge(), "Age should be 300");
     }
-}
 
-class ShadowGameTest {
     @Test
-    public void testShadowingExample() {
-        ShadowGame shadowGame = new ShadowGame();
-        shadowGame.printShadow();
-        // No assertions, this test is for verifying shadowing behavior and console output
+    void testSetSpeed() {
+        voyager1.setSpeed(4.5);
+        assertEquals(4.5, voyager1.getSpeed(), "Speed should be 4.5");
     }
-}
 
-class CreatureTest {
     @Test
-    public void testCreatureAnnouncement() {
-        Creature creature = new Creature("Dragon");
-        creature.announce();
-        // No assertions, this test is for verifying creature announcement behavior and console output
+    void testSetActive() {
+        voyager1.setActive(false);
+        assertFalse(voyager1.isActive(), "Voyager should not be active");
+    }
+
+    @Test
+    void testInteraction() {
+        voyager1.interact(voyager2);
+        assertEquals(2.5, voyager1.getSpeed(), "Speed should be reduced by 0.5");
+    }
+
+    @Test
+    void testInteractionDoesNotResultInNegativeSpeed() {
+        voyager1.setSpeed(0.3);
+        voyager1.interact(voyager2);
+        assertEquals(0.0, voyager1.getSpeed(), "Speed should not be negative");
+    }
+
+    @Test
+    void testMaximumSpeedValueInteraction() {
+        voyager1.setSpeed(Double.MAX_VALUE);
+        voyager1.interact(voyager2);
+        assertEquals(Double.MAX_VALUE - 0.5, voyager1.getSpeed(), "Speed should be Double.MAX_VALUE - 0.5");
+    }
+
+    @Test
+    void testMinimumAgeBoundary() {
+        voyager1.setAge(0);
+        assertEquals(0, voyager1.getAge(), "Age should be 0");
+    }
+
+    @Test
+    void testMaximumAgeBoundary() {
+        voyager1.setAge(Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, voyager1.getAge(), "Age should be Integer.MAX_VALUE");
+    }
+
+    @Test
+    void testNegativeAgeInput() {
+        voyager1.setAge(-10);
+        assertEquals(-10, voyager1.getAge(), "Negative age should be set without constraint");
+    }
+
+    @Test
+    void testPerformanceUnderHighLoad() {
+        int count = 100000;
+        StarVoyager[] voyagers = new StarVoyager[count];
+        for (int i = 0; i < count; i++) {
+            voyagers[i] = new StarVoyager("Voyager " + i, i, i * 0.1, i % 2 == 0);
+        }
+        assertEquals(count, voyagers.length, "Correct number of StarVoyagers should be created");
     }
 }
