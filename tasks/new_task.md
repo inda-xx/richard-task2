@@ -1,137 +1,55 @@
-# Let's Play Java Game! 🕹️ 
+# Battle Blocks, Survive!
 
-This is your challenge for today, programmer! It's time to step into the magical world of **Java Programming** and test your skills. Are you ready?
+In this exercise, you are going to build a simple game application using core JAVA programming concepts. The purpose of this exercise is to acquaint you with Java classes, instance fields, constructor methods, getters and setters, and printing to the terminal.
 
-### 📅 Deadline
-Get this task completed before the due date, which is on **Tuesday 20th September**.
+### 🎯 Deadline
+This game application should be completed before the next class, on **Tuesday 20th September**.
 
-### 👨‍💼 Instructions
-Please review the [course instructions section](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments) to understand how to do and submit assignments. Make sure you adhere to every detail.
+### 👷‍♂️ Instructions
+For instructions on how to do and submit the assignment, please see the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 🎓 Preparation
-Before getting started with this assignment, here's what you need to do:
+### ⚒️ Preparation
+Before starting this task make sure to read and understand the following preparatory material:
+- Read and practice [Defining and Using Classes in Java](https://openbookproject.net/thinkcsjava/chap10.html)
+- Check out the basics of [Java Game Development](https://beginnersbook.com/2017/08/java-tutorial-game-development/)
 
-- Read [Using Objects](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=a2b40d76a4200020a49c27f0000168af)
-- Sign up and get registered for the course key `dd1337-ht22` at https://kth.oli.cmu.edu/, in case you haven't done it yet. 
-
-### 📌 Learning Goals
-The learning goals for this week's tasks are:
+### 🎯 Learning Goals
+The learning goals for this exercise include:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
-* Creating getters and setters
+* Creating *getters* and *setters*
 * Printing to the terminal
-* Utilising the `main` method
-* Scope (or variable shadowing)
+* Using the `main` method
+* Scope (or *variable shadowing*)
 
-### 🔧 Troubleshooting Guide
-If you find yourself stuck or facing any difficulties:
+### ☔ Troubleshooting Guide
+If you encounter any problems:
+1. Revisit the learning goals and make sure that you understand each concept.
+2. Ask a question by raising a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Start the title with "Task: Game App" followed by your specific question.
+3. Ask a TA for help during the next lab session. 
 
-1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). The solution to your problem might be there already.
-2. If not, feel free to post your issue [here](https://gits-15.sys.kth.se/inda-22/help/issues/new). Make sure title begins with "Task *x*: *summary of your problem*".
-3. You can always ask a teacher assistant in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule for the timings of the next lab.
+Remember, it's great to discuss this task with your peers, but do not share answers!
 
-Feel free to discuss with your fellow students, but remember to **respect the rules against plagiarism**!
+### 🎲 Assignment
 
-### 👾 Assignment
+The task presents a game called *Battle Blocks*. The game depends on a player's character, which can move on a grid. The objective is to survive as long as possible by avoiding enemies that randomly appear on the grid. The player can earn points by picking up collectible items that also randomly appear on the grid.
 
-The name of the game is **Java Gold Digger!**. You are composing the code of a fearless explorer digging for gold while dodging hidden traps. 
+#### Main Classes Configuration:
+1. Player (includes name, position x and y, score)
+2. Enemy (includes position x and y)
+3. Item (similar to enemy but increases the player's score when collected)
 
-#### Exercise 1.0 -- Character Class
+Each class must be assembled with corresponding getter and setter methods and an appropriate constructor. All instance fields should be private to ensure that they are accessed and modified correctly. 
 
-In the [`src`](src) folder, create a class named `Character.java`. This class will model the game character and should include these attributes:
+For printing to the terminal, you must include a method in the Player class (for example, `printPlayerStatus()`) that prints the current status of the player (name, position, and score).
 
-- `String` name
-- `int` xPos (representing the character's x-position in the game)
-- `int` yPos (y-position)
-- `int` gold (amount of gold collected)
-- `boolean` isAlive (if character is still alive)
+For the main method, use a class Game where you will create instances and manage interactions between the objects. Here, you will also control the player's movement based on the user input. You can start with basic text input for testing purposes and later upgrade to keyboard events if you prefer.
 
-A simple `main` method for `Character.java` should compile correctly if done right. This method is given below for your reference.
+#### Additional Requirements:
+- When an enemy touches (occupies the same block as) the player, the game should end.
+- The enemies and items should appear at random positions within the grid after a certain interval or event (such as after moving or collecting an item).
+- The game should maintain the player's high score after each round.
 
-<details>
-  <summary>🛠️ Example 1</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables to some values
-      digger.name = "digger";
-      digger.xPos = 0;
-      digger.yPos = 0;
-      digger.gold = 0;
-      digger.isAlive = true;
-      
-      // print the information of the assigned values
-      System.out.println("Character name: " + digger.name);
-      System.out.println("Character Position: (" + digger.xPos + ", " + digger.yPos + ")");
-      System.out.println("Gold collected: " + digger.gold);
-      System.out.println("Character alive? " + digger.isAlive);
-    } 
-  } 
-  ```
-</details>
-
-#### Exercise 1.1 -- Getters and Setters 
-
-Implement getters and setters for each field in your `Character` class. Your `Character` class should now have private fields and all the 10 *getters* and *setters* methods. 
-
-A copied version of Example 1 into your `Character.java` file should compile correctly, if you've done this right.
-
-<details>
-  <summary>🛠️ Example 2</summary>
-  
-  ```java
-  class Character {
-    // Put your fields here!
-  
-    // Put your getters and setters here!
-  
-    public static void main(String[] args) {
-      // create a new "Character" object
-      Character digger = new Character();
-      
-      // assign field variables using setters
-      digger.setName("digger");
-      digger.setxPos(0);
-      digger.setyPos(0);
-      digger.setGold(0);
-      digger.setAlive(true);
-      
-      // print the information of the assigned values using getters
-      System.out.println("Character name: " + digger.getName());
-      System.out.println("Character Position: (" + digger.getxPos() + ", " + digger.getyPos() + ")");
-      System.out.println("Gold collected: " + digger.getGold());
-      System.out.println("Character alive? " + digger.getIsAlive());
-    } 
-  } 
-  ```
-</details>
-#### Exercise 1.2
-
-Implement a constructor for your Character class. Overwrite your previous main method in accordance to this change.
-
-#### Exercise 1.3 -- `printStatus()`
-
-Add a method named `printStatus()`. This method should print all the information about the character to the console. 
-
-#### Exercise 1.4 -- `move()`
-
-Incorporate a `move()` method into your Character class. This method should receive a `char` as input ('N', 'S', 'E', 'W') and modify the character's position accordingly (North, South, East, or West). Implement bounds checking so the character cannot move outside the grid (which is 10x10 units for this exercise). 
-
-#### Exercise 1.5 -- `dig()`
- 
-Introduce a `dig()` method. This method receives an `int` value as an argument, which corresponds to the amount of gold to be added to the player’s gold stash.
-
-#### Exercise 1.6 -- Instance variable shadowing
-
-Create an example of instance variable shadowing. Discuss this subject during the next lab session. 
-
-### 🕷️ Bugs and Errors?
-
-If you stumble upon any bugs or errors in this exercise, create a new issue with the title "Task *x*: Error - *summary of the error here*". Your contributions will be appreciated and acknowledged.
+### Bugs or Errors?
+If you find any inconsistencies or errors in this text, raise a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task: Game App Error: summary of the error".
