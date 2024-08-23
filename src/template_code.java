@@ -4,97 +4,103 @@ import org.junit.Before;
     import java.util.Arrays;
     import java.util.List;
 
-import java.util.*;
+class JungleBeast {
+    // Fields
+    private String species;
+    private int energyLevel;
+    private int strength;
+    private int agility;
+    private boolean asleep;
 
-
-public class Game {
-    // fields
-    private String playerName;
-    private int playerScore;
-    private int playerPosition;
-    private String enemyName;
-    private int enemyPosition;
-
-    // constructor
-    public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-        this.playerName = playerName;
-        this.playerScore = playerScore;
-        this.playerPosition = playerPosition;
-        this.enemyName = enemyName;
-        this.enemyPosition = enemyPosition;
+    // Constructor
+    // Initialize your JungleBeast object here with parameters for each field
+    public JungleBeast(String species, int energyLevel, int strength, int agility) {
+        // Assign the parameters to the class fields
+        this.species = species;
+        this.energyLevel = energyLevel;
+        this.strength = strength;
+        this.agility = agility;
+        this.asleep = false; // Default value
     }
 
-    // getters and setters
-    public String getPlayerName() {
-        return playerName;
+    // Getters
+    // Add getters for each field
+    public String getSpecies() {
+        return species;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public int getEnergyLevel() {
+        return energyLevel;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    public int getAgility() {
+        return agility;
     }
 
-    public int getPlayerPosition() {
-        return playerPosition;
+    public boolean isAsleep() {
+        return asleep;
     }
 
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
+    // Setters
+    // Add setters for each field
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
-    public String getEnemyName() {
-        return enemyName;
+    public void setEnergyLevel(int energyLevel) {
+        this.energyLevel = energyLevel;
     }
 
-    public void setEnemyName(String enemyName) {
-        this.enemyName = enemyName;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
-    public int getEnemyPosition() {
-        return enemyPosition;
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
-    public void setEnemyPosition(int enemyPosition) {
-        this.enemyPosition = enemyPosition;
+    public void setAsleep(boolean asleep) {
+        this.asleep = asleep;
     }
 
-    // methods to be implemented by student
-
-    // method for player movement
-    public void movePlayer(int steps) {
-        // update player position
-        // update score based on movement
-        // print new player position
+    // Method to display information about the JungleBeast
+    // Print each field in a formatted manner
+    public void displayInfo() {
+        System.out.println("Species: " + species);
+        System.out.println("Energy Level: " + energyLevel);
+        System.out.println("Strength: " + strength);
+        System.out.println("Agility: " + agility);
+        System.out.println("Asleep: " + asleep);
     }
 
-    // method to update score
-    public void updateScore(int steps) {
-        // update player score
-        // print current score
+    // Method to simulate a tussle between two JungleBeasts
+    // Implement logic to determine the outcome based on strength and agility
+    public void tussle(JungleBeast opponent) {
+        // Example: Check strength or agility to determine the result and print outcome
+        System.out.println(this.species + " engages " + opponent.getSpecies() + " in a tussle!");
+        // Placeholder for actual tussle computation and effects
     }
 
-    // method for enemy interaction
-    public void checkEncounter() {
-        // check if player position is same as enemy position
-        // print encounter message if true
-    }
-
-    // main method
     public static void main(String[] args) {
-        Game game = new Game("Player1", 0, 0, "Enemy1", 5);
+        // Create JungleBeast objects using the constructor
+        JungleBeast leopard = new JungleBeast("Leopard", 100, 80, 90);
+        JungleBeast tiger = new JungleBeast("Tiger", 120, 85, 88);
+        JungleBeast elephant = new JungleBeast("Elephant", 150, 50, 30);
         
-        System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-        System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-        
-        // initialize player and enemy
-        // test movement of player
-        // test encounter function
+        // Use the displayInfo method to print JungleBeast details
+        elephant.displayInfo();
+
+        // Example of tussle
+        JungleBeast jaguar = new JungleBeast("Jaguar", 100, 70, 85);
+        JungleBeast lion = new JungleBeast("Lion", 110, 75, 80);
+
+        jaguar.tussle(lion);
+
+        // Example for variable shadowing discussion
+        // Other examples are additional learning materials, not part of code execution
     }
 }
