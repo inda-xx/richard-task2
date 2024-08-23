@@ -1,74 +1,72 @@
-
-class Rocket {
-
-    // Declare private instance fields/attributes
+```java
+public class Planet {
     private String name;
-    private float speed;
-    private int score;
-    private boolean crashed;
+    private double mass;
+    private double radius;
+    private boolean inhabited;
 
-    // Add your constructor here
-    public Rocket(String name, float speed, int score, boolean crashed) {
+    public Planet(String name, double mass, double radius, boolean inhabited) {
         this.name = name;
-        this.speed = speed;
-        this.score = score;
-        this.crashed = crashed;
+        this.mass = mass;
+        this.radius = radius;
+        this.inhabited = inhabited;
     }
 
-    public String getName() { return name; }
-    public float getSpeed() { return speed; }
-    public int getScore() { return score; }
-    public boolean isCrashed() { return crashed; }
-
-    public void setName(String name) { this.name = name; }
-    public void setSpeed(float speed) { this.speed = speed; }
-    public void setScore(int score) { this.score = score; }
-    public void setCrashed(boolean crashed) { this.crashed = crashed; }
-
-    public void collideWith(Asteroid asteroid) {
-        if(this.speed >= asteroid.getSpeed()){
-            this.score += 10;
-        }else {
-            this.crashed = true;
-            this.score = 0;
-        }
-    }
-    
-    public void printStats() {
-        System.out.println("Rocket Name: " + this.name);
-        System.out.println("Rocket Speed: " + this.speed);
-        System.out.println("Rocket Score: " + this.score);
-        System.out.println("Rocket Crashed Status: " + this.crashed);
-    }
-}
-
-class Asteroid {
-    private String asteroidType;
-    private float speed;
-
-    public Asteroid(String asteroidType, float speed) {
-        this.asteroidType = asteroidType;
-        this.speed = speed;
+    public String getName() {
+        return this.name;
     }
 
-    public String getAsteroidType() { return asteroidType; }
-    public float getSpeed() { return speed; }
+    public double getMass() {
+        return this.mass;
+    }
 
-    public void setAsteroidType(String asteroidType) { this.asteroidType = asteroidType; }
-    public void setSpeed(float speed) { this.speed = speed; }
-}
+    public double getRadius() {
+        return this.radius;
+    }
 
-public class AceTheSpace {
+    public boolean isInhabited() {
+        return this.inhabited;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public void setInhabited(boolean inhabited) {
+        this.inhabited = inhabited;
+    }
+
+    public void printPlanetDetails() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Mass: " + this.mass + " kg");
+        System.out.println("Radius: " + this.radius + " km");
+        System.out.println("Is Inhabited: " + this.inhabited);
+    }
+
+    public double calculateGravity() {
+        final double G = 6.674 * Math.pow(10, -11);
+        return (G * this.mass) / Math.pow(this.radius * 1000, 2); // Gravity calculated in m/s^2
+    }
+
+    public void shadowedMethod() {
+        String name = "Jupiter";
+        System.out.println("Instance Variable: " + this.name);
+        System.out.println("Local Variable: " + name);
+    }
 
     public static void main(String[] args) {
-        Rocket rocket = new Rocket("Rocket X", 100f, 0, false);
-        Asteroid asteroid = new Asteroid("Asteroid Y", 200f);
-
-        rocket.collideWith(asteroid);
-        rocket.printStats();
+        Planet earth = new Planet("Earth", 5.972 * Math.pow(10, 24), 6371, true);
+        earth.printPlanetDetails();
+        System.out.println("Gravity: " + earth.calculateGravity() + " m/s^2");
+        earth.shadowedMethod();
     }
 }
-
-class ScopeExample {
-    // Insert examples of variable shadowing here
-}
+```
