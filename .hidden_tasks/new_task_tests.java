@@ -2,100 +2,148 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GameTest {
-    private Game game;
-    private Game encounterGame;
+class Tree {
+    
+    private String species;
+    private double height;
+    private int age;
+    private boolean evergreen;
+    
+    public Tree(String species, double height, int age, boolean evergreen) {
+        this.species = species;
+        this.height = height;
+        this.age = age;
+        this.evergreen = evergreen;
+    }
+    
+    public String getSpecies() {
+        return species;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isEvergreen() {
+        return evergreen;
+    }
+    
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setEvergreen(boolean evergreen) {
+        this.evergreen = evergreen;
+    }
+    
+    public void describe() {
+        System.out.println("> TREE INFO");
+        System.out.println("> Species: " + getSpecies());
+        System.out.println("> Height: " + getHeight() + " meters");
+        System.out.println("> Age: " + getAge() + " years");
+        System.out.println("> Evergreen: " + isEvergreen());
+    }
+    
+    public void grow(double growthFactor) {
+        System.out.println("\n> Growing by " + growthFactor + " meters...");
+        this.height += growthFactor;
+        this.age += 1;
+    }
+
+    public static void main(String[] args) {
+        Tree oak = new Tree("Oak", 15.5, 80, false);
+        oak.describe();
+        oak.grow(0.5);
+        oak.describe();
+    }
+}
+
+public class TreeTest {
+    
+    private Tree tree;
 
     @Before
-    public void setup() {
-        game = new Game("Player1", 0, 0, "Enemy1", 5);
-        encounterGame = new Game("Player1", 10, 3, "Enemy1", 5);
+    public void setUp() {
+        tree = new Tree("Pine", 10.0, 12, true);
     }
 
     @Test
-    public void testInitialPlayerSetup() {
-        assertEquals("Player1", game.getPlayerName());
-        assertEquals(0, game.getPlayerScore());
-        assertEquals(0, game.getPlayerPosition());
+    public void testGetters() {
+        assertEquals("Pine", tree.getSpecies());
+        assertEquals(10.0, tree.getHeight(), 0.01);
+        assertEquals(12, tree.getAge());
+        assertTrue(tree.isEvergreen());
     }
 
     @Test
-    public void testInitialEnemySetup() {
-        assertEquals("Enemy1", game.getEnemyName());
-        assertEquals(5, game.getEnemyPosition());
+    public void testSetters() {
+        tree.setSpecies("Birch");
+        tree.setHeight(12.5);
+        tree.setAge(15);
+        tree.setEvergreen(false);
+
+        assertEquals("Birch", tree.getSpecies());
+        assertEquals(12.5, tree.getHeight(), 0.01);
+        assertEquals(15, tree.getAge());
+        assertFalse(tree.isEvergreen());
     }
 
     @Test
-    public void testPlayerMovement() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-        assertEquals(3, game.getPlayerScore());
+    public void testGrow_IncreasesHeightAndAge() {
+        double initialHeight = tree.getHeight();
+        int initialAge = tree.getAge();
 
-        game.movePlayer(2);
-        assertEquals(5, game.getPlayerPosition());
-        assertEquals(5, game.getPlayerScore());
-    }
+        tree.grow(1.5);
 
-    @Test
-    public void testEncounter() {
-        encounterGame.movePlayer(2);
-        assertEquals(5, encounterGame.getPlayerPosition());
-        assertEquals(12, encounterGame.getPlayerScore());
-    }
-    
-    @Test
-    public void testPlayerScoreAfterMove() {
-        game.movePlayer(4);
-        assertEquals(4, game.getPlayerScore());
-        assertEquals(4, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testPlayerPositionAfterMove() {
-        game.movePlayer(3);
-        assertEquals(3, game.getPlayerPosition());
-    }
-    
-    @Test
-    public void testModifyPlayerName() {
-        game.setPlayerName("NewPlayer");
-        assertEquals("NewPlayer", game.getPlayerName());
+        assertEquals(initialHeight + 1.5, tree.getHeight(), 0.01);
+        assertEquals(initialAge + 1, tree.getAge());
     }
 
     @Test
-    public void testModifyEnemyPosition() {
-        game.setEnemyPosition(10);
-        assertEquals(10, game.getEnemyPosition());
+    public void testGrow_NegativeGrowthDoesNotDecreaseHeightOrAge() {
+        double initialHeight = tree.getHeight();
+        int initialAge = tree.getAge();
+
+        tree.grow(-0.5);
+
+        assertEquals(initialHeight - 0.5, tree.getHeight(), 0.01);
+        assertEquals(initialAge + 1, tree.getAge());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_InvalidHeightThrowsException() {
+        new Tree("Spruce", -5.0, 10, true);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_InvalidAgeThrowsException() {
+        new Tree("Spruce", 5.0, -10, true);
     }
 
     @Test
-    public void testModifyPlayerPosition() {
-        game.setPlayerPosition(8);
-        assertEquals(8, game.getPlayerPosition());
+    public void testExtremelyTallTreeHeight() {
+        tree.setHeight(10000.0);
+        tree.grow(5.0);
+        assertEquals(10005.0, tree.getHeight(), 0.01);
     }
 
-    @Test
-    public void testNegativeMovement() {
-        game.movePlayer(-3);
-        assertEquals(-3, game.getPlayerPosition());
-        assertEquals(-3, game.getPlayerScore());
-    }
-}
-
-class ShadowGameTest {
-    @Test
-    public void testShadowingExample() {
-        ShadowGame shadowGame = new ShadowGame();
-        shadowGame.printShadow();
-        // No assertions, this test is for verifying shadowing behavior and console output
-    }
-}
-
-class CreatureTest {
-    @Test
-    public void testCreatureAnnouncement() {
-        Creature creature = new Creature("Dragon");
-        creature.announce();
-        // No assertions, this test is for verifying creature announcement behavior and console output
+    @Test(timeout = 1000)
+    public void testPerformanceForLargeNumberOfTrees() {
+        for (int i = 0; i < 1000000; i++) {
+            Tree tempTree = new Tree("Fir", 5.0, 50, false);
+            tempTree.grow(1.0);
+        }
     }
 }
