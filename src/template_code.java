@@ -1,64 +1,89 @@
 ### Template
 
 ```java
-// Starting with Rocket Class
-class Rocket {
-    // Declaring private instance fields/attributes
-    private String name;
-    private float speed;
-    private int score;
-    private boolean crashed;
-    
-    // Add your constructor here
-    public Rocket(String name, float speed, int score, boolean crashed) {
-        // Initialize instance fields here
-    }
-    
-    // Declare your getter methods here
-    // Example: public String getName() { return name; }
-    
-    // Declare your setter methods here
-    // Example: public void setName(String name) { this.name = name; }
-    
-    // Add a method collideWith here to handle the rocket collisions
-    public void collideWith(Asteroid asteroid) {
-        // Implement your code here
-    }
-    
-    // Implement the printStats function here
-    public void printStats() {
-        // Implement your code here
-    }
-}
+// Exercise 3.1 -- Book Class
+class Book {
+    private String title;
+    private String author;
+    private int yearPublished;
+    private boolean isBorrowed;
 
-// Now continue with the Asteroid Class
-class Asteroid {
-    // Declare private instance fields for Asteroid here
-    private String asteroidType;
-    private float speed;
-    
-    // Add your constructor here
-    public Asteroid(String asteroidType, float speed) {
-        // Initialize instance fields here
+    // Create a constructor method
+    public Book(String title, String author, int yearPublished, boolean isBorrowed) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isBorrowed = isBorrowed;
     }
-    
-    // Declare your getter methods here
-    
-    // Declare your setter methods here
-}
 
-// Add the main method here
-public static void main(String[] args) {
-    // Create your Rocket and Asteroid objects here
-    // Let them interact
-    // Print the game results
-}
+    // getters
+    public String getTitle() { /* Code here to return title */ }
+    public String getAuthor() { /* Code here to return author */ }
+    public int getYearPublished() { /* Code here to return yearPublished */ }
+    public boolean isBorrowed() { /* Code here to return isBorrowed */ }
 
-// Create a separate Class for scope understanding
-class ScopeExample {
-    // Replicate the given examples of Variable shadowing here
-    // Fix and observe outcomes
+    // setters
+    public void setTitle(String title) { /* Code here to set title */ }
+    public void setAuthor(String author) { /* Code here to set author */ }
+    public void setYearPublished(int yearPublished) { /* Code here to set yearPublished */ }
+    public void setBorrowed(boolean isBorrowed) { /* Code here to set isBorrowed */ }
+
+    // bookInfo method
+    public void bookInfo() { /* Code here to print book info */ }
+
+    public static void main(String[] args) {
+        /* Code here to create a new Book object and call its methods */
+    }
 }
 ```
 
-Remember, replace the comments with actual Java code that reflects the requirements of each exercise. For instance, in the Rocket constructor, you would replace `// Initialize instance fields here` with specific code that assigns the inputted parameters to the class's fields, such as `this.name = name; this.speed = speed;`, etc. Also, be sure to fully implement the `collideWith` and `printStats` methods as per the task description.
+```java
+// Exercise 3.2 -- Library Class
+class Library {
+    private Book[] books;
+    private int bookCount;
+
+    // Create a constructor method
+    public Library(int size) {
+       this.books = new Book[size];
+       this.bookCount = 0;
+    }
+
+    // getters
+    public Book[] getBooks() { /* Code here to return books */ }
+    public int getBookCount() { /* Code here to return bookCount */ }
+
+    // setters
+    public void setBooks(Book[] books) { /* Code here to set books */ }
+    public void setBookCount(int bookCount) { /* Code here to set bookCount */ }
+
+    // Method to add a book to the library
+    public void addBook(Book book) { /* Code here to add book to library */ }
+
+    // Method to borrow a book from the library
+    public Book borrowBook(String title) { /* Code here to borrow book from library */ }
+
+    // Method to return a book to the library
+    public void returnBook(Book book) { /* Code here to return book to library */ }
+
+    public static void main(String[] args) {
+        /* Code here to create a new Library object and call its methods */
+    }
+}
+```
+
+```java
+// Exercise 3.3 -- Scope or Variable Shadowing
+class Library {
+    // ...
+    // Add your experiment method here. It should contain a local variable with the same name
+    // as one of the fields and demonstrate how Java decides between them.
+    public void demonstrateVariableShadowing() {
+        int bookCount = 0; // This variable shadows the field 'bookCount'
+        /*
+        * Add your explanation here. Describe what happens when you try to 
+        * access 'bookCount' in this method and why.
+        */
+    }
+}
+```
