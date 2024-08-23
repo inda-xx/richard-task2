@@ -1,74 +1,91 @@
+```java
+// Exercise 3.1 -- Book Class
+class Book {
+    private String title;
+    private String author;
+    private int yearPublished;
+    private boolean isBorrowed;
 
-class Rocket {
-
-    // Declare private instance fields/attributes
-    private String name;
-    private float speed;
-    private int score;
-    private boolean crashed;
-
-    // Add your constructor here
-    public Rocket(String name, float speed, int score, boolean crashed) {
-        this.name = name;
-        this.speed = speed;
-        this.score = score;
-        this.crashed = crashed;
+    // Create a constructor method
+    public Book(String title, String author, int yearPublished, boolean isBorrowed) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isBorrowed = isBorrowed;
     }
 
-    public String getName() { return name; }
-    public float getSpeed() { return speed; }
-    public int getScore() { return score; }
-    public boolean isCrashed() { return crashed; }
+    // getters
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public int getYearPublished() { return yearPublished; }
+    public boolean isBorrowed() { return isBorrowed; }
 
-    public void setName(String name) { this.name = name; }
-    public void setSpeed(float speed) { this.speed = speed; }
-    public void setScore(int score) { this.score = score; }
-    public void setCrashed(boolean crashed) { this.crashed = crashed; }
+    // setters
+    public void setTitle(String title) { this.title = title; }
+    public void setAuthor(String author) { this.author = author; }
+    public void setYearPublished(int yearPublished) { this.yearPublished = yearPublished; }
+    public void setBorrowed(boolean isBorrowed) { this.isBorrowed = isBorrowed; }
 
-    public void collideWith(Asteroid asteroid) {
-        if(this.speed >= asteroid.getSpeed()){
-            this.score += 10;
-        }else {
-            this.crashed = true;
-            this.score = 0;
+    // bookInfo method
+    public void bookInfo() { 
+      System.out.println("Title: " + this.getTitle());
+      System.out.println("Author: " + this.getAuthor());
+      System.out.println("Year Published: " + this.getYearPublished());
+      System.out.println("Is the book available: " + !this.isBorrowed());
+    }
+}
+
+// Exercise 3.2 -- Library Class
+class Library {
+    private Book[] books;
+    private int bookCount;
+
+    // Create a constructor method
+    public Library(int size) {
+       this.books = new Book[size];
+       this.bookCount = 0;
+    }
+
+    // getters
+    public Book[] getBooks() { return books; }
+    public int getBookCount() { return bookCount; }
+
+    // Method to add a book to the library
+    public void addBook(Book book) { 
+      if (bookCount < books.length) {
+        books[bookCount++] = book;
+      }
+    }
+
+    // Method to borrow a book from the library
+    public void borrowBook(String title) {
+      for (Book book : books) {
+        if (book != null && book.getTitle().equals(title)) {
+          book.setBorrowed(true);
+          return;
         }
-    }
-    
-    public void printStats() {
-        System.out.println("Rocket Name: " + this.name);
-        System.out.println("Rocket Speed: " + this.speed);
-        System.out.println("Rocket Score: " + this.score);
-        System.out.println("Rocket Crashed Status: " + this.crashed);
-    }
-}
-
-class Asteroid {
-    private String asteroidType;
-    private float speed;
-
-    public Asteroid(String asteroidType, float speed) {
-        this.asteroidType = asteroidType;
-        this.speed = speed;
+      }
     }
 
-    public String getAsteroidType() { return asteroidType; }
-    public float getSpeed() { return speed; }
-
-    public void setAsteroidType(String asteroidType) { this.asteroidType = asteroidType; }
-    public void setSpeed(float speed) { this.speed = speed; }
-}
-
-public class AceTheSpace {
-
-    public static void main(String[] args) {
-        Rocket rocket = new Rocket("Rocket X", 100f, 0, false);
-        Asteroid asteroid = new Asteroid("Asteroid Y", 200f);
-
-        rocket.collideWith(asteroid);
-        rocket.printStats();
+    // Method to return a book to the library
+    public void returnBook(Book book) {
+      if (book != null) {
+        book.setBorrowed(false);
+      }
     }
 }
 
-class ScopeExample {
-    // Insert examples of variable shadowing here
+// Exercise 3.3 -- Scope or Variable Shadowing
+class Library {
+    // ...
+    // Add your experiment method here. It should contain a local variable with the same name
+    // as one of the fields and demonstrate how Java decides between them.
+    public void demonstrateVariableShadowing() {
+        int bookCount = 5; // This variable shadows the field 'bookCount'
+        // Here, the `bookCount` variable that was declared inside the method will be 
+        // printed because it shadows the instance variable `bookCount`.
+        System.out.println("Local 'bookCount': " + bookCount);
+        System.out.println("Instance 'bookCount': " + this.bookCount); // Use `this` to access the instance variable
+    }
 }
+```
