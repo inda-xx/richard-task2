@@ -1,273 +1,211 @@
-# 👾 Java Game Task: Simple Game Application
+# 🦁 Jungle Adventure!
 
-Welcome to your Java game development assignment! In this task, you will create a simple text-based game application that incorporates player movement, scoring, and enemy interactions.
+In this exercise, you will embark on a programming journey to explore the depths of object-oriented programming by modeling wild animals in the jungle using Java. You will gain hands-on experience in constructing Java classes, defining instance variables, and implementing essential class functionalities. 
 
-### 💀 Deadline
-This assignment is due by **Friday, 18th November**. Make sure to submit your solution before the deadline.
+### 📅 Deadline
+Please complete this assignment by **Friday, April 12th**.
 
-### 👩‍🏫 Instructions
-For submission instructions, please refer to the [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
+### 📚 Instructions
+Follow the submission guidelines outlined in the [course's assignment instructions](https://gits-15.sys.kth.se/inda-23/course-instructions#assignments).
+ 
+### 📖 Preparation
+Before you start, ensure you have grasped the fundamental concepts by reviewing the relevant material:
 
-### 📝 Preparation
-To prepare for this task, review the following materials:
+- Read [Classes and Objects in Java](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
+- Access additional resources using the course key `dd1337-ht23` at [KTH OLI](https://kth.oli.cmu.edu/).
 
-- Study [Java Class Design](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
-- Read about [Encapsulation in Java](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
+> **Note:** The resources could be updated annually, so it's recommended to check for revisions and additional readings.
 
-### ✅ Learning Goals
+### 🎯 Learning Goals
 
-Upon completing this assignment, you should be able to:
+By the end of this task, you will achieve the following skills:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating *getters* and *setters*
+* Printing to the terminal
+* Utilizing the `main` method
+* Understanding Scope and *Variable Shadowing*
 
-- Design Java classes
-- Add instance fields
-- Add a constructor method
-- Create *getters* and *setters*
-- Print to the terminal
-- Use the `main` method
-- Understand **Scope** (or variable shadowing)
+### 🛠 Troubleshooting Guide
+If you run into issues, take the following steps:
 
-### 🚨 Troubleshooting Guide
-If you encounter issues during the task, follow these steps:
+1. Review the [current issues](https://gits-15.sys.kth.se/inda-23/help/issues) to see if others have encountered similar problems.
+2. If your issue is unique, submit a [New Issue](https://gits-15.sys.kth.se/inda-23/help/issues/new). Title it as "Task *x*: *brief problem description*".
+3. Reach out to a Teaching Assistant during the scheduled [weekly lab](https://queue.csc.kth.se/Queue/INDA).
 
-1. Check the [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues) to see if others have experienced your problem.
-2. If your problem is not listed, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description.
-3. Talk to a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Refer to your schedule for lab timings.
+We encourage collaborative discussions, but remember not to share direct answers!
 
-Discussing concepts with peers is encouraged, but **do not share code solutions**!
+### 🌿 Assignment
 
-### 🏛️ Assignment
+Deep within the jungles of Java, lies the mythical **JungleBeast**! Your goal is to create a digital model of these majestic creatures. Below is a sample illustration to inspire your design:
 
-In this assignment, you will create a simple Java game! Your game will have a player, a scoring system, and interactions with enemies. Ready to start coding your adventure?
+<img src="images/junglebeasts.png" width="800">
 
-#### 🌟 Exercise 1.0 -- Game Classes
+#### Exercise 1.0 -- Fields
+Create a new file, `JungleBeast.java`, in the `src` directory. Begin by defining the primary attributes (fields) of a JungleBeast:
 
-Create a new Java class called `Game.java` inside the `src` directory. In this class, you'll begin by modeling the game's basic components. Start by defining these fields:
+- `String` species
+- `int` energyLevel
+- `int` strength
+- `int` agility
+- `boolean` asleep
 
-- `String` playerName
-- `int` playerScore
-- `int` playerPosition
-- `int` enemyPosition
-- `String` enemyName
-
-Create a main method within the `Game` class to instantiate a new player and an enemy, initializing default values for all fields.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      // Define fields here!
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.playerName = "Player1";
-          game.playerScore = 0;
-          game.playerPosition = 0;
-          game.enemyName = "Enemy1";
-          game.enemyPosition = 5;
-      
-          System.out.println("Player: " + game.playerName + " is at position " + game.playerPosition);
-          System.out.println("Enemy: " + game.enemyName + " is at position " + game.enemyPosition);
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.1 -- Implement Getters and Setters
-
-Encapsulate the fields by making them `private`. Implement their respective *getters* and *setters* to allow controlled access to their values.
+With these fields, your initial setup should allow the sample main method in Example 1 to execute successfully.
 
 <details>
-  <summary> 🛠 Example Code </summary>
+  <summary> 🛠 Example 1 </summary>
 
   ```java
-  public class Game {
-      private String playerName;
-      private int playerScore;
-      private int playerPosition;
-      private String enemyName;
-      private int enemyPosition;
-      
-      // Getters and Setters
-      public String getPlayerName() { return playerName; }
-      public void setPlayerName(String playerName) { this.playerName = playerName; }
-      
-      public int getPlayerScore() { return playerScore; }
-      public void setPlayerScore(int playerScore) { this.playerScore = playerScore; }
-      
-      public int getPlayerPosition() { return playerPosition; }
-      public void setPlayerPosition(int playerPosition) { this.playerPosition = playerPosition; }
-      
-      public String getEnemyName() { return enemyName; }
-      public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
-      
-      public int getEnemyPosition() { return enemyPosition; }
-      public void setEnemyPosition(int enemyPosition) { this.enemyPosition = enemyPosition; }
-      
-      public static void main(String[] args) {
-          Game game = new Game();
-          game.setPlayerName("Player1");
-          game.setPlayerScore(0);
-          game.setPlayerPosition(0);
-          game.setEnemyName("Enemy1");
-          game.setEnemyPosition(5);
-      
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
+  class JungleBeast {
 
-#### 🌟 Exercise 1.2 -- Constructor Method
-
-Define a constructor for the `Game` class to initialize objects more efficiently. Use parameters to set initial values.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-          this.playerName = playerName;
-          this.playerScore = playerScore;
-          this.playerPosition = playerPosition;
-          this.enemyName = enemyName;
-          this.enemyPosition = enemyPosition;
-      }
-      
-      // Other existing methods...
-
-      public static void main(String[] args) {
-          Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-          
-          System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-          System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-      }
-  }
-  ```
-</details>
-
-#### 🌟 Exercise 1.3 -- Player Movement
-
-Implement a method to allow the player to "move" by changing their position. Print the new position each time the player moves.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // Implement main method...
-  }
-  ```
-
-  Modify your `main` method to test `movePlayer()`.
-</details>
-
-#### 🌟 Exercise 1.4 -- Scoring System
-
-Implement a method that adds points to the player's score every time they move. Add 1 point per step moved.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void updateScore(int steps) {
-          playerScore += steps;
-          System.out.println(playerName + " has a score of " + playerScore);
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-      }
-      
-      // main method...
-  }
-  ```
-
-  Update your `main` method to observe changes in the player's score.
-</details>
-
-#### 🌟 Exercise 1.5 -- Enemy Interaction
-
-Develop a method that detects when the player encounters the enemy, printing a fight message.
-
-<details>
-  <summary> 🛠 Example Code </summary>
-
-  ```java
-  public class Game {
-      
-      public void checkEncounter() {
-          if (playerPosition == enemyPosition) {
-              System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
-          }
-      }
-      
-      public void movePlayer(int steps) {
-          playerPosition += steps;
-          updateScore(steps);
-          System.out.println(playerName + " moved to position " + playerPosition);
-          checkEncounter();
-      }
-      
-      // main method...
-  }
-  ```
-
-  Ensure your `main` method tests player movement to the enemy's position.
-</details>
-
-#### 🌟 Exercise 1.6 -- Variable Shadowing
-
-Understand variable shadowing by exploring the examples below. What changes would you make to correctly refer to instance variables?
-
-Example 1:
-
-```java
-public class ShadowGame {
-    private int position = 0; // We want this position printed
-
-    public void printShadow() {
-        int position = 5;
-        System.out.println(position); // It's printing the wrong position :( What's happening?
-    }
+    // Declare your fields here!
 
     public static void main(String[] args) {
-        new ShadowGame().printShadow();
+      // Initialize a JungleBeast object
+      JungleBeast leopard = new JungleBeast();
+
+      // Assign properties directly
+      leopard.species = "Leopard";
+      leopard.energyLevel = 100;
+      leopard.strength = 80;
+      leopard.agility = 90;
+
+      // Display the JungleBeast's properties
+      System.out.println("Species: " + leopard.species);
+      System.out.println("Energy Level: " + leopard.energyLevel);
+      System.out.println("Strength: " + leopard.strength);
+      System.out.println("Agility: " + leopard.agility);
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.1 -- Getters and Setters
+Encapsulation is a core tenet of object-oriented programming. Ensure your fields are securely encapsulated by setting their access modifiers to `private`. Implement getters and setters for each field to manage access and modification. Successfully implement these methods so the Example 2 code executes without errors.
+
+<details>
+  <summary> 🛠 Example 2 </summary>
+
+  ```java
+  class JungleBeast {
+
+    // Declare your fields here!
+
+    // Implement your getters and setters here!
+
+    public static void main(String[] args) {
+      JungleBeast tiger = new JungleBeast();
+
+      // Use setters to assign values
+      tiger.setSpecies("Tiger");
+      tiger.setEnergyLevel(120);
+      tiger.setStrength(85);
+      tiger.setAgility(88);
+
+      // Retrieve and print properties using getters
+      System.out.println("Species: " + tiger.getSpecies());
+      System.out.println("Energy Level: " + tiger.getEnergyLevel());
+      System.out.println("Strength: " + tiger.getStrength());
+      System.out.println("Agility: " + tiger.getAgility());
+      System.out.println("Is asleep: " + tiger.isAsleep());
+    }
+  }
+  ```
+</details>
+
+> **Note:** For boolean fields, the `isAsleep()` naming convention is used instead of `getAsleep()`.
+
+#### Exercise 1.2 -- Constructor
+Streamline your object creation process by developing a constructor based on the best practices found in [Java Constructors](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html). Make sure the Example 3 method integrates your constructor efficiently.
+
+#### Exercise 1.3 -- displayInfo()
+Create a method called `displayInfo()` that summarizes the JungleBeast's data in a formatted print statement. Implement functionality such that the following example works:
+
+<details>
+  <summary> 🛠 Example 3 </summary>
+
+  ```java
+  public static void main(String[] args){
+    JungleBeast elephant = new JungleBeast("Elephant", 150, 50, 30);
+
+    elephant.displayInfo();
+  }
+  ```
+
+  Expected Output:
+
+  ```
+  > Species: Elephant
+  > Energy Level: 150
+  > Strength: 50
+  > Agility: 30
+  > Asleep: false
+  ```
+</details>
+
+#### Exercise 1.4 -- Jungle Tussle!
+Incorporate a method called `tussle` that simulates a challenge between two JungleBeasts. Determine the tussle outcome based on strength and agility, printing status updates to the console. Implement Example 4 to illustrate this dynamic.
+
+<details>
+  <summary> 🛠 Example 4 </summary>
+
+  ```java
+  public static void main(String[] args){
+    JungleBeast jaguar = new JungleBeast("Jaguar", 100, 70, 85);
+    JungleBeast lion = new JungleBeast("Lion", 110, 75, 80);
+
+    jaguar.tussle(lion);
+  }
+  ```
+
+  Example Output:
+
+  ```
+  > Jaguar engages Lion in a tussle and deals damage!
+  > Lion sustains 5 points of damage and now has a decreased energy level of 105!
+  ```
+</details>
+
+#### Exercise 1.5 -- Variable Shadowing
+Review the examples below to grasp how *variable shadowing* can cause conflicts. Be prepared to identify and explain solutions during the class discussion.
+
+```Java
+public class ShadowExample {
+    private int depth = 0; // Attempting to print this variable
+
+    public void revealDepth() {
+        int depth = 20;
+        System.out.println(depth); // Why does it print the wrong value?
+    }
+
+    public static void main(String[] args){
+        new ShadowExample().revealDepth();
     }
 }
 ```
 
-Example 2:
+Additional example:
 
-```java
-public class Creature {
-    private String name;
+```Java
+public class Tiger {
+  private String stripPattern = "Vertical";
+  private String sound;
 
-    public Creature(String name) {
-        name = name; // This doesn't set the instance variable :( Why not?
-    }
+  public Tiger(String stripPattern, String sound) {
+    stripPattern = stripPattern; // Potential issue here?
+    sound = sound;
+  }
 
-    public void announce() {
-        String name = "Unknown";
-        System.out.println(name + " approaches!"); // It's printing the wrong name :( 
-    }
+  public void roar(){
+    String sound = "Loud Roar";
+    System.out.println("Tiger sound: " + sound); // Why could this be incorrect?  
+  }
+
 }
 ```
 
-> **Hint:** Review how the `this` keyword is used in context of variable shadowing to access instance fields.
+> **Tip:** Familiarize yourself with [variable scope](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html).
 
-### 🐞 Bugs and errors?
-If you discover any errors or inconsistencies in the task, please create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a detailed description. Identified bugs will be acknowledged!
+### 🐛 Bug Reports
+If you identify any discrepancies or errors in this exercise, please report them by creating a [New Issue](https://gits-15.sys.kth.se/inda-23/help/issues/new) with the subject "Task *x* Bug: *brief error description*". Detecting bugs will earn you accolades in the acknowledgments!
