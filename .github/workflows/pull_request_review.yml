@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          java -cp .hidden_tasks:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore .hidden_tasks
+          java -cp .hidden_tasks:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore .hidden_tasks.new_task_tests
 
       - name: Determine Test Result
         id: determine-result
