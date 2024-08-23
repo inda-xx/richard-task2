@@ -13,29 +13,30 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
 
-    outputs:
-      tests_passed: ${{ steps.determine-result.outputs.tests_passed }}
-
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}  # Ensure the branch with the new task is checked out
+          ref: ${{ github.head_ref }}
 
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'  
-          java-version: '11'     # Adjust JDK version
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Download JUnit
+        run: |
+          wget -O junit-4.13.2.jar https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
+          wget -O hamcrest-core-1.3.jar https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
 
       - name: Compile the Code
         run: |
-          javac -d .hidden_tasks/ src/*.java
+          javac -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar -d .hidden_tasks/ src/*.java
 
       - name: Run Tests
-        id: run-tests
         run: |
-          java -cp .hidden_tasks/:path/to/junit-platform-console-standalone.jar org.junit.runner.JUnitCore .hidden_tasks.IndamonTest
+          java -cp .hidden_tasks:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore .hidden_tasks.IndamonTest
 
       - name: Determine Test Result
         id: determine-result
