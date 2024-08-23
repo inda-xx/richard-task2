@@ -1,125 +1,147 @@
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.Arrays;
-import java.util.List;
 
-import java.util.*;
+public class Cookie {
+    
+    // Fields: Declare the private fields for the class
+    private String flavor;
+    private int size; // in cm
+    private boolean hasChips;
+    private int calories;
 
-public class Game {
-    // fields
-    private String playerName;
-    private int playerScore;
-    private int playerPosition;
-    private String enemyName;
-    private int enemyPosition;
-
-    // constructor
-    public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-        this.playerName = playerName;
-        this.playerScore = playerScore;
-        this.playerPosition = playerPosition;
-        this.enemyName = enemyName;
-        this.enemyPosition = enemyPosition;
+    // Constructor: Initialize the object's attributes
+    public Cookie(String flavor, int size, boolean hasChips, int calories) {
+        // Use the 'this' keyword to resolve variable shadowing
+        this.flavor = flavor;
+        this.size = size;
+        this.hasChips = hasChips;
+        this.calories = calories;
     }
 
-    // getters and setters
-    public String getPlayerName() {
-        return playerName;
+    // Default constructor for flexibility and testing
+    public Cookie() {
+        // Initialize default cookie attributes
+        this.flavor = "Plain";
+        this.size = 0; 
+        this.hasChips = false;
+        this.calories = 0;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    // Getters: Add getter methods to access private fields
+    public String getFlavor() {
+        return flavor;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public int getSize() {
+        return size;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    public boolean isHasChips() {
+        return hasChips;
     }
 
-    public int getPlayerPosition() {
-        return playerPosition;
+    public int getCalories() {
+        return calories;
     }
 
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
+    // Setters: Add setter methods to modify private fields
+    public void setFlavor(String flavor) {
+        this.flavor = flavor;
     }
 
-    public String getEnemyName() {
-        return enemyName;
+    public void setSize(int size) {
+        this.size = size;
     }
 
-    public void setEnemyName(String enemyName) {
-        this.enemyName = enemyName;
+    public void setHasChips(boolean hasChips) {
+        this.hasChips = hasChips;
     }
 
-    public int getEnemyPosition() {
-        return enemyPosition;
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
-    public void setEnemyPosition(int enemyPosition) {
-        this.enemyPosition = enemyPosition;
+    // printInfo method: Prints the cookie's information to the console
+    public void printInfo() {
+        System.out.println("Cookie Info:");
+        System.out.println("Flavor: " + getFlavor());
+        System.out.println("Size: " + getSize() + " cm");
+        System.out.println("Has Chips: " + isHasChips());
+        System.out.println("Calories: " + getCalories());
     }
 
-    // method for player movement
-    public void movePlayer(int steps) {
-        playerPosition += steps;
-        updateScore(steps);
-        System.out.println(playerName + " moved to position " + playerPosition);
-        checkEncounter();
-    }
-
-    // method to update score
-    public void updateScore(int steps) {
-        playerScore += steps;
-        System.out.println(playerName + " has a score of " + playerScore);
-    }
-
-    // method for enemy interaction
-    public void checkEncounter() {
-        if (playerPosition == enemyPosition) {
-            System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
-        }
-    }
-
-    // main method
+    // Main method: Create instances and demonstrate the functionality
     public static void main(String[] args) {
-        Game game = new Game("Player1", 0, 0, "Enemy1", 5);
+        // Create a Cookie object using the constructor
+        Cookie chocolateChipCookie = new Cookie("Chocolate", 10, true, 250);
 
-        System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-        System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
+        // Print the cookie's information using printInfo method
+        chocolateChipCookie.printInfo();
+        
+        // Create another Cookie object using the default constructor and setters
+        Cookie oatmealRaisin = new Cookie();
+        oatmealRaisin.setFlavor("Oatmeal Raisin");
+        oatmealRaisin.setSize(12);
+        oatmealRaisin.setHasChips(false);
+        oatmealRaisin.setCalories(180);
+        oatmealRaisin.printInfo();
 
-        // Test moving the player
-        game.movePlayer(3);
-        game.movePlayer(2); // This move should initiate an encounter with the enemy
+        // Demonstrate the use of getters to retrieve field values
+        System.out.println("Getting flavor: " + chocolateChipCookie.getFlavor());
+
+        // Demonstrate the use of setters to modify field values
+        chocolateChipCookie.setCalories(300);
+        System.out.println("Updated Calories: " + chocolateChipCookie.getCalories());
     }
 }
 
-// Shadowing Example
-class ShadowGame {
-    private int position = 0; // We want this position printed
+class CookieTest {
+    private Cookie testCookie;
 
-    public void printShadow() {
-        System.out.println(this.position); // Using this.position to print the instance variable
+    @Before
+    public void setUp() {
+        testCookie = new Cookie("Vanilla", 8, false, 150);
     }
 
-    public static void main(String[] args) {
-        new ShadowGame().printShadow();
-    }
-}
-
-// Shadowing Example
-class Creature {
-    private String name;
-
-    public Creature(String name) {
-        this.name = name; // Using this.name to refer to the instance variable
+    @Test
+    public void testDefaultConstructorValues() {
+        Cookie defaultCookie = new Cookie();
+        assertEquals("Plain", defaultCookie.getFlavor());
+        assertEquals(0, defaultCookie.getSize());
+        assertFalse(defaultCookie.isHasChips());
+        assertEquals(0, defaultCookie.getCalories());
     }
 
-    public void announce() {
-        System.out.println(this.name + " approaches!"); // Using this.name to access the instance variable
+    @Test
+    public void testConstructorInitialization() {
+        assertEquals("Vanilla", testCookie.getFlavor());
+        assertEquals(8, testCookie.getSize());
+        assertFalse(testCookie.isHasChips());
+        assertEquals(150, testCookie.getCalories());
+    }
+
+    @Test
+    public void testSetFlavor() {
+        testCookie.setFlavor("Chocolate");
+        assertEquals("Chocolate", testCookie.getFlavor());
+    }
+
+    @Test
+    public void testSetSize() {
+        testCookie.setSize(12);
+        assertEquals(12, testCookie.getSize());
+    }
+
+    @Test
+    public void testSetHasChips() {
+        testCookie.setHasChips(true);
+        assertTrue(testCookie.isHasChips());
+    }
+
+    @Test
+    public void testSetCalories() {
+        testCookie.setCalories(200);
+        assertEquals(200, testCookie.getCalories());
     }
 }
