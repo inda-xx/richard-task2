@@ -1,170 +1,241 @@
-# 🕹️ Simple Java Game Assignment
+# SuperRide: The Java Adventure 🚴
 
-In this exercise, you'll design and implement a simple game application in Java that incorporates player movement, scoring, and enemy interactions. Through this task, you will become familiar with Java classes and object-oriented programming concepts.
+In this exercise, you will dive into designing and implementing Java classes through the lens of a bike registration system. This task will enable you to practice object-oriented programming concepts while crafting your own bicycle model.
 
-### 📅 Deadline
-Complete and submit the assignment before **Friday, October 20th**.
+### 🚨 Deadline
+This assignment is due on **Friday, November 10th**.
 
-### 📘 Instructions
-For more information on submission procedures, refer to the [course instructions](https://example.com/course/instructions#assignments).
+### 💻 Instructions
+Please ensure you follow the guidelines laid out in the [course instructions](https://example-university.edu/java-course-instructions#assignments) for submission.
 
-### 📝 Preparation
-To prepare, review the following materials:
+### 📚 Preparation
+To prepare for this task, ensure you read the following resources:
 
-- [Java Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
-- If you're unfamiliar with Java, sign up and complete the essential modules at [Java Programming Basics](https://example.com/online-java-course).
-
-> **Assistant's Note:** The materials might have slight discrepancies, so it's advisable to explore further if necessary.
+- [Java Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
+- [Encapsulation in Java](https://www.baeldung.com/java-encapsulation)
+- [Understanding Constructors](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html)
 
 ### 🎯 Learning Goals
-This assignment aims to bolster the following skills:
 
-- Designing Java classes
-- Adding instance fields
-- Adding a constructor method
-- Creating *getters* and *setters*
-- Printing to the terminal
-- Using the `main` method
-- Understanding and managing variable scope, including shadowing
+This exercise aims to strengthen your understanding in several areas:
 
-### 🛠️ Troubleshooting Guide
-In case of queries or issues, follow these steps:
+* Designing Java classes
+* Adding instance fields
+* Adding a constructor method
+* Creating getters and setters
+* Printing to the terminal
+* Using the `main` method
+* Scope (or variable shadowing)
 
-1. Check this week’s [posted issues](https://example.com/help/issues) to see if other students have similar problems.
-2. If not, create a [New Issue](https://example.com/help/issues/new) with a clear title, such as "Game Task: specific problem".
-3. Seek help from a TA during weekly labs. Refer to the schedule for details.
+### 📈 Assignment
 
-Collaborate constructively with peers, but **do not share solutions directly**.
+Welcome to SuperRide, a fictional bicycle company dedicated to providing high-performing and environmentally friendly bikes. Your task is to create a Java class model for these bikes!
 
-### 🕹️ Game Assignment
+#### Exercise 1.0 -- Instance Fields
 
-In this task, you'll create a basic and engaging text-based game. Your game will allow a player to move around a grid, collect points, and interact with enemies.
+Create a `Bicycle.java` class in the `src` folder. This class should include the following fields to represent the attributes of a Bicycle:
 
-#### Exercise 1 -- Setting Up the Game Classes
-In the `src` folder, create a new Java file named `Game.java`. Implement the following components:
+- `String` modelName
+- `int` gearCount
+- `double` currentSpeed
+- `String` color
 
-1. **Player Class**
+If done correctly, the main method provided in Example 1 should compile.
 
-   - Fields: `String name`, `int score`, `int x`, `int y`
-   - Methods: `constructor`, `move(int deltaX, int deltaY)`, `addScore(int points)`, `printPosition()`
+<details>
+  <summary>🛠 Example 1</summary>
 
-2. **Enemy Class**
+  ```java
+  public class Bicycle {
 
-   - Fields: `int x`, `int y`, `int damage`
-   - Methods: `constructor`, `interact(Player player)`, `printPosition()`
-
-Ensure this setup matches the structure illustrated below:
-
-```java
-class Player {
-    private String name;
-    private int score;
-    private int x;
-    private int y;
-
-    public Player(String name, int startX, int startY) {
-        this.name = name;
-        this.score = 0;
-        this.x = startX;
-        this.y = startY;
-    }
-
-    // Getters and setters here
-    // Other methods here
-}
-
-class Enemy {
-    private int x;
-    private int y;
-    private int damage;
-
-    public Enemy(int startX, int startY, int damage) {
-        this.x = startX;
-        this.y = startY;
-        this.damage = damage;
-    }
-
-    // Methods here
-}
-```
-
-#### Exercise 2 -- Implement Movement and Scoring
-Extend your `Player` class with:
-
-- **Move Method**: Updates the player's current position. Enforce a grid size (5x5).
-- **AddScore Method**: Increases the player's score by specified points.
-
-Demonstrate functionality with the example main method provided:
-
-```java
-public class Game {
-    public static void main(String[] args) {
-        Player player = new Player("Hero", 0, 0);
-        player.move(1, 1);
-        player.printPosition();
-        player.addScore(10);
-    }
-}
-```
-
-Output Sample:
-
-```
-> Player is at position (1, 1).
-> Current score: 10 points.
-```
-
-#### Exercise 3 -- Interacting with Enemies
-Add interaction capabilities to the `Enemy` class:
-
-- **Interact Method**: Modifies the player's position and/or score upon enemy encounter.
-
-Sample main method to show interaction:
-
-```java
-public class Game {
-    public static void main(String[] args) {
-        Player player = new Player("Hero", 0, 0);
-        Enemy enemy = new Enemy(1, 1, 5);
-
-        player.move(1, 1);
-        enemy.interact(player); // Player encounters enemy
-
-        player.printPosition();
-        System.out.println("Player score: " + player.getScore());
-    }
-}
-```
-
-Expected Output:
-
-```
-> Player is at position (1, 1).
-> Oh no! Player encountered an enemy and lost 5 points.
-> Player score: -5
-```
-
-#### Exercise 4 -- Variable Shadowing Exploration
-Study and correct the shadowing problems shown below:
-
-```java
-public class ShadowExample {
-    private int value = 10;
-
-    public void showValue() {
-        int value = 5;
-        System.out.println("Value: " + value);
-    }
+    // Fields for Bicycle class
 
     public static void main(String[] args) {
-        new ShadowExample().showValue();
+      Bicycle tropical = new Bicycle();
+
+      // Assigning values
+      tropical.modelName = "Tropical";
+      tropical.gearCount = 21;
+      tropical.currentSpeed = 0.0;
+      tropical.color = "Blue";
+
+      // Printing information
+      System.out.println("Model: " + tropical.modelName);
+      System.out.println("Gears: " + tropical.gearCount);
+      System.out.println("Speed: " + tropical.currentSpeed + " km/h");
+      System.out.println("Color: " + tropical.color);
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.1 -- Getters and Setters
+
+To adhere to the principles of encapsulation, modify the `Bicycle` class to make its fields private. Add getters and setters for all fields so external classes can interact with them safely.
+
+<details>
+  <summary>🛠 Example 2</summary>
+
+  ```java
+  public class Bicycle {
+
+    // Fields with private access
+
+    // Getters and Setters
+
+    public static void main(String[] args) {
+      Bicycle mountainMaster = new Bicycle();
+
+      // Using setters
+      mountainMaster.setModelName("MountainMaster");
+      mountainMaster.setGearCount(18);
+      mountainMaster.setCurrentSpeed(0.0);
+      mountainMaster.setColor("Red");
+
+      // Using getters
+      System.out.println("Model: " + mountainMaster.getModelName());
+      System.out.println("Gears: " + mountainMaster.getGearCount());
+      System.out.println("Speed: " + mountainMaster.getCurrentSpeed() + " km/h");
+      System.out.println("Color: " + mountainMaster.getColor());
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.2 -- Constructor Method
+
+Create a constructor for the `Bicycle` class that initializes all its fields. Update the previous examples to utilize this constructor.
+
+<details>
+  <summary>🛠 Example 3</summary>
+
+  ```java
+  public class Bicycle {
+
+    // Fields with private access
+
+    // Constructor
+
+    // Getters and Setters
+
+    public static void main(String[] args) {
+      Bicycle roadRunner = new Bicycle("RoadRunner", 10, 25.5, "Yellow");
+
+      // Printing information
+      System.out.println("Model: " + roadRunner.getModelName());
+      System.out.println("Gears: " + roadRunner.getGearCount());
+      System.out.println("Speed: " + roadRunner.getCurrentSpeed() + " km/h");
+      System.out.println("Color: " + roadRunner.getColor());
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.3 -- `printInfo()` Method
+
+Incorporate a method named `printInfo()` that prints all details of the Bicycle object. The method should not return any value.
+
+<details>
+  <summary>🛠 Example 4</summary>
+
+  ```java
+  public void printInfo() {
+    System.out.println("Bicycle Model: " + modelName);
+    System.out.println("Number of Gears: " + gearCount);
+    System.out.println("Current Speed: " + currentSpeed + " km/h");
+    System.out.println("Color: " + color);
+  }
+
+  // Example print call
+  roadRunner.printInfo();
+  ```
+  This should produce:
+  ```
+  Bicycle Model: RoadRunner
+  Number of Gears: 10
+  Current Speed: 25.5 km/h
+  Color: Yellow
+  ```
+</details>
+
+#### Exercise 1.4 -- Speed Control
+
+Add functionality to your Bicycle class for accelerating and decelerating. Implement `accelerate(double increment)` and `decelerate(double decrement)` methods. These methods should adjust the `currentSpeed` and ensure the speed never drops below 0 km/h.
+
+<details>
+  <summary>🛠 Example 5</summary>
+
+  ```java
+  public class Bicycle {
+
+    // [Fields, Constructor, PrintInfo from previous exercises]
+
+    public void accelerate(double increment) {
+      currentSpeed += increment;
+    }
+
+    public void decelerate(double decrement) {
+      currentSpeed -= decrement;
+      if (currentSpeed < 0) currentSpeed = 0;
+    }
+
+    public static void main(String[] args) {
+      Bicycle cityCruiser = new Bicycle("CityCruiser", 8, 15.5, "Green");
+
+      // Testing speed control
+      cityCruiser.accelerate(5.0);
+      System.out.println("Accelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h"); // Should be 20.5 km/h
+
+      cityCruiser.decelerate(10.0);
+      System.out.println("Decelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h"); // Should be 10.5 km/h
+
+      cityCruiser.decelerate(15.0);
+      System.out.println("Decelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h"); // Should be 0 km/h
+    }
+  }
+  ```
+</details>
+
+#### Exercise 1.5 -- Understanding Variable Shadowing
+
+Examine the following shadowing problems. Be prepared to explain how to resolve them in class. Refer to articles on [Variable Shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) and the `this` keyword [documentation](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html).
+
+```java
+public class TestShadowing {
+    private int speed = 25;
+
+    public void testShadow() {
+        int speed = 50;
+        System.out.println(speed); // Prints the wrong speed
+    }
+
+    public static void main(String[] args){
+        new TestShadowing().testShadow();
     }
 }
 ```
 
-Consider how to utilize the `this` keyword to avoid scope issues like in the examples.
+```java
+public class PaintedBike {
+  private String color;
 
-In conclusion, reflect on how declaring `Variable` at a different scope changes the output. Implement the fixes inside your game classes if necessary.
+  public PaintedBike(String color) {
+    color = color; // This doesn't work. Why?
+  }
 
-### 🐛 Bug Reporting
-Spot any discrepancies or bugs? Report them via a [New Issue](https://example.com/help/issues/new) under the title "Game Task Issue: *brief summary*". Acknowledgements await for valid bug finds!
+  public void display() {
+    String color = "Red";
+    System.out.println("Bike color: " + color); // Prints the wrong color
+  }
+
+  public static void main(String[] args){
+        PaintedBike myBike = new PaintedBike("Blue");
+        myBike.display(); // Problem with output
+  }
+}
+```
+
+### 🐞 Troubleshooting
+If you encounter issues or find errors in this exercise, open a [New Issue](https://example-university.edu/java-course-issues/new) labeled "Exercise Error: Bicycle Task". Your feedback will help improve materials for everyone!
+
+Happy coding! 🧑‍💻
