@@ -1,4 +1,4 @@
-```java
+
 class Rocket {
 
     // Declare private instance fields/attributes
@@ -72,4 +72,3 @@ public class AceTheSpace {
 class ScopeExample {
     // Insert examples of variable shadowing here
 }
-```
