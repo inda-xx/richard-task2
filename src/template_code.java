@@ -1,11 +1,10 @@
 import org.junit.Before;
-    import org.junit.Test;
-    import static org.junit.Assert.*;
-    import java.util.Arrays;
-    import java.util.List;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.List;
 
 import java.util.*;
-
 
 public class Game {
     // fields
@@ -65,36 +64,62 @@ public class Game {
         this.enemyPosition = enemyPosition;
     }
 
-    // methods to be implemented by student
-
     // method for player movement
     public void movePlayer(int steps) {
-        // update player position
-        // update score based on movement
-        // print new player position
+        playerPosition += steps;
+        updateScore(steps);
+        System.out.println(playerName + " moved to position " + playerPosition);
+        checkEncounter();
     }
 
     // method to update score
     public void updateScore(int steps) {
-        // update player score
-        // print current score
+        playerScore += steps;
+        System.out.println(playerName + " has a score of " + playerScore);
     }
 
     // method for enemy interaction
     public void checkEncounter() {
-        // check if player position is same as enemy position
-        // print encounter message if true
+        if (playerPosition == enemyPosition) {
+            System.out.println("Encounter! " + playerName + " is fighting " + enemyName);
+        }
     }
 
     // main method
     public static void main(String[] args) {
         Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-        
+
         System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
         System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-        
-        // initialize player and enemy
-        // test movement of player
-        // test encounter function
+
+        // Test moving the player
+        game.movePlayer(3);
+        game.movePlayer(2); // This move should initiate an encounter with the enemy
+    }
+}
+
+// Shadowing Example
+class ShadowGame {
+    private int position = 0; // We want this position printed
+
+    public void printShadow() {
+        System.out.println(this.position); // Using this.position to print the instance variable
+    }
+
+    public static void main(String[] args) {
+        new ShadowGame().printShadow();
+    }
+}
+
+// Shadowing Example
+class Creature {
+    private String name;
+
+    public Creature(String name) {
+        this.name = name; // Using this.name to refer to the instance variable
+    }
+
+    public void announce() {
+        System.out.println(this.name + " approaches!"); // Using this.name to access the instance variable
     }
 }
