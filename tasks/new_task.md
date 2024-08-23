@@ -1,82 +1,84 @@
-# Ace the Space! 🚀
+# Build Your Own Library - Java Edition! 📚🚀
 
-In this assignment for JProg, you are going to practice object-oriented programming using Java by building a simple game. You will create classes and implement methods to model a fun space-themed game.
+Get ready for the third exercise of the Java Fundamentals course! Here, we will put into practice important aspects of Java such as creating and designing classes, using constructors, creating getters and setters, understanding scope and utilizing the main method.
 
-### 🗓️ Due Date 
-This assignment should be completed by **Monday, 12th December**.
+### ⏱ Deadline
+This work should be completed before the exercise, which is due on **Friday 19th November**.
 
-### 👩‍🏫 Instructions
-You can find instructions on how to approach and submit your work in the [assignment section of the course portal](https://jprog.kth.se/assignments#ace-space).
+### 🔧 Instructions
+For instructions on how to complete and submit the assignment, please follow the [course instructions](https://gits-15.sys.kth.se/inda-22/course-instructions#assignments).
 
-### 📚 Preparation
-Before starting, it's recommended to read and answer the questions in the W3Schools tutorial for Java OOP.
+### 📖 Preparation
+Before you start the assignment, make sure you have read the material for Module 2.
 
-- Read [Java OOP](https://www.w3schools.com/java/java_oop.asp)
+- Please review [Designing Classes](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=f5e5a808ac1f088812f2a8ce315bac65)
+- Go to https://kth.oli.cmu.edu/ and sign up using the course key `kth001-ht22`.
 
 ### ✅ Learning Goals
-By completing this assignment, you will achieve the following learning goals:
+
+After this assignment, you should be comfortable with:
 * Designing Java classes
 * Adding instance fields
 * Adding a constructor method
-* Creating *getters* and *setters*
+* Creating getters and setters
 * Printing to the terminal
-* Using the `main` method
-* Understanding of Scope (or *variable shadowing*)
+* Using the main method
+* Understanding scope (or variable shadowing)
 
-### 🚨 Troubleshooting Guide
-Having problems? Here's what to do:
+### 🚒 Troubleshooting
 
-1. Check the [posted issues](https://jprog.kth.se/help/issues) to see if any other students are facing the same issue.
-2. If not found, post a question yourself by creating a [New Issue](https://jprog.kth.se/help/issues/new) and summarize the problem in the title.
-3. Consult a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/JProg). Check your timetable for the next session.
+If you have any issues, please follow these steps:
 
-It's encouraged to discuss and collaborate with your coursemates but remember **not to share solutions!**
+1. Check out this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students asking about the same problem?
+2. If not, create a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with a descriptive title starting with "Task 3: *summary of the issue*".
+3. Consult a TA during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when the next lab is scheduled.
 
-### 🕹️ Assignment
+Please, discuss the assignment with your classmates, but **do not share answers**!
 
-Your game, called "Ace the Space", features a rocket that flies in space evading asteroids and scoring points. Your rocket and asteroids will be modeled in Java!
+### 🏰 Assignment
 
-#### Exercise 1 - Rocket Class 🚀
+In this assignment, you are tasked to create a simplified simulation of a library's book repository. You are to model the `Book` class first and then build a `Library` that holds a collection of books.
 
-Create a new class called `Rocket.java`. Your Rocket should have these attributes:
+#### Exercise 3.1 -- Book Class
 
-- `String` name
-- `float` speed
-- `int` score
-- `boolean` crashed
+In the `src` folder, build a new class called `Book.java`. The `Book` class should contain the following fields:
 
-#### Exercise 2 - Getters and Setters 🛠️
+- `String` title
+- `String` author
+- `int` yearPublished
+- `boolean` isBorrowed
 
-Prevent direct access of Rocket's state by setting field access modifiers to `private`. Then add getters and setters for each field. 
+In addition, you should create getters (accessors) and setters (mutators) for each of these fields. 
 
-#### Exercise 3 - Rocket Constructor 🏗️
+The `Book` class should also contain a `bookInfo()` method that prints information of the book to the terminal, similar to the example below.
 
-Implement a constructor in `Rocket.java` that sets name, speed, score, and crashed status of the rocket when a new rocket object is created. 
+```java
+System.out.println("Title: " + book.getTitle());
+System.out.println("Author: " + book.getAuthor());
+System.out.println("Year Published: " + book.getYearPublished());
+System.out.println("Is the book available: " + book.isBorrowed());
+```
 
-#### Exercise 4 - Asteroid Class ☄️
+#### Exercise 3.2 -- Library Class
 
-Next, you need to model the asteroids. Create a new class called `Asteroid.java`. Your Asteroid should have these attributes:
+Now that we have our `Book` class, let's create a `Library` class that holds an array of Book objects.
 
-- `String` asteroidType
-- `float` speed
+Create a new class called `Library.java`. This class should contain the following:
 
-Create all necessary getters, setters and a constructor for creating an Asteroid object.
+- An array instance field that will hold `Book` objects
+- A constructor method to establish the size of the library
+- Getter and Setter methods
+- A method to add a book to the library
+- A method to borrow a book from the library
+- A method to return a book to the library
+ 
+Keep in mind that the library's capacity should not exceed the size set when instantiated, which implies that you should keep track of the current number of books in the library.
 
-#### Exercise 5 - Collision Function 🔥
+#### Exercise 3.3 -- Scope or Variable Shadowing
 
-Now, model a collision between the rocket and an asteroid. Add a method named `collideWith` in Rocket class that checks if the rocket has collided with the asteroid. If rocket's speed is greater than or equal to that of the asteroid, the rocket survives and gains 10 points, else it crashes. Remember to update rocket's score and crashed status accordingly.
+Look into the concept of 'Variable Shadowing'. You can check this article on [Wikipedia](https://en.wikipedia.org/wiki/Variable_shadowing) to help you understand this concept. 
 
-#### Exercise 6 - Print Stats Function 📊
+Create another method in the `Library` class that experimentally demonstrates the concept of *variable shadowing* and explain what's happening in that method through comments.
 
-Implement a method named `printStats` in Rocket class. This method prints all info about the rocket to the console.
-
-#### Exercise 7 - Main Method 🎮
-
-Finally, create a main method to run your game. Inside the main method, create a rocket and a few asteroids. Let them interact and print the game results to the console. 
-
-#### Exercise 8 - Understand Scope 🎯
-
-Create a separate Java file named "ScopeExample.java" and replicate the given examples of Variable Shadowing to understand them better. Experiment by fixing them and observe the outcomes.
-
-### 🐞 Bugs and Errors
-In case you find mistakes in this description or the code examples, please report them as a [New Issue](https://jprog.kth.se/help/issues/new) and mention "Ace the Space: *error summary*" in the title. Your involvement in debugging will be much appreciated.
+### ✨ Credits
+If you find any inconsistencies, please raise a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) titled "Task 3 Error: *summary of error*" . Contributors to bug reports and fixes will be credited in the acknowledgment section.
