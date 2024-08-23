@@ -1,138 +1,175 @@
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
 
-class Player {
-    // Declare private fields for name, score, x, and y position
-    private String name;
-    private int score;
-    private int x;
-    private int y;
-    
-    // Constructor to initialize name, starting x and y position, and score
-    public Player(String name, int startX, int startY) {
-        this.name = name;
-        this.x = startX;
-        this.y = startY;
-        this.score = 0; // Initialize score to zero
-    }
-    
-    // Getter for name
-    public String getName() { return name; }
-    
-    // Getter for score
-    public int getScore() { return score; }
-    
-    // Setter for score
-    public void setScore(int score) { this.score = score; }
-    
-    // Getter for x position
-    public int getX() { return x; }
-    
-    // Getter for y position
-    public int getY() { return y; }
-    
-    // Method to move the player, ensuring they stay within a 5x5 grid
-    public void move(int deltaX, int deltaY) {
-        this.x = Math.max(0, Math.min(4, this.x + deltaX));
-        this.y = Math.max(0, Math.min(4, this.y + deltaY));
-    }
-    
-    // Method to add score
-    public void addScore(int points) {
-        this.score += points;
-    }
-    
-    // Method to print the player's current position
-    public void printPosition() {
-        System.out.println(name + " is at position (" + x + ", " + y + ").");
-    }
-}
+public class SecureBankingSystem {
 
-class Enemy {
-    // Declare private fields for x position, y position, and damage
-    private int x;
-    private int y;
-    private int damage;
-    
-    // Constructor to initialize x, y, and damage
-    public Enemy(int startX, int startY, int damage) {
-        this.x = startX;
-        this.y = startY;
-        this.damage = damage;
+    // Fields for database connection
+    private static final String DB_URL = "jdbc:yourdatabaseurl";
+    private static final String USER = "yourusername";
+    private static final String PASS = "yourpassword";
+    private Connection conn;
+
+    // Constructor
+    public SecureBankingSystem() {
+        try {
+            // Establish connection to the database
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    
-    // Method to interact with Player
-    public void interact(Player player) {
-        // Check if player position matches enemy position
-        if (player.getX() == this.x && player.getY() == this.y) {
-            // Reduce player's score by enemy damage
-            player.setScore(player.getScore() - damage);
-            // Print encounter message
-            System.out.println("Oh no! " + player.getName() + " encountered an enemy and lost " + damage + " points.");
+
+    // Method to create a new account
+    public void createAccount(String accountName, double initialDeposit) {
+        String sql = "INSERT INTO accounts (name, balance) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, accountName);
+            pstmt.setDouble(2, initialDeposit);
+            pstmt.executeUpdate();
+            System.out.println("Account created successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
-    // Method to print enemy's position
-    public void printPosition() {
-        System.out.println("Enemy is at position (" + x + ", " + y + ").");
+    // Method to deposit money into an account
+    public void deposit(String accountName, double amount) {
+        String sql = "UPDATE accounts SET balance = balance + ? WHERE name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDouble(1, amount);
+            pstmt.setString(2, accountName);
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Deposit completed successfully.");
+            } else {
+                System.out.println("Account not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
 
-public class Game {
+    // Method to withdraw money from an account
+    public void withdraw(String accountName, double amount) {
+        String checkBalanceSql = "SELECT balance FROM accounts WHERE name = ?";
+        String withdrawSql = "UPDATE accounts SET balance = balance - ? WHERE name = ?";
+        
+        try (PreparedStatement checkStmt = conn.prepareStatement(checkBalanceSql);
+             PreparedStatement withdrawStmt = conn.prepareStatement(withdrawSql)) {
+            checkStmt.setString(1, accountName);
+            ResultSet rs = checkStmt.executeQuery();
+            
+            if (rs.next()) {
+                double currentBalance = rs.getDouble("balance");
+                if (currentBalance >= amount) {
+                    withdrawStmt.setDouble(1, amount);
+                    withdrawStmt.setString(2, accountName);
+                    withdrawStmt.executeUpdate();
+                    System.out.println("Withdrawal completed successfully.");
+                } else {
+                    System.out.println("Insufficient funds.");
+                }
+            } else {
+                System.out.println("Account not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to check account balance
+    public double checkBalance(String accountName) {
+        String sql = "SELECT balance FROM accounts WHERE name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, accountName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("balance");
+                } else {
+                    System.out.println("Account not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
+    // Method to close the database connection
+    public void closeConnection() {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        // Create a Player with name and initial position
-        Player player = new Player("Hero", 0, 0);
-        
-        // Create an Enemy with initial position and damage
-        Enemy enemy = new Enemy(1, 1, 5);
-        
-        // Move player and check interactions with enemy
-        player.move(1, 1);
-        enemy.interact(player);
-        
-        // Print player's position and score
-        player.printPosition();
-        System.out.println("Player score: " + player.getScore());
-    }
-}
+        SecureBankingSystem bankingSystem = new SecureBankingSystem();
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
 
-// Testing the game logic
-class GameTest {
+        while (!exit) {
+            System.out.println("Welcome to the Secure Banking System!");
+            System.out.println("1. Create account");
+            System.out.println("2. Deposit money");
+            System.out.println("3. Withdraw money");
+            System.out.println("4. Check balance");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
 
-    private Player player;
-    private Enemy enemy;
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-    @Before
-    public void setup() {
-        player = new Player("TestPlayer", 0, 0);
-        enemy = new Enemy(1, 1, 5);
-    }
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter account name: ");
+                    String accountName = scanner.nextLine();
+                    System.out.print("Enter initial deposit: ");
+                    double initialDeposit = scanner.nextDouble();
+                    bankingSystem.createAccount(accountName, initialDeposit);
+                    break;
+                case 2:
+                    System.out.print("Enter account name: ");
+                    accountName = scanner.nextLine();
+                    System.out.print("Enter deposit amount: ");
+                    double depositAmount = scanner.nextDouble();
+                    bankingSystem.deposit(accountName, depositAmount);
+                    break;
+                case 3:
+                    System.out.print("Enter account name: ");
+                    accountName = scanner.nextLine();
+                    System.out.print("Enter withdrawal amount: ");
+                    double withdrawalAmount = scanner.nextDouble();
+                    bankingSystem.withdraw(accountName, withdrawalAmount);
+                    break;
+                case 4:
+                    System.out.print("Enter account name: ");
+                    accountName = scanner.nextLine();
+                    double balance = bankingSystem.checkBalance(accountName);
+                    System.out.println("Balance: " + balance);
+                    break;
+                case 5:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
 
-    @Test
-    public void testPlayerMoveWithinBounds() {
-        player.move(3, 3);
-        assertEquals("Player should be at x=3", 3, player.getX());
-        assertEquals("Player should be at y=3", 3, player.getY());
-    }
-    
-    @Test
-    public void testPlayerMoveOutOfBounds() {
-        player.move(6, 6);
-        assertEquals("Player should be at the maximum x=4", 4, player.getX());
-        assertEquals("Player should be at the maximum y=4", 4, player.getY());
-    }
-
-    @Test
-    public void testEncounterWithEnemy() {
-        player.move(1, 1); // Move player to enemy's location
-        enemy.interact(player);
-        assertEquals("Player score should be -5 after encounter", -5, player.getScore());
-    }
-
-    @Test
-    public void testAddScore() {
-        player.addScore(10);
-        assertEquals("Player score should be 10", 10, player.getScore());
+        bankingSystem.closeConnection();
+        scanner.close();
     }
 }
