@@ -1,4 +1,4 @@
-ny necessary libraries
+
 import java.util.*;
 
 // Class definition for the Pixel class
