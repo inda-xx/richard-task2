@@ -4,97 +4,90 @@ import org.junit.Before;
     import java.util.Arrays;
     import java.util.List;
 
-import java.util.*;
+class StarVoyager {
+    // Declare private fields for encapsulation
+    private String name;
+    private int age;
+    private double speed;
+    private boolean active;
 
-
-public class Game {
-    // fields
-    private String playerName;
-    private int playerScore;
-    private int playerPosition;
-    private String enemyName;
-    private int enemyPosition;
-
-    // constructor
-    public Game(String playerName, int playerScore, int playerPosition, String enemyName, int enemyPosition) {
-        this.playerName = playerName;
-        this.playerScore = playerScore;
-        this.playerPosition = playerPosition;
-        this.enemyName = enemyName;
-        this.enemyPosition = enemyPosition;
+    // Constructor to initialize a new StarVoyager object
+    public StarVoyager(String name, int age, double speed, boolean active) {
+        // Initialize fields with the parameters
     }
 
-    // getters and setters
-    public String getPlayerName() {
-        return playerName;
+    // Getter for name
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    // Getter for age
+    public int getAge() {
+        return age;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    // Setter for age
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public int getPlayerPosition() {
-        return playerPosition;
+    // Getter for speed
+    public double getSpeed() {
+        return speed;
     }
 
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
+    // Setter for speed
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
-    public String getEnemyName() {
-        return enemyName;
+    // Getter for active
+    public boolean isActive() {
+        return active;
     }
 
-    public void setEnemyName(String enemyName) {
-        this.enemyName = enemyName;
+    // Setter for active
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public int getEnemyPosition() {
-        return enemyPosition;
+    // Method to print the status of the StarVoyager
+    public void printStatus() {
+        System.out.println(">> VOYAGER STATUS <<");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Speed: " + speed + " light-years/year");
+        System.out.println("Active: " + active);
     }
 
-    public void setEnemyPosition(int enemyPosition) {
-        this.enemyPosition = enemyPosition;
+    // Method to simulate interaction between this StarVoyager and another
+    public void interact(StarVoyager voyager) {
+        // Decrease this object's speed by a constant and prevent negative values
+        System.out.println(name + " interacted with " + voyager.getName());
+        System.out.println(name + "'s new speed: " + speed + " light-years/year");
     }
 
-    // methods to be implemented by student
-
-    // method for player movement
-    public void movePlayer(int steps) {
-        // update player position
-        // update score based on movement
-        // print new player position
-    }
-
-    // method to update score
-    public void updateScore(int steps) {
-        // update player score
-        // print current score
-    }
-
-    // method for enemy interaction
-    public void checkEncounter() {
-        // check if player position is same as enemy position
-        // print encounter message if true
-    }
-
-    // main method
     public static void main(String[] args) {
-        Game game = new Game("Player1", 0, 0, "Enemy1", 5);
-        
-        System.out.println("Player: " + game.getPlayerName() + " is at position " + game.getPlayerPosition());
-        System.out.println("Enemy: " + game.getEnemyName() + " is at position " + game.getEnemyPosition());
-        
-        // initialize player and enemy
-        // test movement of player
-        // test encounter function
+        // Example of creating a new StarVoyager object using the constructor
+        StarVoyager voyager = new StarVoyager("Nebula Nomad", 180, 3.0, true);
+
+        // Example of using getters to print information
+        System.out.println("Voyager Details:");
+        System.out.println("Name: " + voyager.getName());
+        System.out.println("Age: " + voyager.getAge());
+        System.out.println("Speed: " + voyager.getSpeed() + " light-years/year");
+        System.out.println("Active: " + voyager.isActive());
+
+        // Call printStatus to display voyager's information
+        voyager.printStatus();
+
+        // Example of interacting with another StarVoyager
+        StarVoyager anotherVoyager = new StarVoyager("Celestial Drifter", 230, 7.5, false);
+        voyager.interact(anotherVoyager);
     }
 }
