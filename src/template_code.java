@@ -1,64 +1,73 @@
-### Template
-
-```java
-// Starting with Rocket Class
 class Rocket {
-    // Declaring private instance fields/attributes
+
+    // Declare private instance fields/attributes
     private String name;
     private float speed;
     private int score;
     private boolean crashed;
-    
+
     // Add your constructor here
     public Rocket(String name, float speed, int score, boolean crashed) {
-        // Initialize instance fields here
+        this.name = name;
+        this.speed = speed;
+        this.score = score;
+        this.crashed = crashed;
     }
-    
-    // Declare your getter methods here
-    // Example: public String getName() { return name; }
-    
-    // Declare your setter methods here
-    // Example: public void setName(String name) { this.name = name; }
-    
-    // Add a method collideWith here to handle the rocket collisions
+
+    public String getName() { return name; }
+    public float getSpeed() { return speed; }
+    public int getScore() { return score; }
+    public boolean isCrashed() { return crashed; }
+
+    public void setName(String name) { this.name = name; }
+    public void setSpeed(float speed) { this.speed = speed; }
+    public void setScore(int score) { this.score = score; }
+    public void setCrashed(boolean crashed) { this.crashed = crashed; }
+
     public void collideWith(Asteroid asteroid) {
-        // Implement your code here
+        if(this.speed >= asteroid.getSpeed()){
+            this.score += 10;
+        }else {
+            this.crashed = true;
+            this.score = 0;
+        }
     }
     
-    // Implement the printStats function here
     public void printStats() {
-        // Implement your code here
+        System.out.println("Rocket Name: " + this.name);
+        System.out.println("Rocket Speed: " + this.speed);
+        System.out.println("Rocket Score: " + this.score);
+        System.out.println("Rocket Crashed Status: " + this.crashed);
     }
 }
 
-// Now continue with the Asteroid Class
 class Asteroid {
-    // Declare private instance fields for Asteroid here
     private String asteroidType;
     private float speed;
-    
-    // Add your constructor here
+
     public Asteroid(String asteroidType, float speed) {
-        // Initialize instance fields here
+        this.asteroidType = asteroidType;
+        this.speed = speed;
     }
-    
-    // Declare your getter methods here
-    
-    // Declare your setter methods here
+
+    public String getAsteroidType() { return asteroidType; }
+    public float getSpeed() { return speed; }
+
+    public void setAsteroidType(String asteroidType) { this.asteroidType = asteroidType; }
+    public void setSpeed(float speed) { this.speed = speed; }
 }
 
-// Add the main method here
-public static void main(String[] args) {
-    // Create your Rocket and Asteroid objects here
-    // Let them interact
-    // Print the game results
+public class AceTheSpace {
+
+    public static void main(String[] args) {
+        Rocket rocket = new Rocket("Rocket X", 100f, 0, false);
+        Asteroid asteroid = new Asteroid("Asteroid Y", 200f);
+
+        rocket.collideWith(asteroid);
+        rocket.printStats();
+    }
 }
 
-// Create a separate Class for scope understanding
 class ScopeExample {
-    // Replicate the given examples of Variable shadowing here
-    // Fix and observe outcomes
+    // Insert examples of variable shadowing here
 }
-```
-
-Remember, replace the comments with actual Java code that reflects the requirements of each exercise. For instance, in the Rocket constructor, you would replace `// Initialize instance fields here` with specific code that assigns the inputted parameters to the class's fields, such as `this.name = name; this.speed = speed;`, etc. Also, be sure to fully implement the `collideWith` and `printStats` methods as per the task description.
