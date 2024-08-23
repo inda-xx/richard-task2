@@ -2,137 +2,167 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-class Player {
-    // Declare private fields for name, score, x, and y position
-    private String name;
-    private int score;
-    private int x;
-    private int y;
-    
-    // Constructor to initialize name, starting x and y position, and score
-    public Player(String name, int startX, int startY) {
-        this.name = name;
-        this.x = startX;
-        this.y = startY;
-        this.score = 0; // Initialize score to zero
-    }
-    
-    // Getter for name
-    public String getName() { return name; }
-    
-    // Getter for score
-    public int getScore() { return score; }
-    
-    // Setter for score
-    public void setScore(int score) { this.score = score; }
-    
-    // Getter for x position
-    public int getX() { return x; }
-    
-    // Getter for y position
-    public int getY() { return y; }
-    
-    // Method to move the player, ensuring they stay within a 5x5 grid
-    public void move(int deltaX, int deltaY) {
-        this.x = Math.max(0, Math.min(4, this.x + deltaX));
-        this.y = Math.max(0, Math.min(4, this.y + deltaY));
-    }
-    
-    // Method to add score
-    public void addScore(int points) {
-        this.score += points;
-    }
-    
-    // Method to print the player's current position
-    public void printPosition() {
-        System.out.println(name + " is at position (" + x + ", " + y + ").");
-    }
-}
+public class Bicycle {
+    // Declare the instance fields
+    private String modelName;
+    private int gearCount;
+    private double currentSpeed;
+    private String color;
 
-class Enemy {
-    // Declare private fields for x position, y position, and damage
-    private int x;
-    private int y;
-    private int damage;
-    
-    // Constructor to initialize x, y, and damage
-    public Enemy(int startX, int startY, int damage) {
-        this.x = startX;
-        this.y = startY;
-        this.damage = damage;
+    // Constructor to initialize the fields
+    // Make sure to use the 'this' keyword to resolve variable shadowing
+    public Bicycle(String modelName, int gearCount, double currentSpeed, String color) {
+        this.modelName = modelName;
+        this.gearCount = gearCount;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
     }
-    
-    // Method to interact with Player
-    public void interact(Player player) {
-        // Check if player position matches enemy position
-        if (player.getX() == this.x && player.getY() == this.y) {
-            // Reduce player's score by enemy damage
-            player.setScore(player.getScore() - damage);
-            // Print encounter message
-            System.out.println("Oh no! " + player.getName() + " encountered an enemy and lost " + damage + " points.");
+
+    // Getter for modelName
+    public String getModelName() {
+        return modelName;
+    }
+
+    // Setter for modelName
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    // Getter for gearCount
+    public int getGearCount() {
+        return gearCount;
+    }
+
+    // Setter for gearCount
+    public void setGearCount(int gearCount) {
+        this.gearCount = gearCount;
+    }
+
+    // Getter for currentSpeed
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    // Setter for currentSpeed
+    public void setCurrentSpeed(double currentSpeed) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    // Getter for color
+    public String getColor() {
+        return color;
+    }
+
+    // Setter for color
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    // Method to print all information about the bicycle
+    public void printInfo() {
+        System.out.println("Bicycle Model: " + modelName);
+        System.out.println("Number of Gears: " + gearCount);
+        System.out.println("Current Speed: " + currentSpeed + " km/h");
+        System.out.println("Color: " + color);
+    }
+
+    // Method to increase the current speed
+    public void accelerate(double increment) {
+        currentSpeed += increment;
+    }
+
+    // Method to decrease the current speed, ensuring it doesn't go below zero
+    public void decelerate(double decrement) {
+        currentSpeed -= decrement;
+        if (currentSpeed < 0) {
+            currentSpeed = 0;
         }
     }
-    
-    // Method to print enemy's position
-    public void printPosition() {
-        System.out.println("Enemy is at position (" + x + ", " + y + ").");
-    }
-}
 
-public class Game {
+    // Main method to test the Bicycle class
     public static void main(String[] args) {
-        // Create a Player with name and initial position
-        Player player = new Player("Hero", 0, 0);
-        
-        // Create an Enemy with initial position and damage
-        Enemy enemy = new Enemy(1, 1, 5);
-        
-        // Move player and check interactions with enemy
-        player.move(1, 1);
-        enemy.interact(player);
-        
-        // Print player's position and score
-        player.printPosition();
-        System.out.println("Player score: " + player.getScore());
+        // Creating a new Bicycle object using the constructor
+        Bicycle cityCruiser = new Bicycle("CityCruiser", 8, 15.5, "Green");
+
+        // Printing initial information
+        cityCruiser.printInfo();
+
+        // Testing accelerate method
+        cityCruiser.accelerate(5.0);
+        System.out.println("Accelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h");
+
+        // Testing decelerate method
+        cityCruiser.decelerate(10.0);
+        System.out.println("Decelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h");
+
+        // Further testing deceleration to ensure speed doesn't go below zero
+        cityCruiser.decelerate(15.0);
+        System.out.println("Decelerated Speed: " + cityCruiser.getCurrentSpeed() + " km/h");
     }
-}
+} 
 
-// Testing the game logic
-class GameTest {
-
-    private Player player;
-    private Enemy enemy;
+// Uncomment the following lines to add the unit testing class
+/*
+public class BicycleTest {
+    private Bicycle bicycle;
 
     @Before
-    public void setup() {
-        player = new Player("TestPlayer", 0, 0);
-        enemy = new Enemy(1, 1, 5);
+    public void setUp() {
+        bicycle = new Bicycle("TestModel", 7, 0.0, "TestColor");
     }
 
     @Test
-    public void testPlayerMoveWithinBounds() {
-        player.move(3, 3);
-        assertEquals("Player should be at x=3", 3, player.getX());
-        assertEquals("Player should be at y=3", 3, player.getY());
-    }
-    
-    @Test
-    public void testPlayerMoveOutOfBounds() {
-        player.move(6, 6);
-        assertEquals("Player should be at the maximum x=4", 4, player.getX());
-        assertEquals("Player should be at the maximum y=4", 4, player.getY());
+    public void testModelName() {
+        assertEquals("TestModel", bicycle.getModelName());
     }
 
     @Test
-    public void testEncounterWithEnemy() {
-        player.move(1, 1); // Move player to enemy's location
-        enemy.interact(player);
-        assertEquals("Player score should be -5 after encounter", -5, player.getScore());
+    public void testGearCount() {
+        assertEquals(7, bicycle.getGearCount());
     }
 
     @Test
-    public void testAddScore() {
-        player.addScore(10);
-        assertEquals("Player score should be 10", 10, player.getScore());
+    public void testCurrentSpeed() {
+        assertEquals(0.0, bicycle.getCurrentSpeed(), 0.01);
+    }
+
+    @Test
+    public void testColor() {
+        assertEquals("TestColor", bicycle.getColor());
+    }
+
+    @Test
+    public void testSettersAndGetters() {
+        bicycle.setModelName("NewModel");
+        assertEquals("NewModel", bicycle.getModelName());
+
+        bicycle.setGearCount(10);
+        assertEquals(10, bicycle.getGearCount());
+
+        bicycle.setCurrentSpeed(15.0);
+        assertEquals(15.0, bicycle.getCurrentSpeed(), 0.01);
+
+        bicycle.setColor("NewColor");
+        assertEquals("NewColor", bicycle.getColor());
+    }
+
+    @Test
+    public void testAccelerate() {
+        bicycle.accelerate(10.0);
+        assertEquals(10.0, bicycle.getCurrentSpeed(), 0.01);
+    }
+
+    @Test
+    public void testDecelerate() {
+        bicycle.decelerate(5.0);
+        assertEquals(0.0, bicycle.getCurrentSpeed(), 0.01);
+
+        bicycle.setCurrentSpeed(15.0);
+        bicycle.decelerate(10.0);
+        assertEquals(5.0, bicycle.getCurrentSpeed(), 0.01);
+
+        bicycle.decelerate(10.0);
+        assertEquals(0.0, bicycle.getCurrentSpeed(), 0.01);
     }
 }
+*/
