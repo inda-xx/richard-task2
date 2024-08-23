@@ -19,7 +19,7 @@ def main(api_key, branch_name):
 
     # Read the solution code
     try:
-        with open("src/new_task_solution.java", "r") as file:
+        with open(".hidden_tasks/new_task_solution.java", "r") as file:
             solution = file.read()
     except FileNotFoundError:
         print("Error: new_task_solution.java file not found.")
@@ -40,8 +40,11 @@ def main(api_key, branch_name):
         print("Error: Failed to generate the tests after multiple retries.")
         sys.exit(1)
 
-    # Write the tests code to a Java file
-    tests_file_path = os.path.join("src", "new_task_tests.java")
+    # Ensure the .hidden_tasks directory exists
+    os.makedirs(".hidden_tasks", exist_ok=True)
+
+    # Write the tests code to a Java file in the .hidden_tasks directory
+    tests_file_path = os.path.join(".hidden_tasks", "new_task_tests.java")
     with open(tests_file_path, "w") as file:
         file.write(response_content)
 
@@ -65,24 +68,13 @@ def generate_with_retries(client, prompt, max_retries=3):
                 print("Retrying...")
     return None
 
-def commit_and_push_solution(branch_name, solution_content):
+def commit_and_push_changes(branch_name, tests_file_path):
     try:
         subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
-        
-        # Ensure the .hidden_tasks directory exists
-        os.makedirs(".hidden_tasks", exist_ok=True)
 
-        # Define the file path for solution
-        solution_file_path = os.path.join(".hidden_tasks", "new_task_solution.java")
-
-        # Write the generated solution to the file
-        with open(solution_file_path, "w") as solution_file:
-            solution_file.write(solution_content)
-
-        # Add and commit the solution file
-        subprocess.run(["git", "add", solution_file_path], check=True)
-        subprocess.run(["git", "commit", "-m", "Add generated solution"], check=True)
+        subprocess.run(["git", "add", tests_file_path], check=True)
+        subprocess.run(["git", "commit", "-m", "Add generated tests"], check=True)
         subprocess.run(
             ["git", "push", "--set-upstream", "origin", branch_name],
             check=True,
