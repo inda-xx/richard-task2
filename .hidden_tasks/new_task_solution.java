@@ -1,138 +1,128 @@
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import java.util.ArrayList;
 
-class Player {
-    // Declare private fields for name, score, x, and y position
-    private String name;
-    private int score;
-    private int x;
-    private int y;
+public class Artwork {
+    // Fields
+    private String title;
+    private String artist;
+    private int year;
+    private boolean isOnDisplay;
     
-    // Constructor to initialize name, starting x and y position, and score
-    public Player(String name, int startX, int startY) {
-        this.name = name;
-        this.x = startX;
-        this.y = startY;
-        this.score = 0; // Initialize score to zero
+    // Constructor
+    public Artwork(String title, String artist, int year, boolean isOnDisplay) {
+        this.title = title;
+        this.artist = artist;
+        this.year = year;
+        this.isOnDisplay = isOnDisplay;
     }
-    
-    // Getter for name
-    public String getName() { return name; }
-    
-    // Getter for score
-    public int getScore() { return score; }
-    
-    // Setter for score
-    public void setScore(int score) { this.score = score; }
-    
-    // Getter for x position
-    public int getX() { return x; }
-    
-    // Getter for y position
-    public int getY() { return y; }
-    
-    // Method to move the player, ensuring they stay within a 5x5 grid
-    public void move(int deltaX, int deltaY) {
-        this.x = Math.max(0, Math.min(4, this.x + deltaX));
-        this.y = Math.max(0, Math.min(4, this.y + deltaY));
+
+    // Getters and Setters
+    public String getTitle() {
+        return title;
     }
-    
-    // Method to add score
-    public void addScore(int points) {
-        this.score += points;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
-    
-    // Method to print the player's current position
-    public void printPosition() {
-        System.out.println(name + " is at position (" + x + ", " + y + ").");
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public boolean isOnDisplay() {
+        return isOnDisplay;
+    }
+
+    public void setOnDisplay(boolean isOnDisplay) {
+        this.isOnDisplay = isOnDisplay;
+    }
+
+    // Method to print information
+    public void printInfo() {
+        System.out.println("Artwork Details:");
+        System.out.println("Title: " + title);
+        System.out.println("Artist: " + artist);
+        System.out.println("Year: " + year);
+        System.out.println("Is on display: " + isOnDisplay);
+    }
+
+    // Main method to test the Artwork class
+    public static void main(String[] args) {
+        Artwork artwork = new Artwork("Starry Night", "Vincent van Gogh", 1889, true);
+        
+        // Use getters to print the artwork information
+        System.out.println("Title: " + artwork.getTitle());
+        System.out.println("Artist: " + artwork.getArtist());
+        System.out.println("Year: " + artwork.getYear());
+        System.out.println("Is on display: " + artwork.isOnDisplay());
+
+        // Modify artwork details using setters
+        artwork.setTitle("Mona Lisa");
+        artwork.setArtist("Leonardo da Vinci");
+        artwork.setYear(1503);
+        artwork.setOnDisplay(false);
+
+        // Print updated information
+        artwork.printInfo();
     }
 }
 
-class Enemy {
-    // Declare private fields for x position, y position, and damage
-    private int x;
-    private int y;
-    private int damage;
-    
-    // Constructor to initialize x, y, and damage
-    public Enemy(int startX, int startY, int damage) {
-        this.x = startX;
-        this.y = startY;
-        this.damage = damage;
+class Exhibition {
+    private ArrayList<Artwork> artworks;
+
+    // Constructor
+    public Exhibition() {
+        this.artworks = new ArrayList<>();
     }
-    
-    // Method to interact with Player
-    public void interact(Player player) {
-        // Check if player position matches enemy position
-        if (player.getX() == this.x && player.getY() == this.y) {
-            // Reduce player's score by enemy damage
-            player.setScore(player.getScore() - damage);
-            // Print encounter message
-            System.out.println("Oh no! " + player.getName() + " encountered an enemy and lost " + damage + " points.");
+
+    // Method to add an artwork
+    public void addArtwork(Artwork art) {
+        artworks.add(art);
+    }
+
+    // Method to list all artworks
+    public void listArtworks() {
+        for (Artwork art : artworks) {
+            art.printInfo();
         }
     }
-    
-    // Method to print enemy's position
-    public void printPosition() {
-        System.out.println("Enemy is at position (" + x + ", " + y + ").");
-    }
-}
 
-public class Game {
+    // Main method to test Exhibition class
     public static void main(String[] args) {
-        // Create a Player with name and initial position
-        Player player = new Player("Hero", 0, 0);
+        Exhibition exhibition = new Exhibition();
         
-        // Create an Enemy with initial position and damage
-        Enemy enemy = new Enemy(1, 1, 5);
+        Artwork artwork1 = new Artwork("Starry Night", "Vincent van Gogh", 1889, true);
+        Artwork artwork2 = new Artwork("The Scream", "Edvard Munch", 1893, false);
         
-        // Move player and check interactions with enemy
-        player.move(1, 1);
-        enemy.interact(player);
+        exhibition.addArtwork(artwork1);
+        exhibition.addArtwork(artwork2);
         
-        // Print player's position and score
-        player.printPosition();
-        System.out.println("Player score: " + player.getScore());
+        // List all artworks in the exhibition
+        exhibition.listArtworks();
     }
 }
 
-// Testing the game logic
-class GameTest {
+class Gallery {
+    private String galleryName = "National Gallery";
 
-    private Player player;
-    private Enemy enemy;
-
-    @Before
-    public void setup() {
-        player = new Player("TestPlayer", 0, 0);
-        enemy = new Enemy(1, 1, 5);
+    public void displayGalleryName(String galleryName) {
+        // Use 'this' keyword to access the instance variable
+        System.out.println(this.galleryName);
     }
 
-    @Test
-    public void testPlayerMoveWithinBounds() {
-        player.move(3, 3);
-        assertEquals("Player should be at x=3", 3, player.getX());
-        assertEquals("Player should be at y=3", 3, player.getY());
-    }
-    
-    @Test
-    public void testPlayerMoveOutOfBounds() {
-        player.move(6, 6);
-        assertEquals("Player should be at the maximum x=4", 4, player.getX());
-        assertEquals("Player should be at the maximum y=4", 4, player.getY());
-    }
-
-    @Test
-    public void testEncounterWithEnemy() {
-        player.move(1, 1); // Move player to enemy's location
-        enemy.interact(player);
-        assertEquals("Player score should be -5 after encounter", -5, player.getScore());
-    }
-
-    @Test
-    public void testAddScore() {
-        player.addScore(10);
-        assertEquals("Player score should be 10", 10, player.getScore());
+    public static void main(String[] args) {
+        Gallery gallery = new Gallery();
+        gallery.displayGalleryName("Local Gallery");
     }
 }
